@@ -12,7 +12,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const registerUser = async (req, res) => {
-  let login = req.body.login;
+  //let login = req.body.login;
   let password = req.body.password;
   let passwordConfirm = req.body.passwordConfirm;
   let full_name = req.body.full_name;
@@ -33,7 +33,6 @@ export const registerUser = async (req, res) => {
     if ((await validateUser(usr, res, req)) === true) {
       let token = jwt.sign({ usr }, process.env.SECRET_REGISTER);
       send(email, "Here is link for finish registration: ", `http://localhost:3000/api/auth/register/${token}`);
-      console.log(`http://localhost:3000/api/auth/register/${token}`);
       return res.json('Letter was send on your email');
     }
   }
@@ -42,11 +41,9 @@ export const registerUser = async (req, res) => {
 export const registerConfirm = (req, res) => {
   let token = req.params.token;
   let user = jwt.decode(token, process.env.SECRET_REGISTER);
-  console.log(user);
   let newToken = jwt.sign(user, process.env.TOKEN_KEY);
   let newUser = new User(user.usr.login, user.usr.password, user.usr.full_name, user.usr.email, user.usr.profile_picture);
-  console.log(newUser);
-
+  
   newUser.save();
   return res.json("user creared");
 };
@@ -93,8 +90,6 @@ export const passwordReset = async (req, res) => {
   console.log(email);
   let user = new User();
   await user.read_by_email(email);
-  console.log("User: ////////////////////////////////////////\n");
-  console.log(user);
   // var playload = {
   //   user: user
   // };
@@ -111,14 +106,12 @@ export const passwordResetConfirmToken = async (req, res) => {
   let newPassword = req.body.password;
   let currentToken = req.params.confirm_token;
   let id = parseInt(req.params.id);
-  console.log("1234");
-  // let user = await getDataFromDBByID("user", id, res);
   let user = new User();
+
   user.init(id);
   user.read();
-  console.log("1234");
+  
   let secret = user.password + "_" + config.SECRET_FOR_RESET_PASSWORD;
-
   let decoded = jwt.decode(currentToken, secret);
 
   if (decoded.user.id === user.id) {
@@ -153,30 +146,30 @@ export const deleteAccount = async (req, res) => {
   }
 };
 
-export const deleteAccountConfirm = async (req, res) => {
-  let currentToken = req.params.confirm_token;
-  let id = req.params.id;
-  let user = await getDataFromDBByID("user", id, res);
-  let secret = config.SECRET_FOR_DELETE_ACCOUNT;
+// export const deleteAccountConfirm = async (req, res) => {
+//   let currentToken = req.params.confirm_token;
+//   let id = req.params.id;
+//   let user = await getDataFromDBByID("user", id, res);
+//   let secret = config.SECRET_FOR_DELETE_ACCOUNT;
 
-  let decoded = jwt.decode(currentToken, secret);
+//   let decoded = jwt.decode(currentToken, secret);
 
-  if (decoded.user.id === user[0].id) {
-      try {
-        deleteFromDB("Posts", "author", user[0].login, res);
-        deleteFromDB("Comments", "author", user[0].login, res);
-        deleteFromDB("LikesPosts", "author", user[0].login, res);
-        deleteFromDB("LikesComments", "author", user[0].login, res);
-        deleteUserFromDBById(user[0].id, "user", res);
-        res.send("Success: user and all information deleted");
-      } catch (err) {
-        console.log(err.message);
-        return res.json("Error: can't delete");
-      }
-    } else {
-      return res.json("Error: invalid option for deleting");
-    }
-};
+//   if (decoded.user.id === user[0].id) {
+//       try {
+//         deleteFromDB("Posts", "author", user[0].login, res);
+//         deleteFromDB("Comments", "author", user[0].login, res);
+//         deleteFromDB("LikesPosts", "author", user[0].login, res);
+//         deleteFromDB("LikesComments", "author", user[0].login, res);
+//         deleteUserFromDBById(user[0].id, "user", res);
+//         res.send("Success: user and all information deleted");
+//       } catch (err) {
+//         console.log(err.message);
+//         return res.json("Error: can't delete");
+//       }
+//     } else {
+//       return res.json("Error: invalid option for deleting");
+//     }
+// };
 
 
 
