@@ -1,0 +1,6 @@
+{
+    "host": "localhost",
+    "user": "khudzhuman",
+    "database": "ucode_web_uevent",
+    "password": "securepass"
+}
