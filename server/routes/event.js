@@ -3,27 +3,28 @@ import express from 'express';
 import auth from "../middlewares/verifyToken.js";
 
 import {
-    createEvent, 
-    getEvent, 
-    getEvents, 
-    updateEvent, 
-    deleteEvent
-} from "../controllers/Event/eventController.js"
+    CreateEvent, 
+    GetEvent, 
+    GetEvents, 
+    UpdateEvent, 
+    DeleteEvent,
+    GetCommentsEvent
+} from "../controllers/Event/EventController.js"
 
 
 const router = express.Router();
 
-router.post("/api/event", auth, createEvent);
+router.post("/api/event", auth, CreateEvent);
 
-router.get("/api/event/:id([0-9]+)", auth,  getEvent);
+router.get("/api/event/:id([0-9]+)", auth,  GetEvent);
 
-router.get("/api/events", auth, getEvents);
+router.get("/api/events", auth, GetEvents);
 
-router.patch("/api/event/:id([0-9]+)", auth, updateEvent);
+router.patch("/api/event/:id([0-9]+)", auth, UpdateEvent);
 
-router.delete("/api/event/:id([0-9]+)", auth, deleteEvent);
+router.delete("/api/event/:id([0-9]+)", auth, DeleteEvent);
 
-router.get("/api/event/:id/comments", getCommentsEvent);
+router.get("/api/event/:id/comments", GetCommentsEvent);
 
 
 export default router;
