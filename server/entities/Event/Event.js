@@ -37,7 +37,7 @@ export class Event
     async save ()
     {
         let id = await database.save("Event", this.transfer_data());
-
+        console.log("id: " + id);
     }
 
     async read() {
@@ -52,6 +52,8 @@ export class Event
           this.categoryID = data[0].categoryID;
           this.formatID = data[0].formatID;
         }
+
+        return data;
     }
 
     async update() {

@@ -1,4 +1,4 @@
-import { Event } from "../entities/event.js"
+import { Event } from "../../entities/Event/Event.js"
 // import { setEndTimeEvent } from "../utils/setEndTimeEvent.js";
 // import { toLocalDate } from "../utils/toLocalDate.js";
 
