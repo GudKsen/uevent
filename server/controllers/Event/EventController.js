@@ -63,8 +63,8 @@ export const UpdateEvent = (req, res) => {
     res.send('Updated');
 }
 
-export const GetEvents = (req, res) =>{
-
+export const GetEvents = (req, res) => {
+    
 }
 
 export const GetCommentsEvent = (req, res) => {

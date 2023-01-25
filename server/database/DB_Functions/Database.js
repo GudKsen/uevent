@@ -2,13 +2,20 @@ import { pool } from "../connectDB.js";
 
 export class Database
 {
-    save = (table, set) => {
-        let command = `insert into ${table} set ?`;
-        pool.query(command, set, (err, row) => {
-            if (err) {
-                console.error(err.message);
-            }
-        });
+    // save = (table, set) => {
+    //     let command = `insert into ${table} set ?`;
+    //     pool.query(command, set, (err, row) => {
+    //         if (err) {
+    //             console.error(err.message);
+    //         }
+    //     });
+    // }
+
+
+    save = async (table, set) => {
+        let command = `insert into ${table} set ${set} and output INSERTED.${table}_ID`;
+        let data = await pool.promise().query(command);
+        return data[0];
     }
 
     read = async (table, id) => {

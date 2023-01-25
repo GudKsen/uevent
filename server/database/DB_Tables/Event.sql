@@ -8,9 +8,11 @@ CREATE TABLE IF NOT EXISTS Event(
     Title VARCHAR(255) NOT NULL,
     Description TEXT(1024) NOT NULL,
     Poster VARCHAR(255),
-    DateEvent DATETIME NOT NULL,
+    DateTimeEvent DATETIME NOT NULL,
     Place VARCHAR(255) NOT NULL,
     isOffline INT(1) NOT NULL,
     Price INT(50),
-    isPromocodeAvailable INT(1)
+    isPromocodeAvailable INT(1),
+    format INT NOT NULL,
+    FOREIGN KEY(format) REFERENCES Format(Format_ID)
 )
