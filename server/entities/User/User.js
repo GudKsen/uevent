@@ -53,6 +53,8 @@ export class User
           this.role = data[0].role;
           this.id = data[0].User_ID;
         }
+
+        return data;
     }
 
     reset_password(password) {

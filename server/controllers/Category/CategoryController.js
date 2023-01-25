@@ -1,4 +1,4 @@
-import { Category } from "../../entities/category.js";
+import { Category } from "../../entities/Category/Category.js";
 
 
 export const CreateCategory = (req, res) => {

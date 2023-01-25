@@ -13,8 +13,12 @@ export class Database
 
 
     save = async (table, set) => {
-        let command = `insert into ${table} set ${set} and output INSERTED.${table}_ID`;
-        let data = await pool.promise().query(command);
+        let command = `insert into ${table} set ? `;
+        let data = await pool.promise().query(command, set).catch(err => {
+            console.error(err.message);
+            return new Error(err.message);
+        });
+        //console.log(data[0]);
         return data[0];
     }
 

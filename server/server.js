@@ -6,8 +6,9 @@ import event from "./routes/event.js";
 import user from "./routes/user.js";
 import auth from "./routes/auth.js";
 import theme from "./routes/theme.js";
-import category from "./routes/category.js";
+// import category from "./routes/category.js";
 import company from "./routes/company.js";
+import format from "./routes/format.js";
 
 import cors from 'cors';
 
@@ -30,8 +31,9 @@ app.use(event);
 app.use(user);
 app.use(auth);
 app.use(theme);
-app.use(category);
+// app.use(category);
 app.use(company);
+app.use(format);
 
 app.all("*", (req, res) => {
     res.status(404).send('404! Page not found');

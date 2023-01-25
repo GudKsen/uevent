@@ -14,7 +14,7 @@ import {
 
 const router = express.Router();
 
-router.post("/api/event", auth, CreateEvent);
+router.post("/api/event", CreateEvent);
 
 router.get("/api/event/:id([0-9]+)", auth,  GetEvent);
 

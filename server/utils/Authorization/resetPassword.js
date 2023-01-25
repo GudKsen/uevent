@@ -1,5 +1,5 @@
 import jwt from "jwt-simple";
-import { send } from "./sendEmail.js";
+import { send } from "../Email/sendEmail.js";
 
 const config = process.env;
 

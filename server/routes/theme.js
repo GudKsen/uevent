@@ -12,11 +12,11 @@ import {
 
 const router = express.Router();
 
-router.post("/api/theme", auth, CreateTheme);
-router.get("/api/theme/:id", auth, GetTheme);
-router.get("/api/themes", auth, GetAllThemes);
-router.patch("/api/theme/:id", auth, UpdateTheme);
-router.delete("/api/theme/:id", auth, DeleteTheme);
+router.post("/api/theme",   CreateTheme);
+router.get("/api/theme/:id",   GetTheme);
+router.get("/api/themes",   GetAllThemes);
+router.patch("/api/theme/:id",   UpdateTheme);
+router.delete("/api/theme/:id",   DeleteTheme);
 
 export default router;    
 

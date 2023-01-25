@@ -8,10 +8,11 @@ const validator = async (body, rules, customMessages, callback) => {
 
 export const validationRegister = async (req, res, next) => {
     const validationRules = {
-        "login": "required|string|max:240",
+        "phone_number": "string|max:240",
         "email": "required|email",
         "password": "required|min:8",
-        "full_name": "required|string|min:3|max:240"
+        "full_name": "required|string|min:3|max:240",
+        "birthdate": "required|before:date"
     }
     
     await validator(req.body, validationRules, {}, (err, status) => {

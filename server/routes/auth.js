@@ -9,7 +9,7 @@ import {
   passwordReset,
   passwordResetConfirmToken,
   deleteAccount,
-  deleteAccountConfirm,
+  // deleteAccountConfirm
   //profileData
 } from "../controllers/Authorization/authController.js";
 import { validationRegister } from "../middlewares/validateUser.js";
@@ -33,7 +33,7 @@ router.post(
 
 router.post("/api/auth/delete-account", auth, deleteAccount);
 
-router.post("/api/auth/delete-account-confirm/:confirm_token/:id", auth, deleteAccountConfirm);
+// router.post("/api/auth/delete-account-confirm/:confirm_token/:id", auth, deleteAccountConfirm);
 
 // router.get("/api/auth/profile", auth, profileData);
 

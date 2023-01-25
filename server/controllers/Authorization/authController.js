@@ -1,7 +1,7 @@
-import { User } from "../../entities/user.js";
-import { validateUser } from "../../utils/validData.js";
-import { send } from "../../utils/sendEmail.js";
-import { resetPassword } from "../../utils/resetPassword.js";
+import { User } from "../../entities/User/User.js";
+import { validateUser } from "../../utils/Validation/validData.js";
+import { send } from "../../utils/Email/sendEmail.js";
+import { resetPassword } from "../../utils/Authorization/resetPassword.js";
 
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
