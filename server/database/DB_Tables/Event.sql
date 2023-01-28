@@ -14,5 +14,7 @@ CREATE TABLE IF NOT EXISTS Event(
     price INT(50),
     isPromocodeAvailable INT(1),
     Format_ID INT NOT NULL,
-    FOREIGN KEY(Format_ID) REFERENCES Format(Format_ID)
+    FOREIGN KEY(Format_ID) REFERENCES Format(Format_ID),
+    Author_ID INT NOT NULL,
+    FOREIGN KEY(Author_ID) REFERENCES User(User_ID)
 )

@@ -29,14 +29,14 @@ export class User
           email: this.email,
           profile_picture: this.profile_picture,
           role: this.Role,
-          address: this.Address,
+          address: this.address,
           birthday: this.Birthday
         };
         return obj;
     }
     
     async save() {
-        this.password = bcrypt.hashSync(this.Password, bcrypt.genSaltSync(10));
+        this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10));
         // databaseUser.saveUser("User", this.transfer_data());
         database.save("User", this.transfer_data());
     }

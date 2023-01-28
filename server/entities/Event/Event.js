@@ -1,10 +1,12 @@
 import { Database } from "../../database/DB_Functions/Database.js";
+import { DatabaseGet } from "../../database/DB_Functions/DatabaseGet.js";
 
 let database = new Database();
+let databaseGet = new DatabaseGet();
 
 export class Event
 {
-    constructor(title, description, authorID, datetime, location, image, formatID)
+    constructor(title, description, authorID, datetime, location, image, formatID, theme)
     {
         this.title = title;
         this.description = description;
@@ -13,7 +15,7 @@ export class Event
         this.location = location;
         this.image = image;
         this.formatID = formatID;
-        
+        this.theme = theme;
     }
 
     init (id)
@@ -26,10 +28,9 @@ export class Event
         let obj = {
             title: this.title,
             description: this.description,
-            // User_ID: this.authorID,
+            Author_ID: this.authorID,
             dateTime: this.datetime,
             location: this.location,
-            // categoryID: this.categoryID,
             poster: this.image,
             Format_ID: this.formatID
         }
@@ -40,17 +41,29 @@ export class Event
     {
         let id = await database.save("Event", this.transfer_data());
         console.log("id: " + id.insertId);
-        // event theme
-
+        if (this.theme)
+        {
+            for (let i = 0; i < this.theme.length; i++)
+            {
+                let theme_obj = {
+                    Theme_ID: this.theme[i],
+                    Event_ID: id.insertId
+                };
+                database.save("Event_Theme", theme_obj);
+            }
+        }
     }
 
     async read() {
-        let data = await database.read("User", this.id);
+        //let data = await database.read("Event", this.id);
+        let data = await databaseGet.get_events_with_themes_by_event_id(this.id);
+
+        //console.log(data);
         
-        if (data.length) {
+        if (data !== null) {
           this.title = data[0].title;
           this.description = data[0].description;
-          this.authorID = data[0].authorID;
+          this.authorID = data[0].Author_ID;
           this.datetime = data[0].datetime;
           this.location = data[0].location;
         //   this.categoryID = data[0].categoryID;
@@ -62,13 +75,12 @@ export class Event
     }
 
     async update() {
-        if (this.title.length > 0) await database.update("Event", "title", this.title, this.id);
-        if (this.description.length > 0) await database.update("Event", "description", this.description, this.id);
-        if (this.authorID.length > 0) await database.update("Event", "authorID", this.authorID, this.id);
-        if (this.datetime.length > 0) await database.update("Event", "datetime", this.datetime, this.id);
-        if (this.location.length > 0) await database.update("Event", "location", this.location, this.id);
-        // if (this.categoryID.length > 0) await database.update("Event", "categoryID", this.categoryID, this.id);
-        if (this.formatID.length > 0) await database.update("Event", "formatID", this.formatID, this.id);
+        if (this.title) await database.update("Event", "title", this.title, this.id);
+        if (this.description) await database.update("Event", "description", this.description, this.id);
+        if (this.authorID) await database.update("Event", "Author_ID", this.authorID, this.id);
+        if (this.datetime) await database.update("Event", "datetime", this.datetime, this.id);
+        if (this.location) await database.update("Event", "location", this.location, this.id);
+        if (this.formatID) await database.update("Event", "formatID", this.formatID, this.id);
     }
 
     async delete ()

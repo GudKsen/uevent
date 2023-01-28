@@ -19,7 +19,7 @@ export const CreateEvent = async (req, res) => {
     let themes = req.body.themes.split(',');
 
     for (let i = 0; i < themes.length; i++) {
-        let isExistTheme = await database.find_by_title("Theme", themes[i]);
+        let isExistTheme = await database.find_by_id("Theme", themes[i]);
         if (isExistTheme === null) {
           res.json("Error: theme doesn't exist");
           return;
@@ -45,7 +45,7 @@ export const GetEvent = async (req, res) => {
         let data = await event.read();
         // data[0].beginDate = toLocalDate(data[0].beginDate);
         // if (data[0].endDate) data[0].endDate = toLocalDate(data[0].endDate);
-        
+        //console.log("hjgfhgfhgf " + data);
         res.json(data);
     } catch (err) {
         res.json(err.message);
@@ -65,16 +65,20 @@ export const UpdateEvent = (req, res) => {
     let id = parseInt(req.params.id);
     let title = req.body.title;
     let description = req.body.description;
-    let author = req.user._id;
+    // let author = req.user._id;
     let time = req.body.time;
     let date = req.body.date;
     let location = req.body.location;
     let category = req.body.category;
     let image = req.body.image;
     let format = req.body.format;
-    let themes = req.body.themes.split(',');
+    let themes;
+    if (req.body.themes) {
+        themes = req.body.themes.split(',');
+    }
+    
 
-    let event = new Event(title, description, author, time, date, location, category, image, format);
+    let event = new Event(title, description, 1, time, date, location, category, image, format, themes);
     event.init(id);
     event.update(title);
     res.send('Updated');

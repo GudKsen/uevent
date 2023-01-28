@@ -2,17 +2,17 @@ import multer from "multer";
 
 export const multerStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-      if (req.body.login) {
-        cb(null, "./uploads/avatars/");
+      if (req.body.full_name) {
+        cb(null, "../uploads/avatars/");
       }
       else {
-        cb(null, "./uploads/pictures/");
+        cb(null, "../uploads/images/");
       }
     },
     filename: (req, file, cb) => {
       const ext = file.mimetype.split("/")[1];
-      if (req.body.login) {
-        cb(null, `${req.body.login}_${new Date().getTime()}.${ext}`);
+      if (req.body.full_name) {
+        cb(null, `${req.body.email}_${new Date().getTime()}.${ext}`);
       }
       else {
         cb(null, `${new Date().getTime()}.${ext}`);

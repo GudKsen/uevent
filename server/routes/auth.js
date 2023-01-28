@@ -1,6 +1,10 @@
 import express from "express";
+import multer from "multer";
 
 import auth from "../middlewares/verifyToken.js";
+
+import { multerFilter, multerStorage } from "../utils/Media/multerFunc.js";
+
 import {
   registerUser,
   registerConfirm,
@@ -12,9 +16,15 @@ import {
   // deleteAccountConfirm
   //profileData
 } from "../controllers/Authorization/authController.js";
+
 import { validationRegister } from "../middlewares/validateUser.js";
 
 const router = express.Router();
+
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter,
+});
 
 router.post("/api/auth/register", validationRegister, registerUser);
 

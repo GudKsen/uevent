@@ -13,10 +13,10 @@ import {
 const router = express.Router();
 
 router.post("/api/format", CreateFormat);
-router.get("/api/format/:id", auth, GetFormat);
-router.get("/api/formats", auth, GetAllFormats);
-router.patch("/api/format/:id", auth, UpdateFormat);
-router.delete("/api/format/:id", auth, DeleteFormat);
+router.get("/api/format/:id",    GetFormat);
+router.get("/api/formats",    GetAllFormats);
+router.patch("/api/format/:id",    UpdateFormat);
+router.delete("/api/format/:id",    DeleteFormat);
 
 export default router;    
 

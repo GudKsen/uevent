@@ -1,6 +1,9 @@
 import express from 'express';
+import multer from "multer";
 
 import auth from "../middlewares/verifyToken.js";
+
+import { multerFilter, multerStorage } from "../utils/Media/multerFunc.js";
 
 import {
     CreateEvent, 
@@ -14,15 +17,21 @@ import {
 
 const router = express.Router();
 
-router.post("/api/event", CreateEvent);
+const upload = multer({
+    storage: multerStorage,
+    fileFilter: multerFilter,
+});
+  
 
-router.get("/api/event/:id([0-9]+)", auth,  GetEvent);
+router.post("/api/event", upload.single("file"), CreateEvent);
 
-router.get("/api/events", auth, GetEvents);
+router.get("/api/event/:id([0-9]+)",    GetEvent);
 
-router.patch("/api/event/:id([0-9]+)", auth, UpdateEvent);
+router.get("/api/events",   GetEvents);
 
-router.delete("/api/event/:id([0-9]+)", auth, DeleteEvent);
+router.patch("/api/event/:id([0-9]+)",   UpdateEvent);
+
+router.delete("/api/event/:id([0-9]+)",   DeleteEvent);
 
 router.get("/api/event/:id/comments", GetCommentsEvent);
 
