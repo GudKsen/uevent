@@ -1,6 +1,3 @@
 # uevent
-tasks:
-database
-entities
-routes
-controllers
+## Завдання:
+  * Подумати у якому вигляді у нас будуть представлені квитки
