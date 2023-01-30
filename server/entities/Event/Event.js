@@ -87,5 +87,12 @@ export class Event
     {
         await database.delete("Event", this.id);
     }
+
+    async readAll ()
+    {
+        let d = await databaseGet.get_events_with_themes();
+        // console.log(d);
+        return d;
+    }
 }
 

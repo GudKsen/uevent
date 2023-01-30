@@ -42,17 +42,16 @@ export const CreateUser = async (req, res) => {
 
 export const UpdateUser = (req, res) => {
   let full_name = req.body.full_name;
-  //let full_name = req.body.full_name;
-  let role = req.body.role;
+  let password = req.body.password;
+  let phone_number = req.body.phone_number;
+  let birthday = req.body.birthday;
+  let address = req.body.address;
   let email = req.body.email;
+  let role = req.body.role;
+  let profilePicture = "h";
   let id = parseInt(req.params.id);
-  let user = new User(
-    (full_name = full_name),
-    "-",
-    (full_name = full_name),
-    (email = email),
-    (role = role)
-  );
+
+  let user = new User(full_name, email, address, role, phone_number, birthday, password, profilePicture);
 
   user.init(id);
   user.update();

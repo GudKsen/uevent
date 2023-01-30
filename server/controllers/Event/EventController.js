@@ -84,8 +84,10 @@ export const UpdateEvent = (req, res) => {
     res.send('Updated');
 }
 
-export const GetEvents = (req, res) => {
+export const GetEvents = async (req, res) => {
     let events = new Event();
+    let e = await events.readAll();
+    res.json(e);
     //events.readAll();
 }
 

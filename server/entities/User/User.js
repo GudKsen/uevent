@@ -37,7 +37,6 @@ export class User
     
     async save() {
         this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10));
-        // databaseUser.saveUser("User", this.transfer_data());
         database.save("User", this.transfer_data());
     }
 
@@ -52,6 +51,9 @@ export class User
           this.email = data[0].email;
           this.role = data[0].role;
           this.id = data[0].User_ID;
+          this.address = data[0].address;
+          this.profile_picture = data[0].profile_picture;
+          this.birthday = data[0].birthday;
         }
 
         return data;
@@ -67,6 +69,10 @@ export class User
         if (this.full_name) await database.update("User", "full_name", this.full_name, this.id);
         if (this.email) await database.update("User", "email", this.email, this.id);
         if (this.role) await database.update("User", "role", this.role, this.id);
+        if (this.address) await database.update("User", "address", this.address, this.id);
+        if (this.profile_picture) await database.update("User", "profile_picture", this.profile_picture, this.id);
+        if (this.birthday) await database.update("User", "birthday", this.birthday, this.id);
+        if (this.password) await database.update("User", "password", this.password, this.id);
     }
     
     async delete() {

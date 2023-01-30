@@ -5,9 +5,25 @@ export class DatabaseGet
     async get_events_with_themes()
     {
         let command = `select Event.*, Theme.* from Event_Theme join Event on Event.Event_ID = Event_Theme.Event_ID join Theme on Theme.Theme_ID = Event_Theme.Theme_ID`;
-        const events = await pool.promise().query(command);
+        let get_events_command = `select * from Event`;
+        
+        
+        const events = await pool.promise().query(get_events_command);
         if (events[0].length)
         {
+            for (let event of events[0])
+            {
+                let event_id = event.Event_ID;
+                let command_get_themes_event = `select Theme.* from Event_Theme
+                inner join Theme on Event_Theme.Theme_ID = Theme.Theme_ID
+                where Event_Theme.Event_ID = ${event_id}`;
+                let themes = await pool.promise().query(command_get_themes_event);
+                if (themes.length)
+                {
+                   event.themes = themes[0];
+                }
+            }
+            // console.log(events[0]);
             return events[0];
         }
         else 
@@ -35,7 +51,6 @@ export class DatabaseGet
         {
             if (thmemes[0].length)
             {
-                
                 events[0][0].themes = thmemes[0];
                 return events[0];
             }
@@ -59,6 +74,8 @@ export class DatabaseGet
         // }
     }
 }
+
+
 
 
 //const events = await pool.query("SELECT * FROM events WHERE theme_id IS NOT NULL");
