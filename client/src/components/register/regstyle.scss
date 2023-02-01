@@ -5,17 +5,19 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-body {
+.all {
   min-height: 100vh;
   display: flex;
   align-items: center;
+  text-align: center;
   justify-content: center;
   padding: 20px;
-  background: rgb(65, 134, 220);
+  background: rgb(216, 225, 247);
 }
 .container {
   position: relative;
-  max-width: 700px;
+  max-width: 600px;
+  // margin: 40px;
   width: 100%;
   background: #fff;
   padding: 25px;
@@ -29,9 +31,7 @@ body {
   text-align: center;
 }
 
-.container span {
-    text-align: center;
-}
+s
 .container .form {
   margin-top: 30px;
 }
@@ -59,7 +59,7 @@ body {
 }
 .form .column {
   display: flex;
-  column-gap: 15px;
+  column-gap: 20px;
 }
 .form .gender-box {
   margin-top: 20px;

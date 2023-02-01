@@ -1,0 +1,75 @@
+.userpageall{
+  display: grid;
+  grid-template-columns: 12% 80%;
+  min-height: 100vh;
+  padding-right: 20px;
+  height: 100%;
+  background: rgb(216, 225, 247);
+}
+
+.infouser, .imageuser{
+  font-family: "Poppins", sans-serif;
+  padding-left: 70px;
+  h1 {
+    color: rgb(42, 36, 70);
+  }
+  h2 {
+    padding-left: 70px;
+    font-size: 40px;
+    // color: rgb(0, 0, 0);
+    color:rgb(130, 106, 251);
+  }
+  p {
+    font-size: 50px;
+    color:rgb(42, 36, 70);
+  }
+  
+}
+
+// .form {
+//   button{ padding-left: 15px;}
+// }
+
+.userpage{
+  
+  // padding-left: 70px;
+  padding-top: 70px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  // .containe {
+    min-height: 100vh;
+//     // display: flex;
+//     // align-items: left;
+    // text-align: center;
+//     // justify-content: left;
+//     display: grid;
+//     grid-auto-rows: max-content;
+//     background: #fff;
+    padding-left: 10px;
+    padding-right: 20px;
+    height: 100%;
+    background: rgb(216, 225, 247);
+}
+
+.form input {
+  width: 100%;
+  margin-top: 20px;
+}
+input label {
+  color: #333;
+}
+.form :where( input) {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #707070;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0 15px;
+}
+.input-box input:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
