@@ -28,8 +28,9 @@ function Sidebarwith() {
     }
 
     function logout(){
+        localStorage.clear();
         navigate("/");
-    }
+      }
 
     function setting(){
         navigate("/setting")

@@ -7,6 +7,7 @@ import Sidebar from "../sidebar/Sidebar"
 
 
 function Event() {
+  let userInfo = JSON.parse(localStorage.getItem("userInfo") as string);
 
 
   return (
@@ -17,7 +18,9 @@ function Event() {
       </div>
       <div className="eventpage">
         <div className="infopanel">
-          <p>Date Address</p>
+          <p>{userInfo.city}
+            {/* Date Address */}
+            </p>
         </div>
         <div className="infoevent">
           <div className="even"></div>

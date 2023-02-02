@@ -6,7 +6,7 @@ async function validateUser(user, res, req) {
   // let data2 = await databaseUser.findByEmail(user.email);
 
   // if (data === "Not found" && data2 === "Not found") {
-  //   return true;
+    return true;
   // } else if (data !== "Not found") {
   //   res.send("User with this login already exist");
   //   return false;

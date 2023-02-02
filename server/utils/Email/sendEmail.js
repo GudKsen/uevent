@@ -5,8 +5,8 @@ export function send(email, text, link) {
     host: "smtp.mailtrap.io",
     port: 2525,
     auth: {
-      user: "4c475d92282587",
-      pass: "821b514591f9f1"
+      user: "d13f138085da46",
+    pass: "6b479d6d87fb70"
     }
   });
 

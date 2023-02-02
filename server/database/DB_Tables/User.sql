@@ -12,5 +12,6 @@ CREATE TABLE IF NOT EXISTS User (
     role ENUM('user', 'admin', 'organizator'),
     birthday DATE,
     phone_number VARCHAR(50) UNIQUE NOT NULL,
-    address VARCHAR(255) NOT NULL
+    country VARCHAR(255) NOT NULL,
+    city VARCHAR(255) NOT NULL,
 )

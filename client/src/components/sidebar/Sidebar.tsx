@@ -28,8 +28,9 @@ function Sidebar() {
     }
 
     function logout(){
+        localStorage.clear();
         navigate("/");
-    }
+      }
 
 return (
     <div className="al">
@@ -43,10 +44,7 @@ return (
 
             <div><br/></div>
 
-            <div className="search">
-                {/* Search */}
-                <button className="ser">Search</button>
-            </div>
+        
 
             <div className="profile">
                 {/* Userpage */}

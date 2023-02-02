@@ -8,24 +8,41 @@ function Register() {
   const navigate = useNavigate();
   const [full_name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [number, setNumber] = useState("");
+  const [phone_number, setNumber] = useState("");
   const [city, setCity] = useState("");
-  const [data, setData] = useState("");
+  const [country, setCountry] = useState("");
+  const [birthday, setDirthday] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
   async function sendRegister(e: any) {
     e.preventDefault();
-    const info = {
+    const info = {full_name,
                 password,
                 passwordConfirm,
-                full_name,
+                
                 email,
-                number,
+                phone_number,
+                birthday,
+                country: "Ukraine",
                 city,
-                data
+                
     };
     console.log(info);
+    let res;
+    try{
+      const data = await fetch("http://localhost:8000/api/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(info),
+    }).then(data => console.log(data));
+  //     res = await data.json();
+    } catch (err) {
+      console.error(err);
+  }
+    // console.log(data);
     navigate("/api/auth/login");
     
   }
@@ -64,7 +81,7 @@ function Register() {
           </div>
           <div className="input-box">
             <label>Birth Date</label>
-            <input type="date" placeholder="Enter birth date" required onChange={(e) => setData(e.target.value)}/>
+            <input type="date" placeholder="Enter birth date" required onChange={(e) => setDirthday(e.target.value)}/>
           </div>
         </div>
         <div className="input-box address">
@@ -84,7 +101,7 @@ function Register() {
             <input type="text" placeholder="Enter your city" required onChange={(e) => setCity(e.target.value)}/>
           </div>
         </div>
-        <button>Submit</button>
+        <button onClick={sendRegister}>Submit</button>
       </form>
     </section>
     </div>

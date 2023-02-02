@@ -13,6 +13,14 @@ function RegiConfirm() {
   const { token } = useParams();
   async function logIn(e:any) {
     e.preventDefault();
+    const data = await fetch(`http://localhost:8000/api/auth/register/${token}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
+    // const res = await data.json();
+    console.log(data);
       navigate("/api/auth/login");
     
     }
@@ -21,9 +29,9 @@ function RegiConfirm() {
     <div className="all">
     <section className="container">
       <header>Hello again!</header>
-      <form action="#" className="form" >
+      <form onSubmit={logIn} action="#" className="form" >
       <header>You have successfully registered, click to continue</header>
-         <button>Continue</button>
+         <button >Continue</button>
       </form>
     </section>
   </div>

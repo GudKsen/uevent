@@ -8,19 +8,38 @@ axios.create({
 });
 
 function LogIn() {
-  const [number, setNumber] = React.useState("");
+  const [err, setErr] = React.useState("");
+  const [phone_number, setPhone_number] = React.useState("");
   const [password, setPassword] = React.useState("");
   const navigate = useNavigate();
   async function logIn(e: any) {
     e.preventDefault();
     const info = {
-      number,
+      phone_number,
       password,
     };
-    console.log(info);
-    
-      navigate("/userpage");
+    const data = await fetch("http://localhost:8000/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(info),
+    });
+    console.log(data);
+    const res = await data.json();
+    console.log(res.data);
+    if (typeof res === typeof "rara") {
+      setErr(res);
+    } else {
+      const { User_ID, password, full_name, email, role , country, city, phone_number, birtday} = res.data[0];
+      localStorage.setItem(
+        "userInfo",
+        JSON.stringify({ User_ID, password, full_name, email, role , country, city, phone_number, birtday})
+      );
+      localStorage.setItem("token", res.token);
+      navigate("/month");
     }
+  }
   
 
   return (
@@ -31,10 +50,10 @@ function LogIn() {
           {/* <div className="column"> */}
           <div className="input-box">
             <input
-            onChange={(e) => setNumber(e.target.value)}
+            onChange={(e) => setPhone_number(e.target.value)}
             type="text"
-            placeholder="Login"
-            name="login"
+            placeholder="Phone number"
+            name="phone_number"
             />  
           </div>
           <div className="input-box">

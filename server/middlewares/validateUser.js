@@ -12,7 +12,7 @@ export const validationRegister = async (req, res, next) => {
         "email": "required|email",
         "password": "required|min:8",
         "full_name": "required|string|min:3|max:240",
-        "birthdate": "required|before:date"
+        // "birthday": "required|before:date"
     }
     
     await validator(req.body, validationRules, {}, (err, status) => {

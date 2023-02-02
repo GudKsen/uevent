@@ -5,11 +5,12 @@ let database = new Database();
 
 export class User
 {
-    constructor(Full_name, Email, Address, Role, Phone_number, Birthday, Password, Profile_picture)
+    constructor(Full_name, Email, Country, City, Role, Phone_number, Birthday, Password, Profile_picture)
     {
         this.full_name = Full_name;
         this.email = Email;
-        this.address = Address;
+        this.country = Country;
+        this.city = City;
         this.role = Role;
         this.phone_number = Phone_number;
         this.birthday = Birthday;
@@ -29,7 +30,8 @@ export class User
           email: this.email,
           profile_picture: this.profile_picture,
           role: this.Role,
-          address: this.address,
+          country: this.country,
+          city: this.city,
           birthday: this.Birthday
         };
         return obj;
@@ -51,7 +53,8 @@ export class User
           this.email = data[0].email;
           this.role = data[0].role;
           this.id = data[0].User_ID;
-          this.address = data[0].address;
+          this.country = data[0].country;
+          this.city = data[0].city;
           this.profile_picture = data[0].profile_picture;
           this.birthday = data[0].birthday;
         }
@@ -69,7 +72,8 @@ export class User
         if (this.full_name) await database.update("User", "full_name", this.full_name, this.id);
         if (this.email) await database.update("User", "email", this.email, this.id);
         if (this.role) await database.update("User", "role", this.role, this.id);
-        if (this.address) await database.update("User", "address", this.address, this.id);
+        if (this.country) await database.update("User", "country", this.country, this.id);
+        if (this.city) await database.update("User", "city", this.city, this.id);
         if (this.profile_picture) await database.update("User", "profile_picture", this.profile_picture, this.id);
         if (this.birthday) await database.update("User", "birthday", this.birthday, this.id);
         if (this.password) await database.update("User", "password", this.password, this.id);
