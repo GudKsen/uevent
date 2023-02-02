@@ -11,7 +11,8 @@ import {
     GetEvents, 
     UpdateEvent, 
     DeleteEvent,
-    GetCommentsEvent
+    GetCommentsEvent,
+    GetEventsForUser
 } from "../controllers/Event/EventController.js"
 
 
@@ -35,6 +36,7 @@ router.delete("/api/event/:id([0-9]+)",   DeleteEvent);
 
 router.get("/api/event/:id/comments", GetCommentsEvent);
 
+router.get("/api/events/user", GetEventsForUser);
 
 export default router;
 

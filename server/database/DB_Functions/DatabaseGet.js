@@ -73,6 +73,46 @@ export class DatabaseGet
         //     return null;
         // }
     }
+
+    async get_organizator_with_company()
+    {
+        let get_organizator_command = `select * from User where role = 'organizator`;
+        let organizators = await pool.promise().query(get_organizator_command);
+        if (organizators[0].length)
+        {
+            for (let organizator in organizators)
+            {
+                let id = organizator.User_ID;
+                let command_get_organizator_company = `select Company.* from Organizator_Company
+                inner join Company on Organizator_Company.Company_ID = Company.Company_ID
+                where Organizator_Company.User_ID = ${id}`;
+                let companies = await pool.promise().query(command_get_organizator_company);
+                if (companies[0].length)
+                {
+                    organizator.company = companies[0];
+                } 
+            }  
+            return organizators[0];
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    async get_events_by_location(location)
+    {
+        let command = `select * from Event where location = '${location}'`;
+        let data = await pool.promise().query(command_get_events_by_location);
+        if (data[0].length)
+        {
+            return data[0];
+        }
+        else 
+        {
+            return null;
+        }
+    }
 }
 
 

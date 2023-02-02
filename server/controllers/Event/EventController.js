@@ -1,5 +1,7 @@
 import { DatabaseFind } from "../../database/DB_Functions/DatabaseFind.js";
-import { Event } from "../../entities/Event/Event.js"
+import { Event } from "../../entities/Event/Event.js";
+import { User } from "../../entities/User/User.js";
+import { DatabaseGet } from "../../database/DB_Functions/DatabaseGet.js";
 // import { setEndTimeEvent } from "../utils/setEndTimeEvent.js";
 // import { toLocalDate } from "../utils/toLocalDate.js";
 
@@ -88,7 +90,23 @@ export const GetEvents = async (req, res) => {
     let events = new Event();
     let e = await events.readAll();
     res.json(e);
-    //events.readAll();
+}
+
+export const GetEventsForUser = async (req, res) => {
+    let Userid = req.user._id;
+    let user = new User();
+    user.init(Userid);
+    user.read();
+
+    let databaseGet = new DatabaseGet();
+    let data = await databaseGet.get_events_by_location(user.location);
+    if (data)
+    {
+        res.json(data);
+    }
+    else {
+        return null;
+    }
 }
 
 export const GetCommentsEvent = (req, res) => {
