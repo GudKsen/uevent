@@ -102,7 +102,11 @@ export class DatabaseGet
 
     async get_events_by_location(location)
     {
-        let command = `select * from Event where location = '${location}'`;
+        // location = "Ukraine,Kyiv,st This,75" - EVENT
+        // location = "Ukraine,Kyiv" - USER
+        // can't parse address
+        // 
+        let command = `select * from Event where location like '%${location}%'`;
         let data = await pool.promise().query(command_get_events_by_location);
         if (data[0].length)
         {

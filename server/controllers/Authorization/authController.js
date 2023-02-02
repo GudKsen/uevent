@@ -18,7 +18,7 @@ export const registerUser = async (req, res) => {
   let full_name = req.body.full_name;
   let email = req.body.email;
   let profile_picture = req.body.profilePicture;
-  let user = new User(login, password);
+  let user = new User();
 
   let data = await user.read_by_login(login);
 
