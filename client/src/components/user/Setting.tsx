@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./styleuserpage.scss";
-import Sidebar from "../sidebar/Sidebar"
 // import userimage from  "../user/default.jpg"
 
 
@@ -34,7 +33,7 @@ function Setting() {
     <div className="userpageall">
       
       <div>
-        <Sidebar/>
+        
       </div>
         <div className="userpage">
             <form action="#" className="form" >

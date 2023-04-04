@@ -3,7 +3,7 @@ import express from 'express';
 import auth from "../middlewares/verifyToken.js";
 
 import {
-    CommentCreate,
+    SaveComment,
     GetComment,
     UpdateComment,
     DeleteComment
@@ -11,7 +11,7 @@ import {
 
 const router = express.Router();
 
-router.post("/api/comment", auth, CommentCreate);
+router.post("/api/comment", auth, SaveComment);
 router.get("/api/comment/:id", auth, GetComment);
 router.patch("/api/comment/:id", auth, UpdateComment);
 router.delete("/api/comment/:id", auth, DeleteComment);

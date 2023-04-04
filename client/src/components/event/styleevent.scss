@@ -1,65 +1,65 @@
-.allevents{
-    display: grid;
-    grid-template-columns: 12% 80%;
-    min-height: 100vh;
-    padding-right: 20px;
-    height: 100%;
-    background: rgb(216, 225, 247);
-  }
+// .allevents{
+//     display: grid;
+//     grid-template-columns: 12% 80%;
+//     min-height: 100vh;
+//     padding-right: 20px;
+//     height: 100%;
+//     background: rgb(216, 225, 247);
+//   }
 
-  .infopanel{
-    background: rgb(170, 193, 250);
-    // min-width: 100vh;
-    width: 100%;
-  }
+//   .infopanel{
+//     background: rgb(170, 193, 250);
+//     // min-width: 100vh;
+//     width: 100%;
+//   }
 
-  .eventpage{
-    display: grid;
-    grid-template-rows: 10% 90%;
-  }
+//   .eventpage{
+//     display: grid;
+//     grid-template-rows: 10% 90%;
+//   }
   
-  .infopanel, .imageevent{
-    font-family: "Poppins", sans-serif;
-    padding-left: 70px;
-    h1 {
-      color: rgb(42, 36, 70);
-    }
-    h2 {
-      padding-left: 70px;
-      font-size: 40px;
-      // color: rgb(0, 0, 0);
-      color:rgb(130, 106, 251);
-    }
-    p {
-      font-size: 50px;
-      color:rgb(42, 36, 70);
-    }
+//   .infopanel, .imageevent{
+//     font-family: "Poppins", sans-serif;
+//     padding-left: 70px;
+//     h1 {
+//       color: rgb(42, 36, 70);
+//     }
+//     h2 {
+//       padding-left: 70px;
+//       font-size: 40px;
+//       // color: rgb(0, 0, 0);
+//       color:rgb(130, 106, 251);
+//     }
+//     p {
+//       font-size: 50px;
+//       color:rgb(42, 36, 70);
+//     }
     
-  }
+//   }
   
-  // .form {
-  //   button{ padding-left: 15px;}
-  // }
+//   // .form {
+//   //   button{ padding-left: 15px;}
+//   // }
   
-  .eventpage{
+//   .eventpage{
     
-    // padding-left: 70px;
-    padding-top: 70px;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    // .containe {
-      min-height: 100vh;
-  //     // display: flex;
-  //     // align-items: left;
-      // text-align: center;
-  //     // justify-content: left;
-  //     display: grid;
-  //     grid-auto-rows: max-content;
-  //     background: #fff;
-      padding-left: 10px;
-      padding-right: 20px;
-      height: 100%;
-      background: rgb(216, 225, 247);
-  }
+//     // padding-left: 70px;
+//     padding-top: 70px;
+//     display: grid;
+//     grid-template-columns: 50% 50%;
+//     // .containe {
+//       min-height: 100vh;
+//   //     // display: flex;
+//   //     // align-items: left;
+//       // text-align: center;
+//   //     // justify-content: left;
+//   //     display: grid;
+//   //     grid-auto-rows: max-content;
+//   //     background: #fff;
+//       padding-left: 10px;
+//       padding-right: 20px;
+//       height: 100%;
+//       background: rgb(216, 225, 247);
+//   }
   
   

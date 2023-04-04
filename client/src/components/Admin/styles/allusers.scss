@@ -1,0 +1,83 @@
+.allusers td,
+th {
+    /* border: 1px solid rgb(145, 148, 148); */
+    padding: 10px;
+    border-bottom: 1px solid #e9e9e9;
+    margin: 5px;
+    padding-top: 20px;
+    vertical-align: baseline;
+    /* vertical-align: middle; */
+}
+
+table {
+    width: 95%;
+    margin: 0 auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: justify;
+}
+
+.allusers {
+    max-height: 550px;
+    overflow: auto;
+}
+
+
+.allusers th {
+    // border-top: 1px solid #494d5f;
+    text-align: left;
+    // background-color: #e5eaf5;
+}
+
+// .allusers tr:hover {
+//     background-color: #e5eaf5;
+// }
+
+.allusers table tr th,
+table tr td {
+    vertical-align: middle;
+    /* background-color: #eefbfb; */
+}
+
+.cardcheckbox {
+    // display: none;
+    width: 15px;
+    height: 15px;
+}
+
+.cardcheckbox:hover,
+.cardcheckbox:checked {
+    display: block;
+}
+
+.cardcheckbox:checked{
+    background-color: rgb(185, 185, 185);
+    accent-color: #239eab;
+    color: white;
+}
+
+.select-role {
+    border: none;
+    outline: none;
+    font-weight: bold;
+    font-family: "Poppins", sans-serif;
+    color: #707070;
+}
+
+.allusers {
+    max-height: 550px;
+    overflow: auto;
+}
+
+th {
+    position: sticky;
+    top: 0;
+    background-color: white;
+}
+
+.update-title-event {
+    outline: #e9e9e9;
+    border: 1px solid #a4a6a6;
+    padding: 2px;
+    border-radius: 5px;
+}

@@ -1,0 +1,49 @@
+.ReactFlagsSelect-module_selectBtn__19wW7
+{
+    width: 50px;
+    border: none;
+}
+
+.ReactFlagsSelect-module_selectFlag__2q5gC {
+    width: 30px;
+    height: 30px;
+}
+
+svg {
+    width: 2em;
+    height: 2em;
+}
+
+.ReactFlagsSelect-module_selectBtn__19wW7:after {
+    border-top: 5px solid #ffffff;
+    margin-top: 8px;
+}
+
+
+.ReactFlagsSelect-module_selectBtn__19wW7[aria-expanded="true"]:after {
+    border-top: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #ffffff;
+}
+
+.ReactFlagsSelect-module_flagsSelect__2pfa2 {
+    height: 50px;
+    margin-top: 8px;
+    margin-left: 220px;
+}
+
+.ReactFlagsSelect-module_fullWidthOptions__1XeR6 {
+    right: 0;
+    left: -50px;
+    width: 250px;
+}
+
+.ReactFlagsSelect-module_filterBox__3m8EU input {
+    width: calc(100% - 20px);
+    margin: 0 10px;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid rgb(194, 194, 194);
+    border-radius: 5px;
+}

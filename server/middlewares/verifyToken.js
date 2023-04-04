@@ -5,6 +5,7 @@ const config = process.env;
 const verifyToken = (req, res, next) => {
   const token =
     req.body.token || req.query.token || req.headers['token'];
+    //console.log("🚀 ~ file: verifyToken.js:19 ~ verifyToken ~ token:", token)
   if (!token) {
     return res.status(403).json("A token is required for authentication");
   }
@@ -16,6 +17,7 @@ const verifyToken = (req, res, next) => {
   }
   return next();
 };
+    
 
 export default verifyToken;
 

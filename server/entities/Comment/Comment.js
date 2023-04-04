@@ -7,8 +7,39 @@ export class Comment
         this.eventID = eventID;
     }
 
-    save () {
-        
+    init(id) {
+        this.id = id;
+    }
+
+    transfer_data() {
+        let obj = {
+          content: this.content,
+          date: this.date,
+          User_ID: this.authorID,
+          Event_ID: this.eventID
+        };
+        return obj;
+    }
+
+    create () {
+        database.save('Comment', this.transfer_data());
+    }
+
+    read () {
+        return database.read('Comment', this.id);
+    }
+
+    readAll () {
+        return database.readAll("Comment");
+    }
+
+    async update () {
+        // if (this.title) await database.update('Comment', 'title', this.title, this.id);
+        // if (this.description) await database.update('Comment', 'description', this.description, this.id);
+    }
+
+    async delete () {
+        await database.delete('Comment', this.id);
     }
 }
 

@@ -26,10 +26,12 @@ export class DatabaseFind
     }
 
 
-    async find_by_email (email) {
-        let command = `select * from User where email = '${email}'`;
+    async find_by_email (table, email) {
+        let command = `select * from ${table} where email = '${email}'`;
         let data = await pool.promise().query(command);
         if (data[0].length > 0) {
+            console.log("🚀 ~ file: DatabaseFind.js:33 ~ find_by_email ~ 0:", data[0])
+            
             return data[0];
         }
         else {

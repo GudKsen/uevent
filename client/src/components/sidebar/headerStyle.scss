@@ -1,0 +1,141 @@
+.header {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    // background-color: #28bbcb;
+    // background-color: #1f2945;
+    background-color: rgb(10, 16, 24);
+    height: 100%;
+}
+
+.two{
+    display: grid;
+    grid-template-columns: 85% 15%;
+}
+// .country-select{
+//     margin-right: 800px;
+// }
+
+
+.hoverme-profile {
+    width: 50px;
+    height: 50px;
+    // margin-left: 30px;
+    top: 13px;
+    position: absolute;
+    border-radius: 50%;
+    background-image: url("../../public/video/profile.png");
+    background-size: cover;
+    cursor: pointer;
+    background-color: aliceblue;
+  }
+
+.hoverme-profile:hover {
+    // width: 45px;
+    // height: 45px;
+    border-radius: 50%;
+    background-image: url("../../public/video/profile.gif");
+    
+}
+
+.menu-picture {
+    width: 40px;
+    height: 40px;
+    top: 13px;
+    position: absolute;
+    border-radius: 40%;
+    background-image: url("../../public/video/menu.png");
+    background-size: cover;
+    cursor: pointer;
+    right: 80px;
+    background-color: aliceblue;
+}
+
+.menu-picture:hover {
+    // width: 45px;
+    // height: 45px;
+    border-radius: 50%;
+    background-image: url("../../public/video/menu.gif");
+    
+}
+
+.menu-header {
+    opacity: 0;
+}
+
+.showMenu {
+    opacity: 1;
+}
+
+.search-header {
+    margin-left: 20%;
+    margin-top: 18px;
+    display: grid; 
+    float: left;
+    grid-template-columns: auto auto;
+    background-color: white;
+    border-radius: 20px;
+    height: 40px;
+}
+
+.input-search {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    width: 250px;
+    // border-radius: 10px;
+    outline: none;
+    background: transparent;
+    border: none;
+    
+}
+
+.search-header-button {
+    background-color: white;
+    width: 30px;
+    height: 30px;
+    padding-left: 5px;
+}
+
+.input-header-container {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    height: 40px;
+}
+
+.header-icon-search {
+    margin-left: 5px;
+    height: 40px;
+    // display: flex;
+    // align-items: center;
+    // justify-items: center;
+}
+
+.search-header-button:hover {
+    width: 40px;
+    height: 40px;
+}
+
+.filter-icon {
+    width: 30px;
+    height: 30px;
+    margin-top: 23px;
+    margin-left: 20px;
+}
+
+
+
+
+
+
+.modal-filter {
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: 10%;
+    left: 45%;
+    background-color: white;
+    border: 1px solid rgb(182, 182, 182);
+}

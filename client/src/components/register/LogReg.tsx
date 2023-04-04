@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import LogGoogle from "./LogGoogle";
 
 function LogReg() {
     const navigate = useNavigate();
@@ -15,11 +16,14 @@ function LogReg() {
       <section className="container">
         <header>Hello again!</header>
         <form action="#" className="form">
-          <div className="column">
-            <button onClick={regi}>Registration</button>
-            <button onClick={logi}>Log In</button>
+          <div className="column-logreg">
+            <button className="reg" onClick={regi}>Registration</button>
+            <button className="log" onClick={logi}>Log In</button><br/>
+            
           </div>
         </form>
+        {/* <br/>
+        <LogGoogle/> */}
       </section>
     </div>
   );

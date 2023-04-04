@@ -13,37 +13,33 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const registerUser = async (req, res) => {
-  console.log("0");
-  //let login = req.body.login;
+  console.log("sdjfbhsdhfjhaebfjbh");
   let full_name = req.body.full_name;
   let password = req.body.password;
   let passwordConfirm = req.body.passwordConfirm;
   let email = req.body.email;
   let profile_picture = req.body.profilePicture;
   let phone_number = req.body.phone_number;
-  let birthday = req.body.birthday;
+  let birthday = new Date(req.body.birthday);
   let country = req.body.country;
   let city = req.body.city;
-  console.log("1");
+  
 
   let db = new DatabaseFind();
-  console.log("2");
+  
   let data = await db.find_by_phone_number(phone_number);
-  console.log(data);
-  console.log("3");
+  
   if (password !== passwordConfirm) {
-    console.log("4");
+    // console.log("4");
     return res.json("Confirm password");
   }
   else if(data){
-    console.log("5");
+    // console.log("5");
     return res.json("User exist");
   } 
   else {
-    console.log("qweryuiop");
     let usr = new User(full_name, email, country, city, "user",  phone_number, birthday,password, profile_picture );
     // if ((await validateUser(usr, res, req)) === true) {
-      console.log(usr);
       let token = jwt.sign({ usr }, process.env.SECRET_REGISTER);
       
       send(email, "Here is link for finish registration: ", `http://localhost:3000/api/auth/register/${token}`);
@@ -54,25 +50,33 @@ export const registerUser = async (req, res) => {
 };
 
 export const registerConfirm = (req, res) => {
+  // console.log('registerConfirm');
   let token = req.params.token;
   let user = jwt.decode(token, process.env.SECRET_REGISTER);
-  let newToken = jwt.sign(user, process.env.TOKEN_KEY);
+  // let newToken = jwt.sign(user, process.env.TOKEN_KEY);
   let newUser = new User(user.usr.full_name, user.usr.email, user.usr.country, user.usr.city, user.usr.role, user.usr.phone_number, user.usr.birthday,  user.usr.password, user.usr.profile_picture );
-  console.log(newUser)
+  // console.log(newUser)
   newUser.save();
-  return res.json("user creared");
+  return res.json("user created");
 };
 
 export const loginUser = async (req, res) => {
-  let phone_number = req.body.phone_number;
+  let email = req.body.email;
   let password = req.body.password;
 
   let db = new DatabaseFind();
-  console.log("2");
-  let data = await db.find_by_phone_number(phone_number);
-  console.log(data[0]);
-  console.log("3");
-  if (data !== [] && data.phone_number ) {
+  let data = await db.find_by_email("User", email);
+  console.log("🚀 ~ file: authController.js:69 ~ loginUser ~ data:", data)
+  if (data === null)
+  {
+    res.json("User does not exist");
+    return;
+  }
+  let dbRole = new DatabaseFind();
+  let roleData = await dbRole.find_by_id("Role", data[0].Role_ID);
+  data[0].role = roleData[0].title;
+  
+  if (data) {
     if (!bcrypt.compareSync(password, data[0].password)) {
       return res.json("Wrong password");
     } else {
@@ -80,24 +84,26 @@ export const loginUser = async (req, res) => {
         {
           _id: data[0].User_ID,
           email: data[0].email,
-          role: data[0].role,
+          role: roleData[0].title,
           full_name: data[0].full_name,
           country: data[0].country, 
           city: data[0].city, 
           phone_number: data[0].phone_number, 
-          birtday: data[0].birtday
+          birthday: data[0].birthday,
+          profile_picture: data[0].profile_picture
         },
         process.env.TOKEN_KEY,
         {
           expiresIn: "2h",
         }
       );
-      console.log(data);
+      console.log("🚀 ~ file: authController.js:99 ~ loginUser ~ token:", token)
+      // console.log(data);
       return res.header("token", token).status(200).json({ auth: true, token: token, data });
     }
   }
   else {
-    res.json("There are no password in database. \nIt seems that you don't finish your registration.")
+    res.json("There no such user in database\nCheck your email or password and try again")
   }
 };
 

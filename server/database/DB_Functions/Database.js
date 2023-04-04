@@ -15,11 +15,11 @@ export class Database
     save = async (table, set) => {
         let command = `insert into ${table} set ? `;
         let data = await pool.promise().query(command, set).catch(err => {
+            
             console.error(err.message);
             return new Error(err.message);
         });
-        //console.log(data[0]);
-        return data[0];
+        return data[0].insertId;
     }
 
     read = async (table, id) => {
@@ -32,7 +32,10 @@ export class Database
     }
 
     update = async (table, column, value, id) => {
+        
         let command_update = `update ${table} set ${column} = '${value}' where ${table}_ID = ${id}`;
+        
+        console.log("🚀 ~ file: Database.js:42 ~ update= ~ command_update:", command_update)
         let result = await pool.promise().query(command_update).catch(err => {
             console.error(err.message);
             return err;

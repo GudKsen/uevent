@@ -9,6 +9,13 @@ import Setting from "./components/user/Setting";
 import Event from "./components/event/Event";
 import EventPage from "./components/event/EventPage";
 import RegiConfirm from "./components/register/RegiConfirm";
+import BankCard from "./components/bankCard/bankCard";
+import ManageEvents from "./components/event/ManageEvents";
+import CreateEvent from "./components/event/CreateEvent/CreateEvent";
+import AdminPanel from "./components/Admin/AdminPanel";
+import { CreateOrganization } from "./components/Organization/CreateOrganization";
+import { OrganizationPage } from "./components/Organization/OrganizationPage";
+
 // import DeleteProfile from "./components/register/DeleteProfile";
 
 const router = createBrowserRouter([
@@ -57,6 +64,34 @@ const router = createBrowserRouter([
     path: "userpage",
     element: <UserPage />,
   },
+  {
+    path: "bankcard",
+    element: <BankCard />,
+  },
+  {
+    path: "events/:id",
+    element: <EventPage />,
+  },
+  {
+    path: "events-manage",
+    element: <ManageEvents/>
+  },
+  {
+    path: "create-event",
+    element: <CreateEvent/>
+  },
+  {
+    path: "admin-panel",
+    element: <AdminPanel/>
+  },
+  {
+    path: "create-organization",
+    element: <CreateOrganization/>
+  },
+  {
+    path: "my-organization",
+    element: <OrganizationPage/>
+  }
 ]);
 
 const root = ReactDOM.createRoot(

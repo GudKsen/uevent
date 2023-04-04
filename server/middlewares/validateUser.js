@@ -1,6 +1,6 @@
-import Validator from 'validatorjs'
+import Validator from 'validatorjs';
 
-const validator = async (body, rules, customMessages, callback) => {
+const validatorFunc = async (body, rules, customMessages, callback) => {
     const validation = new Validator(body, rules, customMessages);
     validation.passes(() => callback(null, true));
     validation.fails(() => callback(validation.errors, false));
@@ -12,10 +12,12 @@ export const validationRegister = async (req, res, next) => {
         "email": "required|email",
         "password": "required|min:8",
         "full_name": "required|string|min:3|max:240",
-        // "birthday": "required|before:date"
+        // "birthday": "required",
+        // "country": "required|string|",
+        // "city": "required|string"
     }
     
-    await validator(req.body, validationRules, {}, (err, status) => {
+    await validatorFunc(req.body, validationRules, {}, (err, status) => {
         if (!status) {
             console.log(err)
             res.status(412)

@@ -4,9 +4,12 @@ let database = new Database();
 
 export class Company
 {
-    constructor (title, description) {
-        this.title = title;
+    constructor (name, description, email, location, image) {
+        this.name = name;
         this.description = description;
+        this.email = email;
+        this.location = location;
+        this.image = image;
     }
 
     init(id) {
@@ -15,14 +18,18 @@ export class Company
 
     transfer_data() {
         let obj = {
-          title: this.title,
-          description: this.description
+          name: this.name,
+          description: this.description,
+          email: this.email,
+          Location_ID: this.location,
+          image: this.image
         };
         return obj;
     }
 
-    create () {
-        database.save('Company', this.transfer_data());
+    async create (owner) {
+        let id = await database.save('Company', this.transfer_data());
+        database.save('Organizer_Company', {User_ID: owner, Company_ID: id})
     }
 
     read () {
@@ -34,8 +41,10 @@ export class Company
     }
 
     async update () {
-        if (this.title) await database.update('Company', 'title', this.title, this.id);
+        if (this.name) await database.update('Company', 'name', this.name, this.id);
         if (this.description) await database.update('Company', 'description', this.description, this.id);
+        if (this.email) await database.update('Company', 'email', this.email, this.id);
+        if (this.image) await database.update('Company', 'image', this.image, this.id);
     }
 
     async delete () {

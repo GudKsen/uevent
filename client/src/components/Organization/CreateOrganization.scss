@@ -1,0 +1,106 @@
+.create-organization-page
+{
+    display: grid;
+    grid-template-columns: 5% auto;
+    background-color: #E4E9F7;
+
+    .name-email-form
+    {
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: center;
+        margin-left: 25px;
+    }
+
+    .create-organization-button{
+        margin-right: 65%;
+    }
+
+    .container-company
+    {
+        width: 70%;
+        height: 75%;
+        margin-top: 5%;
+        margin-left: 10%;
+    }
+
+    .input-box-a input{
+        width: 95%;
+      }
+
+    .form-container :where(.input-box-a input, .input-box-a textarea) {
+        position: relative;
+        height: 50px;
+        width: 100%;
+        outline: none;
+        font-size: 1rem;
+        color: #707070;
+        margin-top: 8px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 0 15px;
+      }
+      .input-box-a input:focus {
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+      }
+
+    .form-container {
+        background-color: white;
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        // margin-top: 10%;
+        // margin-left: 10%;
+        padding: 30px;
+    }
+
+    // .form-control-name {
+       
+    // }
+
+    .location-org 
+    {
+        margin-left: 50px;
+        display: grid;
+        grid-template-columns: auto 48%;
+    }
+
+    .street-number-form
+    {
+        margin-top: 25px;
+    }
+
+    .select-country
+    {
+        width: 400px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    .select-state
+    {
+        width: 400px;
+        margin-bottom: 10px;
+    }
+
+    .select-city
+    {
+        width: 400px;
+    }
+
+    .email-create, .add-street-number, .location-org{
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .description-form
+    {
+        width: 60%;
+        height: 90px;
+    }
+
+    .input-street-number, .input-street 
+    {
+        width: 100%;
+    }
+}

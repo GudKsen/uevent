@@ -5,9 +5,43 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+
+.avatarPicture
+{
+  width: 180px;
+  height: 180px;
+}
+
+.input-box-a input{
+  width: 100%;
+}
+// .all {
+//   min-height: 100vh;
+//   display: flex;
+//   position: fixed;
+//   align-items: center;
+//   text-align: center;
+//   justify-content: center;
+//   padding: 20px;
+//   background: rgb(216, 225, 247);
+// }
+// .container {
+//   position: relative;
+//   max-width: 600px;
+//   // margin: 40px;
+//   width: 100%;
+//   background: #fff;
+//   padding: 25px;
+//   border-radius: 8px;
+//   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+// }
 .all {
   min-height: 100vh;
+  min-width: 100%;
   display: flex;
+  //вот строка, она не даёт появляться тому белому моменту. ниже
+  position: fixed;
+  //выше
   align-items: center;
   text-align: center;
   justify-content: center;
@@ -15,6 +49,8 @@
   background: rgb(216, 225, 247);
 }
 .container {
+  // margin:auto;
+  // margin-top: 7%;
   position: relative;
   max-width: 600px;
   // margin: 40px;
@@ -35,14 +71,14 @@ s
 .container .form {
   margin-top: 30px;
 }
-.form .input-box {
+.form .input-box-a, .react-tel-input .form-control {
   width: 100%;
-  margin-top: 20px;
+  // margin-top: 20px;
 }
-.input-box label {
+.input-box-a label {
   color: #333;
 }
-.form :where(.input-box input, .select-box) {
+.form :where(.input-box-a input, .select-box, .react-tel-input .form-control) {
   position: relative;
   height: 50px;
   width: 100%;
@@ -54,9 +90,24 @@ s
   border-radius: 6px;
   padding: 0 15px;
 }
-.input-box input:focus {
+.input-box-a input:focus {
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
+
+
+.form .column-logreg {
+  display: flex;
+}
+
+.reg{
+  margin-right: 20px;
+  // padding-right: 20px;
+}
+
+.lod{
+  margin-left: 20px;
+}
+
 .form .column {
   display: flex;
   column-gap: 20px;
@@ -124,7 +175,48 @@ s
   }
 }
 
+
+
 button{
     padding: 10px 30px;
       border-radius: 15px;
 }
+
+div.react-tel-input {
+  height: 50px;
+  margin-top: 9px;
+  // border: 1px solid rgb(192, 192, 192);
+  border: none
+}
+
+
+.react-tel-input .form-control {
+  height: 50px;
+  // height: 100%;
+  // margin: 10px;
+  // padding: 5px;
+  // border: none
+}
+
+// Select{
+//   height: 50px;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

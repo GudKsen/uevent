@@ -1,0 +1,17 @@
+USE ucode_web_uevent;
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS Ticket;
+SET FOREIGN_KEY_CHECKS = 1;
+
+CREATE TABLE IF NOT EXISTS Ticket (
+    Ticket_ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    Event_ID INT NOT NULL,
+    price INT,
+    FOREIGN KEY(Event_ID) REFERENCES Event(Event_ID),
+    purchase_date TIMESTAMP NOT NULL,
+    seat VARCHAR(255) UNIQUE,
+    visit_date TIMESTAMP NOT NULL,
+    User_ID INT NOT NULL,
+    FOREIGN KEY(User_ID) REFERENCES User(User_ID)
+);
+

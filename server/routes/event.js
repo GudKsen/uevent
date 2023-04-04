@@ -11,7 +11,8 @@ import {
     GetEvents, 
     UpdateEvent, 
     DeleteEvent,
-    GetCommentsEvent
+    GetCommentsEvent,
+    GetEventsByCountry
 } from "../controllers/Event/EventController.js"
 
 
@@ -23,11 +24,13 @@ const upload = multer({
 });
   
 
-router.post("/api/event", upload.single("file"), CreateEvent);
+router.post("/api/event", auth, upload.single("file"), CreateEvent);
 
 router.get("/api/event/:id([0-9]+)",    GetEvent);
 
-router.get("/api/events",   GetEvents);
+router.get("/api/events", GetEventsByCountry);
+
+router.get("/api/events/all", GetEvents);
 
 router.patch("/api/event/:id([0-9]+)",   UpdateEvent);
 

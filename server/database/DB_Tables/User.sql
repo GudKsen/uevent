@@ -9,9 +9,10 @@ CREATE TABLE IF NOT EXISTS User (
     password VARCHAR(255) NOT NULL,
     email VARCHAR(120) UNIQUE NOT NULL,
     profile_picture VARCHAR(255),
-    role ENUM('user', 'admin', 'organizator'),
     birthday DATE,
     phone_number VARCHAR(50) UNIQUE NOT NULL,
     country VARCHAR(255) NOT NULL,
     city VARCHAR(255) NOT NULL,
+    Role_ID INT NOT NULL,
+    FOREIGN KEY(Role_ID) REFERENCES Role(Role_ID)
 )

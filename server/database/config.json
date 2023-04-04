@@ -2,5 +2,6 @@
     "host": "localhost",
     "user": "khudzhuman",
     "database": "ucode_web_uevent",
-    "password": "securepass"
+    "password": "securepass",
+    "timezone": "+00:00"
 }

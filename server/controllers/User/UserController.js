@@ -1,4 +1,6 @@
 import { User } from "../../entities/User/User.js";
+import fs from 'fs'
+import path from "path";
 
 export const GetUsers = async (req, res) => {
   let user = new User();
@@ -12,6 +14,7 @@ export const GetUser = async (req, res) => {
 
   user.init(id);
   let data = await user.read();
+  data[0].role = user.role;
   res.json(data);
 };
 
@@ -40,22 +43,46 @@ export const CreateUser = async (req, res) => {
   res.send("Created");
 };
 
-export const UpdateUser = (req, res) => {
+export const UpdateUser = async(req, res) => {
   let full_name = req.body.full_name;
   let password = req.body.password;
   let phone_number = req.body.phone_number;
   let birthday = req.body.birthday;
-  let address = req.body.address;
   let email = req.body.email;
   let role = req.body.role;
-  let profilePicture = "h";
+  let profilePicture = req.file;
+  let country = req.body.country;
+  let city = req.body.city;
   let id = parseInt(req.params.id);
 
-  let user = new User(full_name, email, address, role, phone_number, birthday, password, profilePicture);
+  let imageName = null;
+  if (profilePicture !== null && profilePicture !== undefined) {
+    imageName = profilePicture.filename;
+  } else {
+    imageName = null;
+  }
 
-  user.init(id);
-  user.update();
-  res.send("User updated");
+  let userNew = new User(full_name, email, country, city, role, phone_number, birthday, password, imageName);
+  let userOld = new User();
+  
+  userOld.init(id);
+  await userOld.read();
+  if (userOld.profile_picture && userOld.profile_picture !== undefined) 
+  {
+    let pathImg = path.resolve("public/avatars", `${userOld.profile_picture}`);
+    fs.readFile(pathImg, (err, data) => {
+      if (!err && data) {
+        fs.unlinkSync(pathImg);
+      }
+    })
+  }
+
+  userNew.init(id);
+  await userNew.update();
+  await userNew.read();
+  console.log("🚀 ~ file: UserController.js:78 ~ UpdateUser ~ userNew:", userNew)
+  
+  res.send(userNew);
 };
 
 export const UpdateUserAvatar = async (req, res) => {

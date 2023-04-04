@@ -9,13 +9,13 @@ axios.create({
 
 function LogIn() {
   const [err, setErr] = React.useState("");
-  const [phone_number, setPhone_number] = React.useState("");
+  const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const navigate = useNavigate();
   async function logIn(e: any) {
     e.preventDefault();
     const info = {
-      phone_number,
+      email,
       password,
     };
     const data = await fetch("http://localhost:8000/api/auth/login", {
@@ -31,13 +31,13 @@ function LogIn() {
     if (typeof res === typeof "rara") {
       setErr(res);
     } else {
-      const { User_ID, password, full_name, email, role , country, city, phone_number, birtday} = res.data[0];
+      const { User_ID, password, full_name, email, role , country, city, phone_number, birthday, profile_picture} = res.data[0];
       localStorage.setItem(
         "userInfo",
-        JSON.stringify({ User_ID, password, full_name, email, role , country, city, phone_number, birtday})
+        JSON.stringify({ User_ID, password, full_name, email, role , country, city, phone_number, birthday, profile_picture})
       );
       localStorage.setItem("token", res.token);
-      navigate("/month");
+      navigate("/events");
     }
   }
   
@@ -50,10 +50,10 @@ function LogIn() {
           {/* <div className="column"> */}
           <div className="input-box">
             <input
-            onChange={(e) => setPhone_number(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             type="text"
-            placeholder="Phone number"
-            name="phone_number"
+            placeholder="Email"
+            name="email"
             />  
           </div>
           <div className="input-box">

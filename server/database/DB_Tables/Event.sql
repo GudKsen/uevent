@@ -8,13 +8,16 @@ CREATE TABLE IF NOT EXISTS Event(
     title VARCHAR(255) NOT NULL,
     description TEXT(1024) NOT NULL,
     poster VARCHAR(255),
-    dateTime DATETIME NOT NULL,
-    location VARCHAR(255) NOT NULL,
-    -- isOffline INT(1) NOT NULL,
+    startDateTime DATETIME NOT NULL,
+    publishDate DATETIME NOT NULL,
+    duration TIME(0),
+    endDateTime DATETIME,
+    Location_ID INT,
+    FOREIGN KEY(Location_ID) REFERENCES Location(Location_ID),
     price INT(50),
     isPromocodeAvailable INT(1),
     Format_ID INT NOT NULL,
     FOREIGN KEY(Format_ID) REFERENCES Format(Format_ID),
-    Author_ID INT NOT NULL,
-    FOREIGN KEY(Author_ID) REFERENCES User(User_ID)
-)
+    Company_ID INT NOT NULL,
+    FOREIGN KEY(Company_ID) REFERENCES Company(Company_ID)
+);

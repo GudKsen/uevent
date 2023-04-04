@@ -6,5 +6,9 @@ SET FOREIGN_KEY_CHECKS = 1;
 CREATE TABLE IF NOT EXISTS Company(
     Company_ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    description TEXT(1024)
-)
+    description TEXT(1024),
+    email VARCHAR(255) NOT NULL UNIQUE,
+    image VARCHAR(255),
+    Location_ID INT NOT NULL,
+    FOREIGN KEY(Location_ID) REFERENCES Location(Location_ID)
+);
