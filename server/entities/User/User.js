@@ -33,7 +33,7 @@ export class User
           profile_picture: this.profile_picture,
           country: this.country,
           city: this.city,
-          birthday: this.Birthday
+          birthday: this.birthday
         };
         return obj;
     }
@@ -43,6 +43,7 @@ export class User
         let db = new DatabaseFind();
         let role_id = await db.find_by_title("Role", this.role);
         let obj = this.transfer_data();
+        // console.log(transfer_data());
         obj.Role_ID = role_id[0].Role_ID;
         database.save("User", obj);
     }

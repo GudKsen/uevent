@@ -77,10 +77,10 @@ const router = createBrowserRouter([
     path: "bankcard",
     element: <BankCard />,
   },
-  {
-    path: "events/:id",
-    element: <EventPage />,
-  },
+  // {
+  //   path: "events/:id",
+  //   element: <EventPage />,
+  // },
   {
     path: "events-manage",
     element: <ManageEvents/>

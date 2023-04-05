@@ -14,14 +14,17 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const registerUser = async (req, res) => {
-  console.log("sdjfbhsdhfjhaebfjbh");
+  // console.log("sdjfbhsdhfjhaebfjbh");
   let full_name = req.body.full_name;
   let password = req.body.password;
   let passwordConfirm = req.body.passwordConfirm;
   let email = req.body.email;
   let profile_picture = req.body.profilePicture;
   let phone_number = req.body.phone_number;
+  // console.log(req.body.birthday);
   let birthday = new Date(req.body.birthday);
+  // let birthday = req.body.birthday;
+  console.log(birthday);
   let country = req.body.country;
   let city = req.body.city;
   
@@ -44,7 +47,7 @@ export const registerUser = async (req, res) => {
       let token = jwt.sign({ usr }, process.env.SECRET_REGISTER);
       
       send(email, "Here is link for finish registration: ", `http://localhost:3000/api/auth/register/${token}`);
-      console.log(`http://localhost:3000/api/auth/register/${token}`);
+      // console.log(`http://localhost:3000/api/auth/register/${token}`);
       return res.send('Letter was send on your email');
     // }
   }
@@ -55,8 +58,8 @@ export const registerConfirm = (req, res) => {
   let token = req.params.token;
   let user = jwt.decode(token, process.env.SECRET_REGISTER);
   // let newToken = jwt.sign(user, process.env.TOKEN_KEY);
-  let newUser = new User(user.usr.full_name, user.usr.email, user.usr.country, user.usr.city, user.usr.role, user.usr.phone_number, user.usr.birthday,  user.usr.password, user.usr.profile_picture );
-  // console.log(newUser)
+  let newUser = new User(user.usr.full_name, user.usr.email, user.usr.country, user.usr.city, user.usr.role, user.usr.phone_number, new Date(user.usr.birthday),  user.usr.password, user.usr.profile_picture );
+  console.log(newUser)
   newUser.save();
   return res.json("user created");
 };

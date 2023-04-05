@@ -73,7 +73,7 @@ function UserPage() {
           
 
           <h1>Date of Birth: </h1>
-          <b><h2>20.12.2003</h2></b><br />
+          <b><h2>{new Date(userInfo.birthday).toLocaleDateString()}</h2></b><br />
 
           <h1>Phone number: </h1>
           <b><h2>{userInfo.phone_number}</h2></b><br />

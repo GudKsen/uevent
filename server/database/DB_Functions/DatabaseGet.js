@@ -144,7 +144,8 @@ export class DatabaseGet
             for (let event of events[0])
             {
                 let event_id = event.Event_ID;
-                let user_id = event.Author_ID;
+                let user_id = event.Company_ID;
+                console.log(event);
 
                 let command_get_themes_event = `select Theme.* from Event_Theme
                 inner join Theme on Event_Theme.Theme_ID = Theme.Theme_ID

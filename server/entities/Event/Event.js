@@ -32,7 +32,7 @@ export class Event
         let obj = {
             title: this.title,
             description: this.description,
-            Author_ID: this.companyID,
+            Company_ID: this.companyID,
             startDateTime: this.dateTime,
             Location_ID: this.location,
             poster: this.image,

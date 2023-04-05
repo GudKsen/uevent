@@ -70,21 +70,21 @@ function EventPage() {
         userInfo ?
             <Sidebar2 />
           :
-          <div className="nosidebar"></div>
+          <div className=" body-sidebar nosidebar"></div>
 
       }
 
       {/* выше */}
 
       {/* <Sidebar2 /> */}
-      <div className="event-info-container">
+      <div className={`event-info-container `}>
         <Header />
-        <div className="create">
+        <div className={`create`}>
 
           {/* <div className="event-create"> */}
             <form className="event-create" action="#">
               <div className="maindata-comment">
-                <div className="maindata">
+                <div className={`maindata `}>
                   <div className="ev-inf">
                     <div className="event-photo">
                       {/* <img src={'http://localhost:8000/images/no_photo.jpg'} alt="" /> */}
@@ -96,22 +96,26 @@ function EventPage() {
                     </div>
                     <div className="event-text">
                       <div className="event-header">
-                        <div className="event-title">Title: {event.title}</div> 
+                        <div className="event-title">
+                          <p>Title:   {event.title}</p>
+                        </div> 
                         {/* <Rating/> */}
                         {/* <p>{event.description}</p> */}
                         </div>
                       <div className="description">
-                        Description: {event.description}<br/>
+                        <p>Description:   {event.description}</p><br/>
                       </div>
                       {/* <div className="location">
                         {event.location}
                       </div> */}
                       {/* <div className="price"> */}
-                        Price: {event.price}<br/>
+                        <p>Price:   {event.price}</p>
                         
-                        Time: {new Date(event.startDateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}<br/>
-                        Date: {new Date(event.startDateTime).toLocaleDateString()}<br/>
-                        Adress: {event.address_line_street}, {event.street_number}<br/>
+                        <p>Time:   {new Date(event.startDateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+                        <p>Date:   {new Date(event.startDateTime).toLocaleDateString()}</p>
+                        <p>Adress:   {event.address_line_street}, {event.street_number}</p>
+                        
+                        
                       {/* </div> */}
                       {/* <div className="Themes">
                         {event.themes}
@@ -132,7 +136,7 @@ function EventPage() {
                   
                 </div>
 
-                <div className="typeevent">
+                <div className={`typeevent `}>
                   <div className="comment">
                     <h2>Comments</h2>
                     {
@@ -142,19 +146,23 @@ function EventPage() {
                         <div  key={comment.Comment_ID}>
                           <div >
                             <div>
-                              {comment.UserInfo.full_name}
+                              {/* <p></p> */}
+                              <p>{comment.UserInfo.full_name}</p>
                               </div>
                             <div >
-                            {new Date(comment.date).toLocaleDateString()} {new Date(comment.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+
+                              <p>{new Date(comment.date).toLocaleDateString()} {new Date(comment.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            </p>
                             </div>
                             <div >
-                              {comment.content}
+                              <p>{comment.content}</p>
+                              
                             </div>
                           </div>
                         </div>
                         )}
                       </div> 
-                      : <div>There are no comments</div>
+                      : <div><p>There are no comments</p></div>
                     }
                     <div >
                       <div >
@@ -168,8 +176,8 @@ function EventPage() {
                  </div>
               </div>
               
-              <div className="author-info">
-                <div className="author">
+              <div className={`author-info`}>
+                <div className={`author `}>
                   {event.author}hhvhjj
                 </div>
               </div>

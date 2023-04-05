@@ -105,7 +105,7 @@ function Event() {
             <div className="list-events-container">
               {eventsData && eventsData.map(event =>
                 <div className="card-container" key={event.Event_ID}>
-                  <div className="card" onClick={() => { navigate(`${event.Event_ID}`) }}>
+                  <div className="card" onClick={() => { navigate(`/eventpage/${event.Event_ID}`) }}>
                     <div className="card-header">
                       {/* <img src="https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg" alt="rover" /> */}
 
