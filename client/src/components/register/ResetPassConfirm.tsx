@@ -37,7 +37,7 @@ function ResetPass() {
         console.log(data);
         const res = await data.json();
         console.log(res.data);
-        navigate("/login");
+        navigate("/api/auth/login");
     
   }
 
@@ -46,14 +46,14 @@ function ResetPass() {
     <section className="container">
       <header>Reset password</header>
       <form action="#" className="form" >
-        <p>{error}</p>
+        <p className="err">{error}</p>
         <div className="input-box-a">
           <label>Password</label>
-          <input type="text" placeholder="Enter email address" required onChange={(e) => setPassword(e.target.value)}/>
+          <input type="password" placeholder="Enter password" required onChange={(e) => setPassword(e.target.value)}/>
         </div>
         <div className="input-box-a">
           <label>Confirm password</label>
-          <input type="text" placeholder="Enter email address" required onChange={(e) => setConfirmPassword(e.target.value)}/>
+          <input type="password" placeholder="Enter password" required onChange={(e) => setConfirmPassword(e.target.value)}/>
         </div>
         <button onClick={sendResetConfirm}>Submit</button>
       </form>

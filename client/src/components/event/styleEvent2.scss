@@ -9,6 +9,16 @@
     color: rgb(10, 16, 24);
 }
 
+.nosidebar{
+  width: 0px;
+  height: 100hv;
+}
+
+.choosecountry{
+  font-size: larger;
+  margin-left: 10%;
+}
+
 .allevents {
     display: grid;
     grid-template-columns: 5% auto;
@@ -121,6 +131,8 @@
   margin-right: 10px;
   bottom: 0px;
 }
+
+
 .user-info h5 {
   margin: 0;
   padding-right: 20px;

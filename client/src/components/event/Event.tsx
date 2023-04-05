@@ -7,6 +7,7 @@ import Header from "../sidebar/Header";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import "../sidebar/sidebar2.scss";
 
 function Event() {
   // let userInfo = JSON.parse(localStorage.getItem("userInfo") as string);
@@ -77,13 +78,19 @@ function Event() {
 
     });
   }
-
+  let userInfo = JSON.parse(localStorage.getItem("userInfo") as string);
   return (
     <div className="allevents">
 
-      <div>
-        <Sidebar2 />
-      </div>
+{
+        userInfo ?
+          <div>
+            <Sidebar2 />
+          </div> 
+          :
+          <div className="body-sidebar nosidebar"></div>
+
+      }
 
       <div className="list-events">
         <Header
@@ -186,7 +193,7 @@ function Event() {
 
             </div>
 
-            : <div>There are no events</div>
+            : <div><br/><p className="choosecountry">Choose country</p></div>
         }
       </div>
     </div>

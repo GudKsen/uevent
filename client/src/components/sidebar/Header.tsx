@@ -10,11 +10,11 @@ import { FlagSelect } from "./FlagSelect";
 import "./headerStyle.scss";
 
 
-function Header({setSearchText, setSelectedCountry}: any) {
+function Header({ setSearchText, setSelectedCountry }: any) {
   const [showMenu, setShowMenu] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [selectedThemes, setSelectedThemes] = useState<any[]>([]);
-  const [selectedFormat, setSelectedFormat] = useState([]); 
+  const [selectedFormat, setSelectedFormat] = useState([]);
   // const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
   let userInfo = JSON.parse(localStorage.getItem("userInfo") as string);
@@ -35,31 +35,39 @@ function Header({setSearchText, setSelectedCountry}: any) {
     )
   }
 
+  async function regi() {
+    navigate("/api/auth/register");
+  }
+
+  async function logi() {
+    navigate("/api/auth/login");
+  }
+
   return (
     <div className="header">
       <div className="three">
         <div className="search-header">
 
           <div className="bb bx bx-search icon header-icon-search">
-            <div className="search-header-button hoverme" 
+            <div className="search-header-button hoverme"
             // onClick={event => handleClick(searchText)}
             ></div>
           </div>
 
           <div className="input-header-container">
             <input className="input-search" type="text" placeholder="Search..."
-            onChange={(e) => setSearchText(e.target.value)}
+              onChange={(e) => setSearchText(e.target.value)}
             ></input>
           </div>
-          
-         
+
+
 
         </div>
         <div>
-            <img className="filter-icon " src={require("../../public/video/filter.png")} alt=""
-              onClick={() => {setIsOpen(!isOpen)}}
-            />
-            {/* {
+          <img className="filter-icon " src={require("../../public/video/filter.png")} alt=""
+            onClick={() => { setIsOpen(!isOpen) }}
+          />
+          {/* {
               isOpen ?
               <div className="modal-filter">
                 <SelectFormat setSelectedThemes={setSelectedThemes}/>
@@ -68,29 +76,54 @@ function Header({setSearchText, setSelectedCountry}: any) {
                 : null
             } */}
 
-            
-          </div>
+
+        </div>
       </div>
       <div className="two">
         <div className="country-select">
-          <FlagSelect className="country-select" setSelectedCountry= {setSelectedCountry}
-          
-            />
+          <FlagSelect className="country-select" setSelectedCountry={setSelectedCountry}
+
+          />
         </div>
+        {
+          !userInfo ?
+            <div className="reglog ">
+              <div>
+                <button className="logi" onClick={logi}>Sing in</button>
+              </div>
+              <div>
+                {/* <button className="log">Sing in</button> */}
+                <button className="regi" onClick={regi}>Sing up</button>
+              </div>
+            </div>
 
-      <div>
+            :
+            <div>
 
-        <div className="hoverme-profile" onClick={() => {
+              <div className="hoverme-profile" onClick={() => {
+                navigate("/userpage");
+              }}></div>
+
+
+
+
+            </div>
+
+        }
+
+        {/* <div>
+
+          <div className="hoverme-profile" onClick={() => {
             navigate("/userpage");
           }}></div>
 
-          
 
 
-        </div>
+
+        </div> */}
       </div>
 
-      
+
     </div>
   );
 }

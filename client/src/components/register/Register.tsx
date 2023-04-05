@@ -11,6 +11,7 @@ import { Country, State, City } from 'country-state-city';
 
 // import ReactCountryFlag from "react-country-flag";
 import "./regstyle.scss";
+import { colors } from "react-select/dist/declarations/src/theme";
 
 interface ILocationOne {
   value: string;
@@ -20,6 +21,7 @@ interface ILocationOne {
 function Register() {
   const navigate = useNavigate();
   const [full_name, setName] = useState("");
+  const [error, setErr] = useState("");
   const [email, setEmail] = useState("");
   const [phone_number, setNumber] = useState("");
   const [city, setCity] = useState("");
@@ -36,6 +38,40 @@ function Register() {
 
   async function sendRegister(e: any) {
     e.preventDefault();
+
+    if(!full_name){
+      setErr("Enter full name");
+      return;
+    }else if(full_name.length < 3 ){
+      setErr("Full name must be more then 3 symbols");
+      return;
+    }else if(!email){
+      setErr("Enter email");
+      return;
+    }else if(!password){
+      setErr("Enter password");
+      return;
+    } else if(password.length < 8){
+      setErr("Password must be more then 8 symbols");
+      return;
+    }else if(password !== passwordConfirm){
+      setErr("Password must be confirm");
+      return;
+    }else if(!phone_number){
+      setErr("Enter phone number");
+      return;
+    }else if(!birthday){
+      setErr("Enter date of birthday");
+      return;
+    }else if(!selectedCountry){
+      setErr("Select country");
+      return;
+    }else if(!selectedCity){
+      setErr("Select city");
+      return;
+    } else{
+      setErr("");
+    }
     const info = {
       full_name,
       password,
@@ -57,11 +93,19 @@ function Register() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(info),
-      }).then(data => console.log(data));
+      }).then(data => res = data);
       ////     res = await data.json();
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
     }
+    // console.log(res.data);
+    // if(res == 'The email field is required.'){
+    //   setErr(res);
+    // }else {
+      setErr("Letter was send on your email");
+    // }
+    // 
+    // setErr(res)
     // // console.log(data);
     // navigate("/api/auth/login");
 
@@ -107,6 +151,7 @@ function Register() {
         <header>Registration Form</header>
         <form action="#" className="form">
           <div className="input-box-a">
+          <p className="err">{error}</p>
             <label>Full Name</label>
             <input type="text" placeholder="Enter full name" required onChange={(e) => setName(e.target.value)} />
           </div><br />

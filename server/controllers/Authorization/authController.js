@@ -3,6 +3,7 @@ import { validateUser } from "../../utils/Validation/validData.js";
 import { send } from "../../utils/Email/sendEmail.js";
 import { resetPassword } from "../../utils/Authorization/resetPassword.js";
 import  { DatabaseFind} from "../../database/DB_Functions/DatabaseFind.js"
+import { Database } from "../../database/DB_Functions/Database.js";
 
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
@@ -140,7 +141,7 @@ export const passwordResetConfirmToken = async (req, res) => {
     let newPassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     database.update("User", "password", newPassword, data[0].User_ID);
     
-    res.send("Password updated");
+    res.json("Password updated");
   }
 };
 

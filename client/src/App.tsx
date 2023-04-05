@@ -1,11 +1,9 @@
-import React from "react";
-import LogIn from "./components/register/LogIn";
-import LogReg from "./components/register/LogReg";
+import Event from "./components/event/Event";
 
 function App() {
   return (
       <div className="App">
-        <LogReg />
+         <Event /> 
       </div>
   );
 }

@@ -48,7 +48,7 @@ function LogIn() {
         <header>Log in</header>
         <form action="#" className="form" >
           {/* <div className="column"> */}
-          <div className="input-box">
+          <div className="input-box-a">
             <input
             onChange={(e) => setEmail(e.target.value)}
             type="text"
@@ -56,7 +56,7 @@ function LogIn() {
             name="email"
             />  
           </div>
-          <div className="input-box">
+          <div className="input-box-a">
             <input
             onChange={(e) => setPassword(e.target.value)}
             type="password"
