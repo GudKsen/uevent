@@ -24,6 +24,7 @@ export const SaveComment = (req, res) => {
 
 export const DeleteComment = (req, res) => {
     let id = parseInt(req.params.id);
+    console.log("==========================\n"+id+"------------------------------\n")
     let comment = new Comment();
     comment.init(id);
     comment.delete();

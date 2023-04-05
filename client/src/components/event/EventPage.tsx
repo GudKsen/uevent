@@ -9,6 +9,8 @@ import "./styleeventpage.scss";
 import "./buttonStyle.scss";
 import Rating from "./rating/Rating";
 import "../sidebar/sidebar2.scss";
+import "../event/CreateEvent/styleCreateEvent.scss";
+
 
 function EventPage() {
   let { id } = useParams();
@@ -47,6 +49,18 @@ function EventPage() {
     setTimeout(() => {
       setAnimate("");
     }, 8000);
+  }
+
+  function deleteComment(id:any) {
+
+    axios.post(`http://localhost:8000/api/comment/${id}`,
+      {
+        // headers: {
+        //   'Content-Type': 'multipart/form-data',
+          'token': localStorage!.getItem("token")!
+      // }
+      });
+    GetComments(id);
   }
 
   function createComment(e: any) {
@@ -145,17 +159,35 @@ function EventPage() {
                         {commentData && commentData.map(comment =>
                         <div  key={comment.Comment_ID}>
                           <div >
-                            <div>
+                            <div className="time-name">
+                              <div className="namecom">
                               {/* <p></p> */}
-                              <p>{comment.UserInfo.full_name}</p>
+                              <label>{comment.UserInfo.full_name}</label>
+                              
                               </div>
-                            <div >
-
-                              <p>{new Date(comment.date).toLocaleDateString()} {new Date(comment.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                            </p>
+                            <div className="timecom">
+                              <label>{new Date(comment.date).toLocaleDateString()} {new Date(comment.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                              </label>
+                              
                             </div>
-                            <div >
-                              <p>{comment.content}</p>
+                              </div>
+                            
+                            <div className="content-del-up">
+                              <div className="content">
+                                <p>{comment.content}</p>
+                                {/* <p>{comment.Comment_ID}</p> */}
+                              </div>
+                                {
+                                  (comment.UserInfo.full_name == userInfo.full_name)?
+                                  <div className="del-up">
+                                    <div className="del" onClick={() => {deleteComment(comment.Comment_ID)}}>
+                                    </div>
+                                    <div className="up">
+                                    </div>
+                                  </div> :
+                                  <div></div>
+                                }
+                                
                               
                             </div>
                           </div>
@@ -164,8 +196,8 @@ function EventPage() {
                       </div> 
                       : <div><p>There are no comments</p></div>
                     }
-                    <div >
-                      <div >
+                    <div className="create-comm">
+                      <div className="input-box-a">
                         <input onChange={(e) => setContent(e.target.value)} type="text" placeholder="Enter comment" required></input>
                       </div>
                       <button onClick={createComment}>Create</button>
