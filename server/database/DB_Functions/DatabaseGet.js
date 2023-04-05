@@ -118,7 +118,7 @@ export class DatabaseGet
                 let data_user = await pool.promise().query(comm);
                 if (data_user[0].length)
                 {
-                    data[0][i].UserInfo = data_user[0];
+                    data[0][i].UserInfo = data_user[0][0];
                 }
             }
             return data[0];

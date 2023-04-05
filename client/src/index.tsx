@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 import Register from "./components/register/Register";
 import LogIn from "./components/register/LogIn";
 import ResetPass from "./components/register/ResetPass";
+import ResetPassConfirm from "./components/register/ResetPassConfirm";
 import UserPage from "./components/user/UserPage";
 import Setting from "./components/user/Setting";
 import Event from "./components/event/Event";
@@ -15,6 +16,7 @@ import CreateEvent from "./components/event/CreateEvent/CreateEvent";
 import AdminPanel from "./components/Admin/AdminPanel";
 import { CreateOrganization } from "./components/Organization/CreateOrganization";
 import { OrganizationPage } from "./components/Organization/OrganizationPage";
+import DeleteProf from "./components/register/DeleteProf";
 
 // import DeleteProfile from "./components/register/DeleteProfile";
 
@@ -47,7 +49,14 @@ const router = createBrowserRouter([
     path: "api/auth/resetpass",
     element: <ResetPass />,
   },
-  
+  {
+    path: "api/user/:id",
+    element: <DeleteProf />,
+  },
+  {
+    path: "/api/auth/password-reset/:confirm_token/:id",
+    element: <ResetPassConfirm />,
+  },
   {
     path: "userpage",
     element: <UserPage />,

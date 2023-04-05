@@ -1,3 +1,6 @@
+import { Database } from "../../database/DB_Functions/Database.js";
+let database = new Database();
+
 export class Comment
 {
     constructor (content, date, authorID, eventID) {
@@ -21,7 +24,7 @@ export class Comment
         return obj;
     }
 
-    create () {
+    async save () {
         database.save('Comment', this.transfer_data());
     }
 

@@ -74,8 +74,6 @@ export const CreateEvent = async (req, res) => {
   }
 
   let datetime = new Date(date + "T" + time);
-  console.log("🚀 ~ file: EventController.js:77 ~ CreateEvent ~ datetime:", datetime)
-  console.log("🚀 ~ file: EventController.js:77 ~ CreateEvent ~ datetime:", datetime)
 
   let imageName = null;
   if (image !== null && image !== undefined) {

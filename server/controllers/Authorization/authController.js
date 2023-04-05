@@ -113,38 +113,71 @@ export const logoutUser = (req, res) => {
 
 export const passwordReset = async (req, res) => {
   let email = req.body.email;
-  console.log(email);
-  let user = new User();
-  await user.read_by_email(email);
-  // var playload = {
-  //   user: user
-  // };
-  // var secret = user.password + "-" + config.SECRET_FOR_RESET_PASSWORD;
-  // var token = jwt.encode(playload, secret); // google it!!!
-  // let text = "Here is link for reset password: ";
-  // let link = `http://localhost:3000/auth/password-reset/${token}/${rows[0].id}`;
-  // send(email, text, link);
-  resetPassword(user);
+  let db = new DatabaseFind();
+  let data = await db.find_by_email("User", email);
+  
+  if(!data)
+  {
+    return res.json("No people with this email.")
+  }
+
+  resetPassword(data[0]);
   return res.json("Reset password");
 };
 
 export const passwordResetConfirmToken = async (req, res) => {
-  let newPassword = req.body.password;
   let currentToken = req.params.confirm_token;
   let id = parseInt(req.params.id);
   let user = new User();
+  let db = new DatabaseFind();
+  let database = new Database();
+  let data = await db.find_by_id("User", id);
 
-  user.init(id);
-  user.read();
-  
   let secret = user.password + "_" + config.SECRET_FOR_RESET_PASSWORD;
   let decoded = jwt.decode(currentToken, secret);
-
-  if (decoded.user.id === user.id) {
-    user.reset_password(newPassword);
+  
+  if (decoded.user.User_ID === data[0].User_ID) {
+    let newPassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+    database.update("User", "password", newPassword, data[0].User_ID);
+    
     res.send("Password updated");
   }
 };
+
+// export const passwordReset = async (req, res) => {
+//   let email = req.body.email;
+//   console.log(email);
+//   let user = new User();
+//   await user.read_by_email(email);
+//   // var playload = {
+//   //   user: user
+//   // };
+//   // var secret = user.password + "-" + config.SECRET_FOR_RESET_PASSWORD;
+//   // var token = jwt.encode(playload, secret); // google it!!!
+//   // let text = "Here is link for reset password: ";
+//   // let link = `http://localhost:3000/auth/password-reset/${token}/${rows[0].id}`;
+//   // send(email, text, link);
+//   resetPassword(user);
+//   return res.json("Reset password");
+// };
+
+// export const passwordResetConfirmToken = async (req, res) => {
+//   let newPassword = req.body.password;
+//   let currentToken = req.params.confirm_token;
+//   let id = parseInt(req.params.id);
+//   let user = new User();
+
+//   user.init(id);
+//   user.read();
+  
+//   let secret = user.password + "_" + config.SECRET_FOR_RESET_PASSWORD;
+//   let decoded = jwt.decode(currentToken, secret);
+
+//   if (decoded.user.id === user.id) {
+//     user.reset_password(newPassword);
+//     res.send("Password updated");
+//   }
+// };
 
 export const deleteAccount = async (req, res) => {
   let login = req.body.login;

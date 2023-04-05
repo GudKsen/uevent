@@ -37,10 +37,21 @@ function UserPage() {
   }
 
   let userInfo = JSON.parse(localStorage.getItem("userInfo") as string);
-  //console.log("🚀 ~ file: CreateOrganization.tsx:122 ~ CreateOrganization ~ userInfo:", userInfo)
-  // useEffect(() => {
-  //    //setUserInfoTmp(userInfo);
-  // }, [userInfo])
+
+  async function deleteProf(){
+    // e.preventDefault();
+    const info = {
+      email: userInfo.email
+    };
+    await fetch("http://localhost:8000/api/delete-user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(info),
+    });
+  }
+
   const navigate = useNavigate();
   //console.log(userInfoTmp);
   return (
@@ -98,7 +109,9 @@ function UserPage() {
           <button className="button" onClick={e => updatePicture()}>Update</button>
 
         </div>
-
+        <div className="deleteProf">
+          <button onClick={deleteProf}>Delete Profile</button>
+        </div>
 
 
       </div>

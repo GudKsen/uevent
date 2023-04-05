@@ -9,7 +9,8 @@ export function resetPassword(user) {
   };
   var secret = user.password + "-" + config.SECRET_FOR_RESET_PASSWORD;
   var token = jwt.encode(playload, secret);
+
   let text = "Here is link for reset password: ";
-  let link = `http://localhost:3000/api/auth/password-reset/${token}/${user.id}`;
+  let link = `http://localhost:3000/api/auth/password-reset/${token}/${user.User_ID}`;
   send(user.email, text, link);
 }

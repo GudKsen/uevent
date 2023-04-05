@@ -1,6 +1,7 @@
 import { User } from "../../entities/User/User.js";
 import fs from 'fs'
 import path from "path";
+import { deleteprof } from "../../utils/User/deleteprof.js";
 
 export const GetUsers = async (req, res) => {
   let user = new User();
@@ -16,15 +17,6 @@ export const GetUser = async (req, res) => {
   let data = await user.read();
   data[0].role = user.role;
   res.json(data);
-};
-
-export const DeleteUser = async (req, res) => {
-  let deleteId = parseInt(req.params.id);
-  let user = new User();
-
-  user.init(deleteId);
-  user.delete();
-  res.json("User deleted");
 };
 
 export const CreateUser = async (req, res) => {
@@ -98,4 +90,37 @@ export const UpdateUserAvatar = async (req, res) => {
   } else {
     res.send("Error: can't update");
   }
+};
+
+export const DeleteProfile = async (req, res) => {
+  let email = req.body.email;
+  // console.log(email);
+  // let user = new User();
+  let db = new DatabaseFind();
+  let data = await db.find_by_email("User", email);
+  // console.log(data[0]);
+  if(!data){
+    return res.json("No people with this email.")
+  }
+  deleteprof(data[0]);
+  return res.json("Reset password");
+};
+
+
+//это, если мы будем делать через всплывающее окно или второе окно, если с конфирмом
+
+export const DeleteUser = async (req, res) => {
+
+  let database = new Database();
+  let deleteId = parseInt(req.params.id);
+
+  database.delete("User", deleteId);
+
+  // let deleteId = parseInt(req.params.id);
+  // let user = new User();
+
+  // user.init(deleteId);
+  // user.delete();
+  console.log("user deleted");
+  res.json("User deleted");
 };

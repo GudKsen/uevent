@@ -9,6 +9,7 @@ import theme from "./routes/theme.js";
 // import category from "./routes/category.js";
 import company from "./routes/company.js";
 import format from "./routes/format.js";
+import comment from "./routes/comment.js";
 
 import cors from 'cors';
 
@@ -36,6 +37,7 @@ app.use(theme);
 // app.use(category);
 app.use(company);
 app.use(format);
+app.use(comment);
 
 app.all("*", (req, res) => {
     res.status(404).send('404! Page not found');

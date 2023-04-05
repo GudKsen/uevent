@@ -13,20 +13,52 @@ function EventPage() {
   let { id } = useParams();
   const [event, setEvent] = useState<any>([]);
   const [animate, setAnimate] = useState("");
+  const [content, setContent] = useState("");
+  const [commentData, setComment] = useState<any[]>([]);
+
+  function GetComments(id: string | undefined)
+  {
+    axios.get(`http://localhost:8000/api/event/comments/${id}`)
+    .then(response => {
+      setComment(response.data);
+    });
+  }
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/event/${id}`).then(response => {
+    if (id !== undefined)
+    {
+      GetComments(id);
+    }
+    
+  }, [id]);
+  
+
+  useEffect(() => {
+    axios.get(`http://localhost:8000/api/event/${id}`, {
+      params: { token: localStorage.getItem("token") }
+    }).then(response => {
       setEvent(response.data[0]);
       console.log(response.data);
     });
   }, [id])
 
-  function handleClickButton() 
-  {
+  function handleClickButton() {
     setAnimate("animate");
     setTimeout(() => {
       setAnimate("");
     }, 8000);
+  }
+
+  function createComment(e: any) {
+    e.preventDefault();
+
+    axios.post("http://localhost:8000/api/comment",
+      {
+        content: content,
+        id: id,
+        token: localStorage.getItem("token")
+      });
+      GetComments(id);
   }
 
   return (
@@ -38,52 +70,75 @@ function EventPage() {
         <div className="create">
 
           {/* <div className="event-create"> */}
-            <form className="event-create" action="#">
-              <div className="maindata">
-                <div className="ev-inf">
-                  <div className="event-photo">
-                    {/* <img src={'http://localhost:8000/images/no_photo.jpg'} alt="" /> */}
-                    { event.poster ? 
-                  <img src={`http://localhost:8000/images/${event.poster}`} alt="" />
-                  :
-                  <img src={`http://localhost:8000/images/no_photo.jpg`} alt="" />
+          <form className="event-create" action="#">
+            <div className="maindata">
+              <div className="ev-inf">
+                <div className="event-photo">
+                  {/* <img src={'http://localhost:8000/images/no_photo.jpg'} alt="" /> */}
+                  {event.poster ?
+                    <img src={`http://localhost:8000/images/${event.poster}`} alt="" />
+                    :
+                    <img src={`http://localhost:8000/images/no_photo.jpg`} alt="" />
+                  }
+                </div>
+                <div className="event-text">
+                  <div className="event-header">
+                    <div className="event-title">{event.title}</div>
+                    {/* <Rating/> */}
+                    {/* <p>{event.description}</p> */}
+                  </div>
+                  <div className="description">
+                    {event.description}
+                  </div>
+                  <div className="date">
+
+                  </div>
+                </div>
+              </div>
+              <div className="button-container">
+                <button className={`button ${animate}`} onClick={handleClickButton}>Buy</button>
+              </div>
+            </div>
+
+            <div className="typeevent">
+              <div className="format">
+                <h2>Comments</h2>
+                {
+                  commentData.length > 0 ?
+                    <div >
+                      {commentData && commentData.map(comment =>
+                        <div key={comment.Comment_ID}>
+                          <div >
+                            <div >
+                              {new Date(comment.date).toLocaleDateString()} {new Date(comment.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            </div>
+                            <div >
+                              {comment.content}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    : <div>There are no comments</div>
                 }
+                <div >
+                  <div >
+                    <input onChange={(e) => setContent(e.target.value)} type="text" placeholder="Enter comment" required></input>
                   </div>
-                  <div className="event-text">
-                    <div className="event-header">
-                      <div className="event-title">{event.title}</div> 
-                      {/* <Rating/> */}
-                      {/* <p>{event.description}</p> */}
-                      </div>
-                    <div className="description">
-                      {event.description}
-                    </div>
-                    <div className="date">
-
-                    </div>
-                  </div>
-                </div>
-                <div className="button-container">
-                  <button className={`button ${animate}`} onClick={handleClickButton}>Buy</button>
+                  <button onClick={createComment}>Create</button>
                 </div>
               </div>
+              <div className="Themes">
 
-              <div className="typeevent">
-                <div className="format">
-                  <h2>Comments</h2>
-                  
-                </div>
-                <div className="Themes">
-                
-                </div>
-                
               </div>
-            </form>
-          </div>
-          
-              
+
+            </div>
+          </form>
         </div>
-        {/* <div className="event-info">
+
+
+      </div>
+      {/* <div className="event-info">
           <div className="event">
               <div className="event-photo">
                 <img src={'http://localhost:8000/images/no_photo.jpg'} alt="" />
@@ -92,9 +147,9 @@ function EventPage() {
                  
                     <div className="event-header">
                       <div className="event-title">{event.title}</div> */}
-                      {/* <Rating/> */}
-                      {/* <p>{event.description}</p> */}
-                      {/* </div>
+      {/* <Rating/> */}
+      {/* <p>{event.description}</p> */}
+      {/* </div>
                     <div className="description">
                       {event.description}
                     </div>
@@ -108,7 +163,7 @@ function EventPage() {
               </div>
           </div>
         </div> */}
-      </div>
+    </div>
     // </div>
   );
 }
