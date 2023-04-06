@@ -200,7 +200,6 @@ function EventPage() {
                     <br />
                     <p>Format: {format?.title}</p>
 
-
                     {/* <div className="date">
 
                       </div> */}
