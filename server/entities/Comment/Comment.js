@@ -38,7 +38,7 @@ export class Comment
 
     async update () {
         // if (this.title) await database.update('Comment', 'title', this.title, this.id);
-        // if (this.description) await database.update('Comment', 'description', this.description, this.id);
+        if (this.content) await database.update('Comment', 'content', this.content, this.id);
     }
 
     async delete () {

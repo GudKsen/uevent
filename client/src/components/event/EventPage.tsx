@@ -9,7 +9,19 @@ import "./buttonStyle.scss";
 import Rating from "./rating/Rating";
 import "../sidebar/sidebar2.scss";
 import "../event/CreateEvent/styleCreateEvent.scss";
+import { useOutsideClick } from "../Admin/utils/useOutsideClick";
 
+interface Format{
+  Format_ID: number;
+  title: string;
+  description: string;
+}
+
+interface Theme{
+  Theme_ID: number;
+  title: string;
+  description: string;
+}
 
 function EventPage() {
   let { id } = useParams();
@@ -18,6 +30,12 @@ function EventPage() {
   const [animate, setAnimate] = useState("");
   const [content, setContent] = useState("");
   const [commentData, setComment] = useState<any[]>([]);
+  const [inEditMode, setInEditMode] = useState({
+    status: false,
+    itemID: null
+  });
+  const [format, setFormat] = useState<Format>();
+
 
   function GetComments(id: string | undefined) {
     console.log(id);
@@ -38,11 +56,24 @@ function EventPage() {
   useEffect(() => {
     axios.get(`http://localhost:8000/api/event/${id}`, {
       params: { token: localStorage.getItem("token") }
-    }).then(response => {
-      setEvent(response.data[0]);
+    }).then(async response => {
+      await setEvent(response.data[0]);
       console.log(response.data);
+      await GetFormat(response.data[0]);
     });
+    
+
   }, [id])
+
+  function GetFormat(event: any)
+  {
+    axios.get(`http://localhost:8000/api/format/${event.Format_ID}`, {
+        params: { token: localStorage.getItem("token") }
+      }).then((res) => {
+        setFormat(res.data[0]);
+        console.log(res.data[0]);
+      })
+  }
 
   function handleClickButton() {
     setAnimate("animate");
@@ -70,6 +101,42 @@ function EventPage() {
     GetComments(id);
   }
 
+  const onEdit = (itemID: any) => {
+    console.log("🚀 ~ file: EventPage.tsx:79 ~ onEdit ~ itemID:", itemID)
+
+    setInEditMode({
+      status: true,
+      itemID: itemID
+    })
+  }
+
+  const handleHeaderClick = (event: any) => {
+    event.stopPropagation();
+  };
+
+  const onCancel = () => {
+    console.log("shdjshgdjhgsjg");
+    setInEditMode({
+      status: false,
+      itemID: null
+    })
+  }
+
+  async function UpdateComment(e: any, Comment_ID: any) {
+    await axios.patch(`http://localhost:8000/api/comment/${Comment_ID}`, {
+      content: e,
+      token: localStorage.getItem("token")
+    });
+    onCancel();
+    GetComments(id);
+  }
+
+  const handleClickOutside = () => {
+    onCancel();
+  };
+
+  const ref = useOutsideClick(handleClickOutside);
+
   return (
     <div className="cardevent">
 
@@ -86,7 +153,7 @@ function EventPage() {
         <div className={`create`}>
 
           {/* <div className="event-create"> */}
-          <form className="event-create" action="#">
+          <form className="event-create" action="#" onClick={handleHeaderClick}>
             <div className="maindata-comment">
               <div className={`maindata `}>
                 <div className="ev-inf">
@@ -118,15 +185,17 @@ function EventPage() {
                     <p>Time:   {new Date(event.startDateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
                     <p>Date:   {new Date(event.startDateTime).toLocaleDateString()}</p>
                     <p>Address:   {event.address_line_street}, {event.street_number}</p>
-
-
-                    {/* </div> */}
-                    {/* <div className="Themes">
-                        {event.themes}
-                      </div> */}
-                    {/* <div className="format">
-                        {event.format}
-                      </div> */}
+                      {
+                        
+                        event.themes && event.themes.map((theme: Theme) =>
+                        {
+                          return <p>{theme.title}</p>
+                        })
+                      }
+                    
+                        <br/>
+                        <p>Format: {format?.title}</p>
+                      
 
                     {/* <div className="date">
 
@@ -173,15 +242,42 @@ function EventPage() {
 
                               <div className="content-del-up">
                                 <div className="content">
-                                  <p>{comment.content}</p>
-                                  {/* <p>{comment.Comment_ID}</p> */}
+                                  {
+                                    inEditMode.status
+                                      && inEditMode.itemID === comment.Comment_ID
+                                      ?
+                                      (
+                                        <div>
+                                          <textarea defaultValue={comment.content}
+                                            onChange={e => {
+                                              // setTimeout(() => {
+                                              setContent(e.target.value);
+                                              // }, 3000);
+                                            }}
+                                          >
+                                          </textarea>
+                                          <button onClick={() => UpdateComment(content, comment.Comment_ID)}>Ok</button>
+                                        </div>
+                                      )
+                                      :
+                                      (
+                                        // inEditMode.status.toString()
+                                        comment.content
+                                      )
+                                  }
+
+
                                 </div>
                                 {
-                                  (userInfo && comment.UserInfo.full_name == userInfo.full_name) ?
+                                  (userInfo && comment.UserInfo.full_name === userInfo.full_name) ?
                                     <div className="del-up">
                                       <div className="del" onClick={() => { deleteComment(comment.Comment_ID) }}>
                                       </div>
-                                      <div className="up">
+                                      <div className="up" onClick={() => {
+                                        let id = comment.Comment_ID;
+                                        onEdit(id);
+
+                                      }}>
                                       </div>
                                     </div> :
                                     <div></div>
@@ -209,7 +305,7 @@ function EventPage() {
 
             <div className={`author-info`}>
               <div className={`author `}>
-                {event.author}hhvhjj
+                {event.Company_ID}
               </div>
             </div>
           </form>

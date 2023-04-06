@@ -72,5 +72,13 @@ export const GetCommentsByEventId = async (req, res) => {
 }
 
 export const UpdateComment = (req, res) => {
+    let content = req.body.content;
+    let id = parseInt(req.params.id);
+    console.log(content);
 
+    let comment = new Comment(content);
+    comment.init(id);
+
+    comment.update();
+    res.json("Updated");
 }
