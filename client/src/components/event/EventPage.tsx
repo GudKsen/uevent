@@ -11,13 +11,13 @@ import "../sidebar/sidebar2.scss";
 import "../event/CreateEvent/styleCreateEvent.scss";
 import { useOutsideClick } from "../Admin/utils/useOutsideClick";
 
-interface Format{
+interface Format {
   Format_ID: number;
   title: string;
   description: string;
 }
 
-interface Theme{
+interface Theme {
   Theme_ID: number;
   title: string;
   description: string;
@@ -35,6 +35,7 @@ function EventPage() {
     itemID: null
   });
   const [format, setFormat] = useState<Format>();
+  const [company, setCompany] = useState<any>();
 
 
   function GetComments(id: string | undefined) {
@@ -60,19 +61,28 @@ function EventPage() {
       await setEvent(response.data[0]);
       console.log(response.data);
       await GetFormat(response.data[0]);
+      await GetCompany(response.data[0]);
     });
-    
+
 
   }, [id])
 
-  function GetFormat(event: any)
-  {
+  function GetFormat(event: any) {
     axios.get(`http://localhost:8000/api/format/${event.Format_ID}`, {
-        params: { token: localStorage.getItem("token") }
-      }).then((res) => {
-        setFormat(res.data[0]);
-        console.log(res.data[0]);
-      })
+      params: { token: localStorage.getItem("token") }
+    }).then((res) => {
+      setFormat(res.data[0]);
+      console.log(res.data[0]);
+    })
+  }
+
+  function GetCompany(event: any) {
+    axios.get(`http://localhost:8000/api/company/${event.Company_ID}`, {
+      params: { token: localStorage.getItem("token") }
+    }).then((res) => {
+      setCompany(res.data[0]);
+      console.log(res.data[0]);
+    })
   }
 
   function handleClickButton() {
@@ -196,7 +206,6 @@ function EventPage() {
                     
                         {/* <br/> */}
                         <p>Format: {format?.title}</p>
-                      
 
                     {/* <div className="date">
 
@@ -306,7 +315,8 @@ function EventPage() {
 
             <div className={`author-info`}>
               <div className={`author `}>
-                {event.Company_ID}
+                {company.name}
+                {company.description}
               </div>
             </div>
           </form>
