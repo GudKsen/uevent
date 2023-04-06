@@ -13,6 +13,11 @@ import axios from "axios";
 function UserPage() {
   const [file, setFile] = useState<File>();
   const [userInfoTmp, setUserInfoTmp] = useState();
+  const navigate = useNavigate();
+  const [inEditMode, setInEditMode] = useState({
+    status: false,
+    field: null
+  });
 
   function updatePicture() {
     let formField = new FormData();
@@ -23,12 +28,12 @@ function UserPage() {
         'token': localStorage!.getItem("token")!
       }
     }).then(res => {
-      
+
       localStorage.removeItem("userInfo");
-      const { User_ID, password, full_name, email, role , country, city, phone_number, birthday, profile_picture} = res.data;
+      const { User_ID, password, full_name, email, role, country, city, phone_number, birthday, profile_picture } = res.data;
       localStorage.setItem(
         "userInfo",
-        JSON.stringify({ User_ID, password, full_name, email, role , country, city, phone_number, birthday, profile_picture})
+        JSON.stringify({ User_ID, password, full_name, email, role, country, city, phone_number, birthday, profile_picture })
       );
       userInfo = JSON.parse(localStorage.getItem("userInfo") as string);
       setUserInfoTmp(userInfo);
@@ -38,7 +43,7 @@ function UserPage() {
 
   let userInfo = JSON.parse(localStorage.getItem("userInfo") as string);
 
-  async function deleteProf(){
+  async function deleteProf() {
     // e.preventDefault();
     const info = {
       email: userInfo.email
@@ -52,7 +57,27 @@ function UserPage() {
     });
   }
 
-  const navigate = useNavigate();
+  const onEdit = (itemID: any) => {
+    console.log("🚀 ~ file: EventPage.tsx:79 ~ onEdit ~ itemID:", itemID)
+
+    setInEditMode({
+      status: true,
+      field: itemID
+    })
+  }
+
+  const handleHeaderClick = (event: any) => {
+    event.stopPropagation();
+  };
+
+  const onCancel = () => {
+    setInEditMode({
+      status: false,
+      field: null
+    })
+  }
+
+  
   //console.log(userInfoTmp);
   return (
     <div className="userpageall">
@@ -65,20 +90,44 @@ function UserPage() {
         <div className="infouser">
           {/* <b><p>User info:</p></b><br/> */}
           <h1>Full name: </h1>
-          <b><h2>{userInfo.full_name}</h2></b>
+          {
+            inEditMode.status && inEditMode.field === 'full_name' ?
+            <input type="text" defaultValue={userInfo.full_name}></input>
+            :
+            <b><h2>{userInfo.full_name}</h2></b>
+          }
+          
           <br />
 
           <h1>Email: </h1>
-          <b><h2>{userInfo.email}</h2></b><br />
+          {
+            inEditMode.status && inEditMode.field === 'email' ?
+            <input type="text" defaultValue={userInfo.email}></input>
+            :
+            <b><h2>{userInfo.email}</h2></b>
+          }
           
 
+
           <h1>Date of Birth: </h1>
-          <b><h2>{new Date(userInfo.birthday).toLocaleDateString()}</h2></b><br />
+          {
+            inEditMode.status && inEditMode.field === 'birthday' ?
+            <input type="text" defaultValue={userInfo.birthday}></input>
+            :
+            <b><h2>{new Date(userInfo.birthday).toLocaleDateString()}</h2></b>
+          }
+          
 
           <h1>Phone number: </h1>
-          <b><h2>{userInfo.phone_number}</h2></b><br />
+          {
+            inEditMode.status && inEditMode.field === 'phone_number' ?
+            <input type="text" defaultValue={userInfo.phone_number}></input>
+            :
+            <b><h2>{userInfo.phone_number}</h2></b>
+          }
 
-          <h1>Address: </h1><b><h2>{userInfo.city} , {userInfo.country}
+          <h1>Address: 
+            </h1><b><h2>{userInfo.city} , {userInfo.country}
           </h2></b><br />
           <div className="create-organization-button button-container">
             {
@@ -103,9 +152,9 @@ function UserPage() {
               <img className="avatarPicture" src={`http://localhost:8000/images/no_photo.jpg`} alt="" />
           }
           <div className="file-create-event field">
-                    <div>UPLOAD AVATAR</div>
-                    <DragDrop setFile={setFile}/>
-                </div>
+            <div>UPLOAD AVATAR</div>
+            <DragDrop setFile={setFile} />
+          </div>
           <button className="button" onClick={e => updatePicture()}>Update</button>
 
         </div>
