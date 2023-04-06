@@ -11,13 +11,13 @@ import "../sidebar/sidebar2.scss";
 import "../event/CreateEvent/styleCreateEvent.scss";
 import { useOutsideClick } from "../Admin/utils/useOutsideClick";
 
-interface Format{
+interface Format {
   Format_ID: number;
   title: string;
   description: string;
 }
 
-interface Theme{
+interface Theme {
   Theme_ID: number;
   title: string;
   description: string;
@@ -35,6 +35,7 @@ function EventPage() {
     itemID: null
   });
   const [format, setFormat] = useState<Format>();
+  const [company, setCompany] = useState<any>();
 
 
   function GetComments(id: string | undefined) {
@@ -60,19 +61,28 @@ function EventPage() {
       await setEvent(response.data[0]);
       console.log(response.data);
       await GetFormat(response.data[0]);
+      await GetCompany(response.data[0]);
     });
-    
+
 
   }, [id])
 
-  function GetFormat(event: any)
-  {
+  function GetFormat(event: any) {
     axios.get(`http://localhost:8000/api/format/${event.Format_ID}`, {
-        params: { token: localStorage.getItem("token") }
-      }).then((res) => {
-        setFormat(res.data[0]);
-        console.log(res.data[0]);
-      })
+      params: { token: localStorage.getItem("token") }
+    }).then((res) => {
+      setFormat(res.data[0]);
+      console.log(res.data[0]);
+    })
+  }
+
+  function GetCompany(event: any) {
+    axios.get(`http://localhost:8000/api/company/${event.Company_ID}`, {
+      params: { token: localStorage.getItem("token") }
+    }).then((res) => {
+      setCompany(res.data[0]);
+      console.log(res.data[0]);
+    })
   }
 
   function handleClickButton() {
@@ -185,17 +195,16 @@ function EventPage() {
                     <p>Time:   {new Date(event.startDateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
                     <p>Date:   {new Date(event.startDateTime).toLocaleDateString()}</p>
                     <p>Address:   {event.address_line_street}, {event.street_number}</p>
-                      {
-                        
-                        event.themes && event.themes.map((theme: Theme) =>
-                        {
-                          return <p>{theme.title}</p>
-                        })
-                      }
-                    
-                        <br/>
-                        <p>Format: {format?.title}</p>
-                      
+                    {
+
+                      event.themes && event.themes.map((theme: Theme) => {
+                        return <p>{theme.title}</p>
+                      })
+                    }
+
+                    <br />
+                    <p>Format: {format?.title}</p>
+
 
                     {/* <div className="date">
 
@@ -305,7 +314,8 @@ function EventPage() {
 
             <div className={`author-info`}>
               <div className={`author `}>
-                {event.Company_ID}
+                {company.name}
+                {company.description}
               </div>
             </div>
           </form>

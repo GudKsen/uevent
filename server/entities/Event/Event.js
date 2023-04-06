@@ -72,7 +72,7 @@ export class Event
         if (data !== null) {
           this.title = data[0].title;
           this.description = data[0].description;
-          this.authorID = data[0].Author_ID;
+          this.authorID = data[0].Company_ID;
           this.dateTime = data[0].dateTime;
           this.location = data[0].location;
         //   this.categoryID = data[0].categoryID;
