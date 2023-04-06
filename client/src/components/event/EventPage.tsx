@@ -77,9 +77,7 @@ function EventPage() {
   }
 
   function GetCompany(event: any) {
-    axios.get(`http://localhost:8000/api/company/${event.Company_ID}`, {
-      params: { token: localStorage.getItem("token") }
-    }).then((res) => {
+    axios.get(`http://localhost:8000/api/company/${event.Company_ID}`).then((res) => {
       setCompany(res.data[0]);
       console.log(res.data[0]);
     })
@@ -112,8 +110,6 @@ function EventPage() {
   }
 
   const onEdit = (itemID: any) => {
-    console.log("🚀 ~ file: EventPage.tsx:79 ~ onEdit ~ itemID:", itemID)
-
     setInEditMode({
       status: true,
       itemID: itemID
@@ -125,7 +121,6 @@ function EventPage() {
   };
 
   const onCancel = () => {
-    console.log("shdjshgdjhgsjg");
     setInEditMode({
       status: false,
       itemID: null
@@ -198,7 +193,7 @@ function EventPage() {
                     {
 
                       event.themes && event.themes.map((theme: Theme) => {
-                        return <p>{theme.title}</p>
+                        return <p key={theme.Theme_ID}>{theme.title}</p>
                       })
                     }
 
@@ -314,8 +309,17 @@ function EventPage() {
 
             <div className={`author-info`}>
               <div className={`author `}>
-                {company.name}
-                {company.description}
+                {
+                  company ?
+                  <div>
+                    <p>{company.name}</p>
+                    <p>{company.description}</p>
+                  </div>
+                  :
+                  null
+                }
+                {/* {company.name} */}
+                {/* {company.description} */}
               </div>
             </div>
           </form>

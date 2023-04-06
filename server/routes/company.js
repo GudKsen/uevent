@@ -24,7 +24,7 @@ const upload = multer({
 });
 
 router.post("/api/company", auth, CreateCompany);
-router.get("/api/company/:id([0-9]+)", auth, GetCompany);
+router.get("/api/company/:id([0-9]+)", GetCompany);
 router.get("/api/company/user", auth, GetCompanyByUser);
 router.get("/api/companies", auth, GetCompanies);
 router.patch("/api/company/:id", auth, upload.single("file"), UpdateCompany);
