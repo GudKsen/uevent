@@ -27,6 +27,8 @@ export const CreateEvent = async (req, res) => {
   let publish_date = req.body.publish_date;
   let duration = req.body.duration;
   let price = req.body.price;
+  let currency = req.body.currency;
+  console.log("🚀 ~ file: EventController.js:31 ~ CreateEvent ~ currency:", currency)
  
   if (!req.body.title) {
     res.status(400).send({
@@ -87,10 +89,9 @@ export const CreateEvent = async (req, res) => {
 
   let user = new User();
   user.init(author);
-  console.log("🚀 ~ file: EventController.js:92 ~ CreateEvent ~ author:", author)
-  let company = await user.getCompanyData();
-  console.log("🚀 ~ file: EventController.js:94 ~ CreateEvent ~ company:", company)
   
+  let company = await user.getCompanyData();
+ 
   let event = new Event(
     title,
     description,
@@ -102,7 +103,8 @@ export const CreateEvent = async (req, res) => {
     themes,
     new Date(endDate),
     publish_date,
-    price
+    price,
+    currency
   );
   console.log("🚀 ~ file: EventController.js:109 ~ CreateEvent ~ event:", event)
 
@@ -120,6 +122,7 @@ export const GetEvent = async (req, res) => {
 
   try {
     let data = await event.read();
+    
     // data[0].beginDate = toLocalDate(data[0].beginDate);
     // if (data[0].endDate) data[0].endDate = toLocalDate(data[0].endDate);
     //console.log("hjgfhgfhgf " + data);
@@ -237,4 +240,9 @@ export const GetEventsByCountry = async (req, res) => {
     }
    })
   return res.json(data);
+}
+
+
+export const BuyTicket = (req, res) => {
+  
 }

@@ -14,10 +14,11 @@ CREATE TABLE IF NOT EXISTS Event(
     endDateTime DATETIME,
     Location_ID INT,
     FOREIGN KEY(Location_ID) REFERENCES Location(Location_ID),
-    price INT(50),
+    Price_ID INT(50),
     isPromocodeAvailable INT(1),
     Format_ID INT NOT NULL,
     FOREIGN KEY(Format_ID) REFERENCES Format(Format_ID),
     Company_ID INT NOT NULL,
-    FOREIGN KEY(Company_ID) REFERENCES Company(Company_ID)
+    FOREIGN KEY(Company_ID) REFERENCES Company(Company_ID),
+    FOREIGN KEY(Price_ID) REFERENCES Price(Price_ID)
 );

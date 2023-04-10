@@ -1,6 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import getSymbolFromCurrency from 'currency-symbol-map'
 import "./styleEvent2.scss";
 import Sidebar2 from "../sidebar/sidebar2";
 import Header from "../sidebar/Header";
@@ -15,6 +14,7 @@ function Event() {
   const [searchText, setSearchText] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("");
   const [refreshData, setRefreshData] = useState(false);
+  const [message, setMessage] = useState("");
 
 
   let [eventsData, setEventsData] = useState<any[]>([]);
@@ -34,7 +34,7 @@ function Event() {
     });
   }, []);
 
-  if (eventsData != null) {
+  if (eventsData !== null) {
     eventsData.forEach(element => {
       let date = new Date(element.dateTime);
       let year = date.getFullYear();
@@ -82,11 +82,11 @@ function Event() {
   return (
     <div className="allevents">
 
-{
+      {
         userInfo ?
           <div>
             <Sidebar2 />
-          </div> 
+          </div>
           :
           <div className="body-sidebar nosidebar"></div>
 
@@ -96,105 +96,114 @@ function Event() {
         <Header
           setSearchText={setSearchText}
           setSelectedCountry={setSelectedCountry}
-        onChange={(e:any) =>  ChangeData(e)}
+          onChange={(e: any) => ChangeData(e)}
         //setRefreshData = {setRefreshData}
         />
 
-        {
-          eventsData.length > 0 ?
-            <div className="list-events-container">
-              {eventsData && eventsData.map(event =>
-                <div className="card-container" key={event.Event_ID}>
-                  <div className="card" onClick={() => { navigate(`/eventpage/${event.Event_ID}`) }}>
-                    <div className="card-header">
-                      {/* <img src="https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg" alt="rover" /> */}
+        {/* {
+          selectedCountry !== "" ?
+           <div>  */}
+            
+            {
+              eventsData.length > 0 ?
+                <div className="list-events-container">
 
-                      {event.poster ?
-                        <img src={`http://localhost:8000/images/${event.poster}`} alt="" />
-                        :
-                        <img src={`http://localhost:8000/images/no_photo.jpg`} alt="" />
-                      }
+                  {eventsData && eventsData.map(event =>
+                    <div className="card-container" key={event.Event_ID}>
+                      <div className="card" onClick={() => { navigate(`/eventpage/${event.Event_ID}`) }}>
+                        <div className="card-header">
+                          {/* <img src="https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg" alt="rover" /> */}
 
-                    </div>
-                    <div className="card-body">
-
-                      <div className="top-container-card-body">
-                        <div className="title-event">
-                          {event.title}
-                        </div>
-                        <div className="price">
-                          {
-                            event.price ?
-                              <div>{event.price}</div>
-                              : <div>Free</div>
+                          {event.poster ?
+                            <img src={`http://localhost:8000/images/${event.poster}`} alt="" />
+                            :
+                            <img src={`http://localhost:8000/images/no_photo.jpg`} alt="" />
                           }
+
                         </div>
-                      </div>
+                        <div className="card-body">
+
+                          <div className="top-container-card-body">
+                            <div className="title-event">
+                              {event.title}
+                            </div>
+                            <div className="price">
+                              {
+                                event.price ?
+                                  <div>{event.price[0].price_value} {getSymbolFromCurrency(event.price[0].currency)}</div>
+                                  : <div>Free</div>
+                              }
+                            </div>
+                          </div>
 
 
-                      <div className="author-event">
-                        by {event.author}
-                      </div>
-                      {/* <div className="price">
+                          <div className="author-event">
+                            by {event.author}
+                          </div>
+                          {/* <div className="price">
                           56
                         </div> */}
 
-                      {/* <div className="description autoShowHide">
+                          {/* <div className="description autoShowHide">
                         {event.description}
                       </div> */}
 
-                      <div className="date-price-container">
-                        <div className="date time">
-                          <img className="clock-icon-allevents" src={require("../../public/video/clock.png")} alt="" />
+                          <div className="date-price-container">
+                            <div className="date time">
+                              <img className="clock-icon-allevents" src={require("../../public/video/clock.png")} alt="" />
 
 
-                          {new Date(event.startDateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                        </div>
+                              {new Date(event.startDateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            </div>
 
-                        <div className="date time">
-                          <img className="clock-icon-allevents" src={require("../../public/video/calendar (1).png")} alt="" />
-                          {new Date(event.startDateTime).toLocaleDateString()}
-                        </div>
+                            <div className="date time">
+                              <img className="clock-icon-allevents" src={require("../../public/video/calendar (1).png")} alt="" />
+                              {new Date(event.startDateTime).toLocaleDateString()}
+                            </div>
 
-                      </div>
+                          </div>
 
 
-                      <div className="location">
-                        <img className="clock-icon-allevents" src={require("../../public/video/location.png")} alt="" />
-                        {event.address_line_street}, {event.street_number}
-                      </div>
+                          <div className="location">
+                            <img className="clock-icon-allevents" src={require("../../public/video/location.png")} alt="" />
+                            {event.address_line_street}, {event.street_number}
+                          </div>
 
-                      {/* { event.themes && event.themes.map((theme: any) =>
+                          {/* { event.themes && event.themes.map((theme: any) =>
                     <div>
                       {theme.title} {theme.description}
                     </div>
                   )} */}
-                      <div className="bottom-container">
-                        <div className="user">
-                          {/* <img src="https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo" alt="user" /> */}
-                          <div className="user-info">
-                            {/* <h5>{event.author}</h5> */}
+                          <div className="bottom-container">
+                            <div className="user">
+                              {/* <img src="https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo" alt="user" /> */}
+                              <div className="user-info">
+                                {/* <h5>{event.author}</h5> */}
+
+
+                              </div>
+
+                            </div>
+
 
 
                           </div>
 
+
+
                         </div>
-
-
-
                       </div>
-
-
-
                     </div>
-                  </div>
+                  )}
+
                 </div>
-              )}
 
-            </div>
+                : <div><br /><p className="choosecountry">There is no events</p></div>
 
-            : <div><br/><p className="choosecountry">Choose country</p></div>
-        }
+            }
+            {/* </div>
+            : <div><br /><p className="choosecountry">Choose country</p>ss: {selectedCountry}</div>
+        } */}
       </div>
     </div>
   );

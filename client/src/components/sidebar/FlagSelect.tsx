@@ -4,8 +4,6 @@ import ReactFlagsSelect from "react-flags-select";
 
 import "./styleFlagSelect.scss";
 
-// let saved_selected = localStorage.getItem("country");
-
 export function FlagSelect({setSelectedCountry}: any) {
     const [selected, setSelected] = useState(() => {
         return localStorage.getItem("country") ? localStorage.getItem("country")!.toString() : ""

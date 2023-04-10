@@ -1,0 +1,11 @@
+USE ucode_web_uevent;
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS Price;
+SET FOREIGN_KEY_CHECKS = 1;
+
+CREATE TABLE IF NOT EXISTS Price (
+    Price_ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    price_value INT NOT NULL,
+    currency VARCHAR(3) NOT NULL,
+    exchange_rate INT NOT NULL
+);

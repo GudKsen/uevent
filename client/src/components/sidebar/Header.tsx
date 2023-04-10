@@ -8,9 +8,10 @@ import DropdownMenu from "./DropdownMenu";
 import { Filter } from "./Filter";
 import { FlagSelect } from "./FlagSelect";
 import "./headerStyle.scss";
+import { CitySelect } from "./CitySelect";
 
 
-function Header({ setSearchText, setSelectedCountry }: any) {
+function Header({ setSearchText, setSelectedCountry, setSelectedCity }: any) {
   const [showMenu, setShowMenu] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [selectedThemes, setSelectedThemes] = useState<any[]>([]);
@@ -84,6 +85,7 @@ function Header({ setSearchText, setSelectedCountry }: any) {
           <FlagSelect className="country-select" setSelectedCountry={setSelectedCountry}
 
           />
+          <CitySelect setSelectedCity={setSelectedCity} />
         </div>
         {
           !userInfo ?

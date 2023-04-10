@@ -12,7 +12,8 @@ import {
     UpdateEvent, 
     DeleteEvent,
     GetCommentsEvent,
-    GetEventsByCountry
+    GetEventsByCountry,
+    BuyTicket
 } from "../controllers/Event/EventController.js"
 
 
@@ -37,6 +38,8 @@ router.patch("/api/event/:id([0-9]+)",   UpdateEvent);
 router.delete("/api/event/:id([0-9]+)",   DeleteEvent);
 
 router.get("/api/event/:id/comments", GetCommentsEvent);
+
+router.post("/api/event/:id/buy", BuyTicket);
 
 
 export default router;

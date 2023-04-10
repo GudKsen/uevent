@@ -1,13 +1,14 @@
 import { Database } from "../../database/DB_Functions/Database.js";
 import { DatabaseDelete } from "../../database/DB_Functions/DatabaseDelete.js";
 import { DatabaseGet } from "../../database/DB_Functions/DatabaseGet.js";
+import { GetCurrentExchangeRate } from "../../utils/PriceEvent/getExchangeRate.js";
 
 let database = new Database();
 let databaseGet = new DatabaseGet();
 
 export class Event
 {
-    constructor(title, description, companyID, dateTime, location, image, formatID, theme, endDate, publishDate, price)
+    constructor(title, description, companyID, dateTime, location, image, formatID, theme, endDate, publishDate, price, currency)
     {
         this.title = title;
         this.description = description;
@@ -20,6 +21,7 @@ export class Event
         this.endDate = endDate;
         this.publishDate =  publishDate;
         this.price = price;
+        this.currency = currency;
     }
 
     init (id)
@@ -38,15 +40,28 @@ export class Event
             poster: this.image,
             Format_ID: this.formatID,
             endDateTime: this.endDate,
-            publishDate: this.publishDate,
-            price: this.price
+            publishDate: this.publishDate
         }
         return obj;
     }
 
+
+    
     async save ()
     {
-        let id = await database.save("Event", this.transfer_data());
+        let exRate = await GetCurrentExchangeRate(this.currency);
+        let idPrice = await database.save("Price", {
+            price_value: this.price,
+            currency: this.currency,
+            exchange_rate: exRate
+        });
+        console.log("🚀 ~ file: Event.js:58 ~ idPrice:", idPrice)
+        
+        this.Price_ID = idPrice;
+        let dataInput = this.transfer_data();
+        dataInput.Price_ID = this.Price_ID;
+
+        let id = await database.save("Event", dataInput);
 
         if (this.theme)
         {
@@ -66,6 +81,7 @@ export class Event
     async read() {
         //let data = await database.read("Event", this.id);
         let data = await databaseGet.get_events_with_themes_by_event_id(this.id);
+        
 
         //console.log(data);
         

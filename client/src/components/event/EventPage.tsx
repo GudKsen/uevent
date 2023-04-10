@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import getSymbolFromCurrency from 'currency-symbol-map'
+
 import Header from "../sidebar/Header";
 import Sidebar2 from "../sidebar/sidebar2";
 import "./styleeventpage.scss";
@@ -185,11 +186,11 @@ function EventPage() {
                         {event.location}
                       </div> */}
                     {/* <div className="price"> */}
-                    <p>Price:   {event.price}</p>
+                    {/* <p>Price:   {event.price}</p> */}
 
                     <p>Time:   {new Date(event.startDateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
                     <p>Date:   {new Date(event.startDateTime).toLocaleDateString()}</p>
-                    <p>Address:   {event.address_line_street}, {event.street_number}</p>
+                    {/* <p>Address:   {event.address_line_street}, {event.street_number}</p> */}
                     {
 
                       event.themes && event.themes.map((theme: Theme) => {
@@ -199,6 +200,16 @@ function EventPage() {
 
                     <br />
                     <p>Format: {format?.title}</p>
+                    <div>
+                      {
+                        event.price ? 
+                        <div>
+                          Price: {event.price[0].price_value} {getSymbolFromCurrency(event.price[0].currency)}
+                        </div>
+                        :
+                        null
+                      }
+                      </div>
 
                     {/* <div className="date">
 

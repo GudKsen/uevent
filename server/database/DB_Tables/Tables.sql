@@ -157,6 +157,17 @@ INSERT INTO Theme (title, description)
 VALUES ("Social sciences", "Any branch of academic study or science that deals with human behaviour in its social and cultural aspects.");
 
 SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS Price;
+SET FOREIGN_KEY_CHECKS = 1;
+
+CREATE TABLE IF NOT EXISTS Price (
+    Price_ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    price_value INT NOT NULL,
+    currency VARCHAR(3) NOT NULL,
+    exchange_rate INT NOT NULL
+);
+
+SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS Event;
 SET FOREIGN_KEY_CHECKS = 1;
 
@@ -171,12 +182,13 @@ CREATE TABLE IF NOT EXISTS Event(
     endDateTime DATETIME,
     Location_ID INT,
     FOREIGN KEY(Location_ID) REFERENCES Location(Location_ID),
-    price INT(50),
+    Price_ID INT(50),
     isPromocodeAvailable INT(1),
     Format_ID INT NOT NULL,
     FOREIGN KEY(Format_ID) REFERENCES Format(Format_ID),
-    Author_ID INT NOT NULL,
-    FOREIGN KEY(Author_ID) REFERENCES User(User_ID)
+    Company_ID INT NOT NULL,
+    FOREIGN KEY(Company_ID) REFERENCES Company(Company_ID),
+    FOREIGN KEY(Price_ID) REFERENCES Price(Price_ID)
 );
 
 SET FOREIGN_KEY_CHECKS = 0;

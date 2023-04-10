@@ -5,6 +5,8 @@
   "dependencies": {
     "@glideapps/glide-data-grid": "^5.2.1",
     "@reduxjs/toolkit": "^1.8.6",
+    "@stripe/react-stripe-js": "^2.1.0",
+    "@stripe/stripe-js": "^1.52.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -16,6 +18,8 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.26",
     "country-state-city": "^3.1.2",
+    "currency-symbol-map": "^5.1.0",
+    "dotenv": "^16.0.3",
     "faster-react-tabs": "^1.0.4",
     "fullcalendar": "^5.11.3",
     "intl-tel-input": "^17.0.19",

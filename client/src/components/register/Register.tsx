@@ -4,7 +4,7 @@ import PhoneInputGfg from "./PI";
 import LogGoogle from "./LogGoogle";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import Select from 'react-select';
+import Select, { createFilter } from 'react-select';
 import { Country, State, City } from 'country-state-city';
 
 // import { useForm} from "react-hook-form";
@@ -210,28 +210,22 @@ function Register() {
             {/* <input type="text" placeholder="Enter street address line 2" required /> */}
             <div className="column">
               <div className="input-box-a">
-                {/* <select>
-                  <option hidden>Country</option>
-                  <option>America</option>
-                  <option>Japan</option>
-                  <option>India</option>
-                  <option>Nepal</option>
-                </select> */}
                 <Select
                   isSearchable={true}
                   options={countries}
                   defaultValue={selectedCountry}
                   onChange={handleSelectCountry}
+                  // filterOption={createFilter({ ignoreAccents: false })}
                   required
                 ></Select>
               </div>
               <div className="input-box-a">
-                {/* <input type="text" placeholder="Enter your city" required onChange={(e) => setCity(e.target.value)} /> */}
                 <Select
                   isSearchable={true}
                   options={cities}
                   defaultValue={selectedCity}
                   onChange={handleSelectCity}
+                  // filterOption={createFilter({ ignoreAccents: false })}
                   required
                 ></Select>
               </div>
