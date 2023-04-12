@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useNavigation, useParams } from "react-router-dom";
 import getSymbolFromCurrency from 'currency-symbol-map'
 
 import Header from "../sidebar/Header";
@@ -37,6 +37,7 @@ function EventPage() {
   });
   const [format, setFormat] = useState<Format>();
   const [company, setCompany] = useState<any>();
+  const navigate = useNavigate();
 
 
   function GetComments(id: string | undefined) {
@@ -89,6 +90,7 @@ function EventPage() {
     setTimeout(() => {
       setAnimate("");
     }, 8000);
+    navigate("/pay");
   }
 
   async function deleteComment(idComment: any) {
@@ -219,7 +221,9 @@ function EventPage() {
                 {
                   userInfo ?
                     <div className="button-container">
-                      <button className={`button ${animate}`} onClick={handleClickButton}>Buy</button>
+                      <button className={`button ${animate}`} onClick={handleClickButton}
+                      
+                      >Buy</button>
                     </div>
                     :
                     <div className="button-container">

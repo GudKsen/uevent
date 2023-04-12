@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@glideapps/glide-data-grid": "^5.2.1",
+    "@paypal/react-paypal-js": "^7.8.3",
     "@reduxjs/toolkit": "^1.8.6",
     "@stripe/react-stripe-js": "^2.1.0",
     "@stripe/stripe-js": "^1.52.0",

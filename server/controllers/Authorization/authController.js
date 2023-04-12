@@ -70,7 +70,7 @@ export const loginUser = async (req, res) => {
 
   let db = new DatabaseFind();
   let data = await db.find_by_email("User", email);
-  console.log("🚀 ~ file: authController.js:69 ~ loginUser ~ data:", data)
+  // console.log("🚀 ~ file: authController.js:69 ~ loginUser ~ data:", data)
   if (data === null)
   {
     res.json("User does not exist");
@@ -98,7 +98,7 @@ export const loginUser = async (req, res) => {
         },
         process.env.TOKEN_KEY,
         {
-          expiresIn: "2h",
+          expiresIn: "5h",
         }
       );
       console.log("🚀 ~ file: authController.js:99 ~ loginUser ~ token:", token)

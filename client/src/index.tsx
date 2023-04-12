@@ -17,6 +17,7 @@ import AdminPanel from "./components/Admin/AdminPanel";
 import { CreateOrganization } from "./components/Organization/CreateOrganization";
 import { OrganizationPage } from "./components/Organization/OrganizationPage";
 import DeleteProf from "./components/register/DeleteProf";
+import { PaymentPage } from "./components/Payment/PaymentPage";
 
 // import DeleteProfile from "./components/register/DeleteProfile";
 
@@ -100,6 +101,10 @@ const router = createBrowserRouter([
   {
     path: "my-organization",
     element: <OrganizationPage/>
+  },
+  {
+    path: "pay",
+    element: <PaymentPage/>
   }
 ]);
 
