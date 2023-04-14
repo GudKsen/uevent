@@ -20,6 +20,7 @@ function Header({ setSearchText, setSelectedCountry, setSelectedCity }: any) {
   const navigate = useNavigate();
   let userInfo = JSON.parse(localStorage.getItem("userInfo") as string);
 
+
   // const [selectedCountry, setSelectedCountry] = useState("");
 
   // if (userInfo.role === "organizator") {
@@ -43,6 +44,24 @@ function Header({ setSearchText, setSelectedCountry, setSelectedCity }: any) {
   async function logi() {
     navigate("/api/auth/login");
   }
+
+  const [animate, setAnimate] = useState("");
+
+  function handleClickButtonReg() {
+      setAnimate("animate");
+      setTimeout(() => {
+          setAnimate("");
+      }, 8000);
+      regi();
+  }
+
+  function handleClickButtonLog() {
+    setAnimate("animate");
+    setTimeout(() => {
+        setAnimate("");
+    }, 8000);
+    logi();
+}
 
   return (
     <div className="header">
@@ -92,11 +111,12 @@ function Header({ setSearchText, setSelectedCountry, setSelectedCity }: any) {
           !userInfo ?
             <div className="reglog ">
               <div>
-                <button className="logi" onClick={logi}>Sing in</button>
+                <button className={`logi  ${animate}`} onClick={handleClickButtonLog}>Sing in</button>
               </div>
+              <div></div>
               <div>
                 {/* <button className="log">Sing in</button> */}
-                <button className="regi" onClick={regi}>Sing up</button>
+                <button className={`regi  ${animate}`} onClick={handleClickButtonReg}>Sing up</button>
               </div>
             </div>
 

@@ -12,7 +12,7 @@
 
 .two{
     display: grid;
-    grid-template-columns: 60% 30%;
+    grid-template-columns: 55% 45%;
 }
 // .country-select{
 //     margin-right: 800px;
@@ -72,15 +72,34 @@
 
 .reglog{
     display: grid;
-    grid-template-columns: 50% 50%;
-    margin-top:3%;
+    grid-template-columns: 54% 1% 45%;
+    margin-top:4%;
 }
 
-.logi, .regi{
+.regi, .logi{
     height: 50px;
-    padding: 10px 30px;
-      border-radius: 15px;
+    font-size: large;
+    // position: relative;
+    padding: 10px 22px;
+    border-radius: 6px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    // background-color: #2cc6d7;
+    background-color: #2cc6d7;
+    width: 120px;
 }
+
+.regi{
+    margin-left: -40px;
+
+}
+
+// .logi{
+//     margin-left: -40px;
+// }
+
+
 
 .country-select{
     // position: fixed;
