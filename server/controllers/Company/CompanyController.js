@@ -5,8 +5,27 @@ import { DatabaseFind } from "../../database/DB_Functions/DatabaseFind.js";
 import { DatabaseGet } from "../../database/DB_Functions/DatabaseGet.js";
 import { Event } from "../../entities/Event/Event.js";
 import { GetEvents } from "../../entities/Event/GetEvents.js";
+import { send } from "../../utils/Email/sendEmail.js";
+
+
+
+export const generateConfirmNumber = async (req, res) => {
+  let generCod = Math.random() * (999999 - 100000) + 100000;
+  let number = jwt.sign({ generCod }, process.env.SECRET_REGISTER);
+  send(email, `Enter these numbers to confirm the creation of the organization: ${generCod}`);
+  res.json(number);
+}
 
 export const CreateCompany = async (req, res) => {
+
+  let geCode = jwt.decode(req.body.genCode, process.env.SECRET_REGISTER);
+
+ if(req.body.code !== geCode.number){
+  let string = "Enter correct cod."
+  res.json(string);
+    return;
+ } 
+
   if (req.user.role === "organizer") {
     res.json("You already have a company and can't create one more.");
     return;

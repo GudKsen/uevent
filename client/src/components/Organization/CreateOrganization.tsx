@@ -1,5 +1,6 @@
 import Sidebar2 from "../sidebar/sidebar2";
 import "./CreateOrganization.scss";
+import "../register/regstyle.scss"
 import { useState } from "react";
 import axios from "axios";
 import { Country, State, City } from 'country-state-city';
@@ -29,7 +30,21 @@ export function CreateOrganization() {
     const [streetCompany, setStreetCompany] = useState<string | null>(null);
     const [number_streetCompany, setNumberStreetCompany] = useState<string | null>(null);
 
+    const [checkEmail, setCheckEmail] = useState(false);
+    const [code, setCode] = useState("");
+    const [genCode, setGenCode] = useState("");
+
+    function check(){
+        axios.get(`http://localhost:8000/api/generate`).then(res => {
+                setCode(res.data.number);
+            });
+        setCheckEmail(true);
+    }
+
     function CreateCompany() {
+        
+
+        
         console.log("Creating Company")
         axios.post("http://localhost:8000/api/company",
             {
@@ -41,6 +56,8 @@ export function CreateOrganization() {
                 city: selectedCity!.label,
                 street: streetCompany,
                 street_number: number_streetCompany,
+                code: code,
+                genCode: genCode,
                 token: localStorage.getItem("token")
             }).then(async (res) => {
                 if (res.status === 200) {
@@ -126,9 +143,7 @@ export function CreateOrganization() {
                                     </div>
                                 </div>
                                 <div className="email-create">
-                                    <div>
-                                        Email
-                                    </div>
+                                    <div>Email</div>
 
                                     <div className="input-box-a">
                                         <input type="email" className="tit" required onChange={e => { setEmailCompany(e.target.value) }} />
@@ -137,15 +152,50 @@ export function CreateOrganization() {
                                 </div>
                             </div>
 
+                            <div className="name-email-form">
+                                <div className="title-create-event-form field">
+                                    <div>About</div>
+                                    <div className="input-box-a">
+                                    <textarea className="description-form is-focused"
+                                        onChange={e => { setDescriptionCompany(e.target.value) }} required
+                                    ></textarea>
+                                    </div>
+                                </div>
+                                <div className="email-create">
+                                    <div>Confirm code</div>
 
-                            <div className="description-create-event field">
+                                    <div className="input-box-a">
+                                    <input type="email" className="tit" required onChange={e => { setEmailCompany(e.target.value) }} />
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            {/* <div className="column">
+                                <div className="input-box-al">
+                                <p>About</p>
+                                <textarea className="description-form is-focused"
+                                        onChange={e => { setDescriptionCompany(e.target.value) }} required
+                                    ></textarea>
+                                </div>
+
+                                <div className="input-box-al">
+                                <p>Confirm code</p>
+                                <input type="email" className="tit" required onChange={e => { setEmailCompany(e.target.value) }} />
+                                </div>
+                            </div><br /> */}
+                            {/* <div className="description-create-event field">
                                 <div>About</div>
                                 <div className="input-box-a">
                                     <textarea className="description-form is-focused"
                                         onChange={e => { setDescriptionCompany(e.target.value) }} required
                                     ></textarea>
                                 </div>
-                            </div>
+                                <div>Confirm code</div>
+                                <div className="input-box-a">
+                                        <input type="email" className="tit" required onChange={e => { setEmailCompany(e.target.value) }} />
+                                    </div>
+                            </div> */}
 
 
 
@@ -222,8 +272,18 @@ export function CreateOrganization() {
 
                             <div className="cr-butt field">
 
-                                <button className={`create-event-button create-organization-button button ${animate}`}
-                                    onClick={handleClickButton}>Create</button>
+                                {
+                                    !checkEmail ?
+                                        <button className={` buttonCheck`}
+                                    onClick={check}>Check Email
+                                    </button>
+                                    :
+                                    <button className={`create-event-button create-organization-button button ${animate}`}
+                                    onClick={handleClickButton}>Create
+                                    </button>
+                                }
+
+                                
 
                             </div>
                         </div>
