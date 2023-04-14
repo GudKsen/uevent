@@ -186,7 +186,7 @@ function EventPage() {
                       {/* <p>{event.description}</p> */}
                     </div>
                     <div className="description">
-                      <p>Description:   {event.description}</p><br />
+                      <p>Description: {event.description}</p><br />
                     </div>
                     {/* <div className="location">
                         {event.location}
@@ -197,12 +197,15 @@ function EventPage() {
                     <p>Time:   {new Date(event.startDateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
                     <p>Date:   {new Date(event.startDateTime).toLocaleDateString()}</p>
                     {/* <p>Address:   {event.address_line_street}, {event.street_number}</p> */}
-                    {
+                    <p>Theme:<label> </label>
+                      {
 
-                      event.themes && event.themes.map((theme: Theme) => {
-                        return <p key={theme.Theme_ID}>{theme.title}</p>
-                      })
-                    }
+                        event.themes && event.themes.map((theme: Theme) => {
+                          return <label key={theme.Theme_ID}>{theme.title}, </label>
+                        })
+                      }
+                    </p>
+                    
 
                     <br />
                     <p>Format: {format?.title}</p>

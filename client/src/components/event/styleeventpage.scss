@@ -147,9 +147,29 @@ img{
     margin-left: 5%;
 }
 
+.maindata{
+    max-width: 900px;
+    max-height: 450px;
+    min-height: 450px;
+}
+
+.typeevent{
+    max-width: 670px;
+    max-height: 450px;
+    min-height: 450px;
+}
+
+.author{
+    padding-bottom: 20px;
+    margin-top: 15px;
+    max-width: 1500px;
+    max-height: 100px;
+    min-height: 100px;
+}
+
 
 .maindata, .typeevent, .author {
-    // min-height: 100%;
+    // min-height: 450px;
     // height: 900%;
     margin-right: 5%;
     padding-top: 5%;
@@ -176,13 +196,11 @@ img{
 
 
 
-.maindata, .typeevent{
-    height: 105%;
-}
+// .maindata, .typeevent{
+//     height: 105%;
+// }
 
-.author{
-    margin-top: 3%;
-}
+
 
 .typeevent{
     margin-right: 15%;

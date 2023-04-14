@@ -87,7 +87,8 @@ function Header({ setSearchText, setSelectedCountry, setSelectedCity }: any) {
           />
           <CitySelect setSelectedCity={setSelectedCity} />
         </div>
-        {
+        {/* <div> */}
+          {
           !userInfo ?
             <div className="reglog ">
               <div>
@@ -100,7 +101,7 @@ function Header({ setSearchText, setSelectedCountry, setSelectedCity }: any) {
             </div>
 
             :
-            <div>
+            <div className="homeclic">
 
               <div className="hoverme-profile" onClick={() => {
                 navigate("/userpage");
@@ -112,6 +113,8 @@ function Header({ setSearchText, setSelectedCountry, setSelectedCity }: any) {
             </div>
 
         }
+        {/* </div> */}
+        
 
         {/* <div>
 
