@@ -23,7 +23,7 @@ function PublishForm({ setPrice, setPublishDate, setReceive, setSee, setCountTic
                 <div>
                     <div>COUNT TICKET</div>
                     <div className="input-box-ab">
-                        <input type={"text"} className="input-box-ab" onChange={e => { setCountTicket(e.target.value) }} placeholder="Price"></input>
+                        <input type={"text"} className="input-box-ab" onChange={e => { setCountTicket(e.target.value) }} placeholder="Count ticket"></input>
                     </div>
                 </div> <br />
 

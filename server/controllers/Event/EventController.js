@@ -186,21 +186,24 @@ export const UpdateEvent = (req, res) => {
 export const GetEvents = async (req, res) => {
   let events = new Event();
   let e = await events.readAll();
+  if(e){
+    e.sort(function (a, b) {
+      if (a.dateTime < b.dateTime)
+      {
+       return -1;
+      } 
+      else if (a.dateTime > b.dateTime)
+      {
+       return 1;
+      }
+      else 
+      {
+       return 0;
+      }
+     })
+  }
 
-  e.sort(function (a, b) {
-   if (a.dateTime < b.dateTime)
-   {
-    return -1;
-   } 
-   else if (a.dateTime > b.dateTime)
-   {
-    return 1;
-   }
-   else 
-   {
-    return 0;
-   }
-  })
+  
 
   res.json(e);
   //events.readAll();

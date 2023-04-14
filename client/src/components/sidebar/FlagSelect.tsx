@@ -13,7 +13,7 @@ export function FlagSelect({setSelectedCountry}: any) {
 
     return (
         <div>
-            {selected === "" ? <div>Select country</div> : null}
+            {selected === "" ? <div><label className="select-cont">Select country</label></div> : null}
             <ReactFlagsSelect
                 selected={selected}
                 onSelect={(code) => {setSelected(code);  onchange= () => {setSelectedCountry(code);
