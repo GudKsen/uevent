@@ -28,6 +28,7 @@ export function PayPalPayment(productId: any) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                'token': localStorage!.getItem("token")!
             },
             // use the "body" param to optionally pass additional order information
             // like product skus and quantities
@@ -48,9 +49,11 @@ export function PayPalPayment(productId: any) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                'token': localStorage!.getItem("token")!
             },
             body: JSON.stringify({
-                orderID: data.orderID
+                orderID: data.orderID,
+                productId: productId
             })
         })
             .then((response) => {

@@ -1,18 +1,19 @@
 import { DatabaseGet } from "../../database/DB_Functions/DatabaseGet.js";
-import { Database } from "../../database/Database.js";
+import { Database } from "../../database/DB_Functions/Database.js";
 
 let database = new Database();
 
 export class Ticket
 {
-    constructor (event_id, user_id, price, purchase_date, seat, visit_date)
+    constructor (event_id, purchase_date, qr_code, user_id)
     {
         this.event_id = event_id;
-        this.user_id = user_id;
-        this.price = price;
+        this.User_ID = user_id;
+        // this.price = price;
         this.purchase_date = purchase_date;
-        this.seat = seat;
-        this.visit_date = visit_date;
+        // this.seat = seat;
+        // this.visit_date = visit_date;
+        this.qr_code = qr_code;
     }
 
     init(id) {
@@ -21,12 +22,10 @@ export class Ticket
 
     transfer_data() {
         let obj = {
-          Event_ID: this.id,
-          User_ID: this.user_id,
-          price: this.price,
+          Event_ID: this.event_id,
+          User_ID: this.User_ID,
           purchase_date: this.purchase_date,
-          seat: this.seat,
-          visit_date: this.visit_date
+          qr_code: this.qr_code
         };
         return obj;
     }
