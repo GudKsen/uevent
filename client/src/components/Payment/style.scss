@@ -1,0 +1,60 @@
+.paypal-payment-page,
+.thankyou-page {
+    display: grid;
+    grid-template-rows: 70px auto;
+}
+
+.paypal-buttons-container {
+    width: 50%;
+    margin: 300px auto 0 auto;
+}
+
+.paypal-buttons {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.thankyou-content {
+    width: 50%;
+    margin: 100px auto 0 auto;
+}
+
+.thankyou-message {
+    text-align: center;
+
+    h1 {
+        color: rgb(109, 108, 108);
+    }
+
+    h3 {
+        margin-top: 20px;
+        color: rgb(109, 108, 108);
+    }
+}
+
+.hover-goto-shop {
+    margin-top: 70px;
+    background-color: transparent;
+    background-image: url('../../public/video/arrow.png');
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-origin: content-box;
+    width: 230px;
+    height: 70px;
+    text-align: left;
+    font-weight: 700;
+    padding: 20px;
+    align-items: center;
+    border: none;
+    outline: none;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+}
+
+.hover-goto-shop:hover {
+    background-image: url('../../public/video/arrow.gif');
+    background-size: 70px 70px;
+    transform: translateY(-7px);
+}

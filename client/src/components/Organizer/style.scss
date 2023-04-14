@@ -1,0 +1,23 @@
+.organizer-manage-events-page .body-sidebar {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 30% auto;
+    background-color: #E4E9F7;
+}
+
+.organizer-page {
+    display: grid;
+    grid-template-rows: 70px auto;
+    margin-left: 30px;
+}
+
+.organizer-panel-content {
+    margin-top: 50px;
+    width: 93%;
+    margin: 75px auto 0 auto;
+
+    table {
+        border: 1px solid rgb(188, 188, 188);
+        height: 500px;
+      }
+}

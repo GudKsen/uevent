@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import axios from "axios";
 import "../sidebar/sidebar2.scss";
 
+import { useTranslation } from "react-i18next";
+
 function Event() {
   // let userInfo = JSON.parse(localStorage.getItem("userInfo") as string);
   const navigate = useNavigate();
@@ -15,6 +17,13 @@ function Event() {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [refreshData, setRefreshData] = useState(false);
   const [message, setMessage] = useState("");
+
+  const {t, i18n} = useTranslation();
+
+  const changeLanguageHandler = () => {
+    let lang = localStorage.getItem("country");
+    i18n.changeLanguage(lang!);
+  }
 
 
   let [eventsData, setEventsData] = useState<any[]>([]);
@@ -125,7 +134,7 @@ function Event() {
 
                           <div className="top-container-card-body">
                             <div className="title-event">
-                              {event.title}
+                              {t(event.title)}
                             </div>
                             <div className="price">
                               {

@@ -7,5 +7,6 @@ CREATE TABLE IF NOT EXISTS User_visit_Event (
     User_ID INT NOT NULL,
     Event_ID INT NOT NULL,
     FOREIGN KEY(User_ID) REFERENCES User(User_ID),
-    FOREIGN KEY(Event_ID) REFERENCES Event(Event_ID)
+    FOREIGN KEY(Event_ID) REFERENCES Event(Event_ID),
+    date_of_purchase DATE NOT NULL
 )

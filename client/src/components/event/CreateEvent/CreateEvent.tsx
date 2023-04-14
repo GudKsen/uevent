@@ -89,7 +89,10 @@ function CreateEvent() {
         formField.append('street', streetCompany!);
         formField.append('street_number', number_streetCompany!);
         formField.append('publish_date', publishDate!);
-        formField.append('currency', currency!.label);
+        
+        formField.append('currency', currency ? currency!.label : '');
+        
+        
         console.log("🚀 ~ file: CreateEvent.tsx:93 ~ create ~ currency:", currency)
 
         axios.post("http://localhost:8000/api/event", formField, {

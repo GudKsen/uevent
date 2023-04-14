@@ -70,6 +70,8 @@ async function handleResponse(response) {
 
 // use the orders api to capture payment for an order
 async function capturePayment(orderId) {
+  //TODO: write purchase information to database
+  console.log("🚀 ~ file: payment.js:73 ~ capturePayment ~ orderId:", orderId)
   const accessToken = await generateAccessToken();
   const url = `${baseURL.sandbox}/v2/checkout/orders/${orderId}/capture`;
   const response = await fetch(url, {

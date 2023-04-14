@@ -11,13 +11,14 @@ import Event from "./components/event/Event";
 import EventPage from "./components/event/EventPage";
 import RegiConfirm from "./components/register/RegiConfirm";
 import BankCard from "./components/bankCard/bankCard";
-import ManageEvents from "./components/event/ManageEvents";
 import CreateEvent from "./components/event/CreateEvent/CreateEvent";
 import AdminPanel from "./components/Admin/AdminPanel";
 import { CreateOrganization } from "./components/Organization/CreateOrganization";
 import { OrganizationPage } from "./components/Organization/OrganizationPage";
 import DeleteProf from "./components/register/DeleteProf";
 import { PaymentPage } from "./components/Payment/PaymentPage";
+import { ManageEvents } from "./components/Organizer/ManageEvents";
+import { Thankyou } from "./components/Payment/Thankyou";
 
 // import DeleteProfile from "./components/register/DeleteProfile";
 
@@ -78,10 +79,10 @@ const router = createBrowserRouter([
     path: "bankcard",
     element: <BankCard />,
   },
-  // {
-  //   path: "events/:id",
-  //   element: <EventPage />,
-  // },
+  {
+    path: "thankyou",
+    element: <Thankyou />,
+  },
   {
     path: "events-manage",
     element: <ManageEvents/>

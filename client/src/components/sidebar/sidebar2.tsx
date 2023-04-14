@@ -6,6 +6,7 @@ import Header from "./Header";
 import ManageEvents from "./ManageEvents";
 import DropdownMenu from "./DropdownMenu";
 import NavigateAdminPanel from "../Admin/NavigateAdminPanel";
+// import { ManageEvents } from "../Organizer/ManageEvents";
 
 function Sidebar2() {
 

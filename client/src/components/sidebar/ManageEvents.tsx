@@ -42,7 +42,7 @@ function ManageEvents() {
                 >Create event</div></li>
 
                 <li><div className="sub-menu-text"
-                onClick={() => navigate("manage-events")}
+                onClick={() => navigate("/events-manage")}
                 >Manage events</div></li>
 
             </ul>

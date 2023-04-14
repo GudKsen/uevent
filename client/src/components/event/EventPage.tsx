@@ -85,12 +85,16 @@ function EventPage() {
     })
   }
 
-  function handleClickButton() {
+  function handleClickButton(id: any) {
     setAnimate("animate");
     setTimeout(() => {
       setAnimate("");
     }, 8000);
-    navigate("/pay");
+    navigate("/pay", {
+      state: {
+        productId: id
+      }
+    });
   }
 
   async function deleteComment(idComment: any) {
@@ -221,14 +225,14 @@ function EventPage() {
                 {
                   userInfo ?
                     <div className="button-container">
-                      <button className={`button ${animate}`} onClick={handleClickButton}
+                      <button className={`button ${animate}`} onClick={e => handleClickButton(event.Event_ID)}
                       
                       >Buy</button>
                     </div>
                     :
                     <div className="button-container">
                       <button className={` disabledBuyButton`}
-                        title="You should register ot login to purchase ticket" disabled>Buy</button>
+                        title="You should register or login to purchase ticket" disabled>Buy</button>
                     </div>
                 }
 

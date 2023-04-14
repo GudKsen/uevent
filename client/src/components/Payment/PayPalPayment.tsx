@@ -1,9 +1,24 @@
 import { PayPalButtons } from "@paypal/react-paypal-js";
-// import React from "react";
-// import ReactDOM from "react-dom"
+import { useEffect } from "react";
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import Header from "../sidebar/Header";
 
-// const PayPalButton = paypal.Buttons.driver("react", { React, ReactDOM });
-export function PayPalPayment() {
+import "./style.scss"
+
+export function PayPalPayment(productId: any) {
+    const navigate = useNavigate();
+    const [event, setEvent] = useState<any>([]);
+
+    useEffect(() => {
+        axios.get(`http://localhost:8000/api/event/${productId.productId}`, {
+            params: { token: localStorage.getItem("token") }
+        }).then(response => {
+            setEvent(response.data[0]);
+            console.log(response.data[0]);
+        });
+    }, [productId])
 
     const serverUrl = "http://localhost:8000";
 
@@ -18,8 +33,8 @@ export function PayPalPayment() {
             // like product skus and quantities
             body: JSON.stringify({
                 product: {
-                    description: "Ticket for event",
-                    cost: "4500",
+                    description: event.description,
+                    cost: event.price[0].price_value,
                     currency: "USD"
                 }
             }),
@@ -38,15 +53,23 @@ export function PayPalPayment() {
                 orderID: data.orderID
             })
         })
-            .then((response) => response.json());
+            .then((response) => {
+                console.log("Successfully")
+                navigate('/thankyou');
+                response.json()
+            });
     };
 
     return (
-        <div>
-            <PayPalButtons
-                createOrder={(data:any) => createOrder(data)}
-                onApprove={(data: any) => onApprove(data)}
-            />
+        <div className="paypal-payment-page">
+            <Header />
+            <div className="paypal-buttons-container">
+                <PayPalButtons
+                    className="paypal-buttons"
+                    createOrder={(data: any) => createOrder(data)}
+                    onApprove={(data: any) => onApprove(data)}
+                />
+            </div>
         </div>
     )
 }

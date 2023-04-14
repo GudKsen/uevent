@@ -49,19 +49,29 @@ export class Event
     
     async save ()
     {
-        let exRate = await GetCurrentExchangeRate(this.currency);
-        let idPrice = await database.save("Price", {
-            price_value: this.price,
-            currency: this.currency,
-            exchange_rate: exRate
-        });
-        console.log("🚀 ~ file: Event.js:58 ~ idPrice:", idPrice)
-        
-        this.Price_ID = idPrice;
-        let dataInput = this.transfer_data();
-        dataInput.Price_ID = this.Price_ID;
+        let id;
+        if (this.price)
+        {
 
-        let id = await database.save("Event", dataInput);
+            let exRate = await GetCurrentExchangeRate(this.currency);
+            let idPrice = await database.save("Price", {
+                price_value: this.price,
+                currency: this.currency,
+                exchange_rate: exRate
+            });
+            
+            this.Price_ID = idPrice;
+            let dataInput = this.transfer_data();
+            dataInput.Price_ID = this.Price_ID;
+    
+            id = await database.save("Event", dataInput);
+
+        }
+        else 
+        {
+            id = await database.save("Event", this.transfer_data());
+        }
+       
 
         if (this.theme)
         {
@@ -113,7 +123,8 @@ export class Event
     async delete ()
     {
         let dbDelete = new DatabaseDelete();
-        await dbDelete.delete_event_theme(this.id);
+        await dbDelete.delete_by_eventId("Event_Theme", this.id);
+        await dbDelete.delete_by_eventId("Comment", this.id);
         await database.delete("Event", this.id);
     }
 
