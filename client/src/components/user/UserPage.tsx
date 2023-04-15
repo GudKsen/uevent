@@ -294,7 +294,7 @@ function UserPage() {
               </div>
                 
                 :
-                <button className="button"
+                <button className="button createorgan"
                   onClick={() => navigate("/create-organization")}
                 >Create organization</button>
             }
