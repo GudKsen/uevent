@@ -139,8 +139,8 @@
 }
 
 img{
-    height: 90%;
-    width: 90%;
+    max-height: 300px;
+    max-width: 300px;
 }
 
 .event-text{
@@ -213,6 +213,7 @@ button{
 }
 
 .button-container {
+    margin-bottom: -10%;
     align-items: center;
   text-align: center;
   justify-content: center;

@@ -25,44 +25,43 @@ function AdminPanel() {
             <Sidebar2 />
             <div className="admin-page">
                 <Header />
-                <div className="admin-panel-content">
-                    {/* <ManageButtons setSave={setSave} /> */}
-                    <div className="lists-contaner">
-                        <Tabs>
-                            <TabList>
-                                <Tab>Users</Tab>
-                                <Tab>Events</Tab>
-                                <Tab>Companies</Tab>
-                                <Tab>Themes</Tab>
-                                <Tab>Formats</Tab>
-                            </TabList>
+                    <div className="admin-panel-content">
+                        {/* <ManageButtons setSave={setSave} /> */}
+                        <div className="lists-contaner">
+                            <Tabs>
+                                <TabList>
+                                    <Tab>Users</Tab>
+                                    <Tab>Events</Tab>
+                                    <Tab>Companies</Tab>
+                                    <Tab>Themes</Tab>
+                                    <Tab>Formats</Tab>
+                                </TabList>
 
-                            <TabPanel className="panel">
-                                <div>
-                                    <AllUsers />
-                                </div>
-                            </TabPanel>
+                                <TabPanel className="panel">
+                                    <div>
+                                        <AllUsers />
+                                    </div>
+                                </TabPanel>
 
-                            <TabPanel className="panel">
-                                <AllEvents saveMove={save} />
-                            </TabPanel>
+                                <TabPanel className="panel">
+                                    <AllEvents saveMove={save} />
+                                </TabPanel>
 
-                            <TabPanel className="panel">
-                                <AllCompanies />
-                            </TabPanel>
+                                <TabPanel className="panel">
+                                    <AllCompanies />
+                                </TabPanel>
 
-                            <TabPanel className="panel">
-                                <AllThemes />
-                            </TabPanel>
+                                <TabPanel className="panel">
+                                    <AllThemes />
+                                </TabPanel>
 
-                            <TabPanel className="panel">
-                                <AllFormats />
-                            </TabPanel>
-                        </Tabs>
+                                <TabPanel className="panel">
+                                    <AllFormats />
+                                </TabPanel>
+                            </Tabs>
+                        </div>
+
                     </div>
-
-                </div>
-
             </div>
         </div>
     )
