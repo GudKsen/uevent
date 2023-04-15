@@ -172,16 +172,16 @@ function EventPage() {
                   <div className="event-photo">
                     {/* <img src={'http://localhost:8000/images/no_photo.jpg'} alt="" /> */}
                     {event.poster ?
-                      <img src={`http://localhost:8000/images/${event.poster}`} alt="" />
+                      <img className="mangodb" src={`http://localhost:8000/images/${event.poster}`} alt="" />
                       :
-                      <img src={`http://localhost:8000/images/no_photo.jpg`} alt="" />
+                      <img className="mangodb" src={`http://localhost:8000/images/no_photo.jpg`} alt="" />
                     }
                   </div>
                   <div className="event-text">
                     <div className="event-header">
                       <div className="event-title">
                         <p>Title:   {event.title}</p>
-                      </div>
+                      </div><br />
                       {/* <Rating/> */}
                       {/* <p>{event.description}</p> */}
                     </div>
@@ -197,18 +197,23 @@ function EventPage() {
                     <p>Time:   {new Date(event.startDateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
                     <p>Date:   {new Date(event.startDateTime).toLocaleDateString()}</p>
                     {/* <p>Address:   {event.address_line_street}, {event.street_number}</p> */}
-                    <p>Theme:<label> </label>
-                      {
+                    
+                    <p>Format: {format?.title}</p><br />
+                    <div className="description">
+                      <p>Theme:<label> </label>
+                        {
 
-                        event.themes && event.themes.map((theme: Theme) => {
-                          return <label key={theme.Theme_ID}>{theme.title}, </label>
-                        })
-                      }
-                    </p>
+                          event.themes && event.themes.map((theme: Theme) => {
+                            return <label key={theme.Theme_ID}>{theme.title}; </label>
+                          })
+                        }
+                      </p>
+                    </div>
+                    
                     
 
-                    <br />
-                    <p>Format: {format?.title}</p>
+                    
+                    
                     <div>
                       {
                         event.price ? 

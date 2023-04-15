@@ -176,15 +176,22 @@
 
 }
 
+.description{
+    word-break:break-all;
+    height: 80px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
 .ev-inf{
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 30% 70%;
 
 }
 
-img{
-    max-height: 300px;
-    max-width: 300px;
+.mangodb{
+    max-height: 200px;
+    max-width: 200px;
 }
 
 .event-text{
