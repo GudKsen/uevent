@@ -248,10 +248,10 @@ function EventPage() {
                   <h2>Comments</h2>
                   {
                     commentData.length > 0 ?
-                      <div >
+                      <div className="scroll-comment" >
                         {commentData && commentData.map(comment =>
                           <div key={comment.Comment_ID}>
-                            <div >
+                            <div className="comcont">
                               <div className="time-name">
                                 <div className="namecom">
                                   {/* <p></p> */}
@@ -286,15 +286,23 @@ function EventPage() {
                                       )
                                       :
                                       (
+                                        <div >
+                                          
+                                          {comment.content}
+                                          
+                                        </div>
                                         // inEditMode.status.toString()
-                                        comment.content
+                                        
+                                        
                                       )
+                                      
                                   }
 
 
                                 </div>
                                 {
                                   (userInfo && comment.UserInfo.full_name === userInfo.full_name) ?
+                                  
                                     <div className="del-up">
                                       <div className="del" onClick={() => { deleteComment(comment.Comment_ID) }}>
                                       </div>
@@ -317,10 +325,10 @@ function EventPage() {
                       : <div><p>There are no comments</p></div>
                   }
                   <div className="create-comm">
-                    <div className="input-box-a">
+                    <div className="input-box-a mavka">
                       <input onChange={(e) => setContent(e.target.value)} type="text" placeholder="Enter comment"></input>
                     </div>
-                    <button onClick={createComment}>Create</button>
+                    <button className="crater" onClick={createComment}>Create</button>
                   </div>
 
 

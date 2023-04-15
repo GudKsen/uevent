@@ -221,6 +221,7 @@ export function CreateOrganization() {
                                     <div>About</div>
                                     <div className="input-box-a">
                                     <textarea className="description-form is-focused"
+                                        // maxlength="500"
                                         onChange={e => { setDescriptionCompany(e.target.value) }} required
                                     ></textarea>
                                     </div>

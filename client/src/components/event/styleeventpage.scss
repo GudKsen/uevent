@@ -9,12 +9,13 @@
 
 .content-del-up{
     display: grid;
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 80% 20%;
 }
 
 .del-up{
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 50% 50%;
+    // margin-left: 30%;
 }
 
 .del, .up{
@@ -43,9 +44,16 @@
 //     right: 0;
 // }
 
+.timecom{
+    margin-left: 20%;
+}
+
 .time-name{
     display:grid;
     grid-template-columns: 50% 50%;
+    border-width: 0 0 2px 0;
+    border-style: solid;
+    border-color: #70707000 #70707000 #c5c5c5 #70707000;
 }
 
 .event-info-container {
@@ -53,22 +61,58 @@
     grid-template-rows: 10% auto;
 }
 
+.namecom{
+    margin-left: 5%;
+}
 
-.input-box-a input{
-    width: 85%;
+
+.mavka{
+    width: 370px;
+}
+
+
+// .input-box-a input{
+//     width: 85%;
+// }
+.crater{
+    margin-bottom: 5px;
+}
+
+.comcont{
+    background-color:#ffffff;
+    border-radius: 5%;
+    width: 360px;
+    margin-bottom: 10px;
+    min-height: 70px;
+}
+
+.scroll-comment{
+    height: 280px;
+    max-height: 300px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.create-comm{
+    position: fixed;
+    // margin-top: 260px;
 }
 
 .create-comm :where(.input-box-a input) {
+    // top: 100px;
     position: relative;
     height: 30px;
     // width: 100%;
     outline: none;
     font-size: 1rem;
     color: #707070;
-    margin-top: 8px;
+    bottom: 3px;
+    // margin-top: 250px;
     border: 1px solid #ddd;
     border-radius: 6px;
     padding: 0 15px;
+
+    
   }
   .input-box-a input:focus {
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
@@ -159,6 +203,10 @@ img{
     min-height: 450px;
 }
 
+
+
+
+
 .author{
     padding-bottom: 20px;
     margin-top: 15px;
@@ -231,4 +279,11 @@ button{
     height: 50px;
     font-size: 15px;
     
+}
+
+.content{
+    margin-left: 5%;
+    margin-right: 3%;
+    // white-space: pre;
+    word-break:break-all;
 }
