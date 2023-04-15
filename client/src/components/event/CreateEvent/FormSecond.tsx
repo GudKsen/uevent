@@ -2,6 +2,7 @@ import { useState } from "react";
 import SelectFormat from "./SelectFormat";
 import SelectTheme from "./SelectTheme";
 import "./styleButton.scss";
+import "../filter.scss"
 
 function FormSecond({setSelectedThemes, setSelectedFormat, CreateEvent}: any) {
     const [animate, setAnimate] = useState("");
@@ -50,8 +51,8 @@ function FormSecond({setSelectedThemes, setSelectedFormat, CreateEvent}: any) {
                 <div className="form2-grid">
                     <div>
                         <div className="themes field">
-                            <div className="theme-title">
-                                THEMES
+                            <div className="theme-title theme">
+                                <div className="ogoloshen"><p>THEMES</p></div>
                             </div>
                             <div className="select-themes-create">
                                 <SelectTheme setSelectedThemes={setSelectedThemes}/>
@@ -59,7 +60,7 @@ function FormSecond({setSelectedThemes, setSelectedFormat, CreateEvent}: any) {
                         </div>
 
                         <div className="format field">
-                            <div>FORMAT</div>
+                            <div  className="ogoloshen"><p>FORMAT</p></div>
                             <div>
                                 <SelectFormat setSelectedFormat={setSelectedFormat}/>
                             </div>

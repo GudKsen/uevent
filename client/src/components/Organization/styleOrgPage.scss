@@ -26,6 +26,13 @@
         .user-data-content{
             width: 70%;
             margin-left: 20%;
+
+            .description{
+                word-break:break-all;
+                height: 80px;
+                overflow: scroll;
+                overflow-x: hidden;
+            }
         }
 
         .imageuser{

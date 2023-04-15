@@ -132,7 +132,7 @@ export function OrganizationPage() {
                                                 setDateOfBirth(e.target.value);
                                             }} className="userinfo-data-input" type="date" defaultValue={userInfo.birthday}></input>
                                             : */}
-                                            <div className="userinfo-data">{organization.description}</div>
+                                            <div className="userinfo-data description">{organization.description}</div>
                                         {/* } */}
                                         </div>
 

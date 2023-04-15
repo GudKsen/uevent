@@ -3,6 +3,7 @@ import getSymbolFromCurrency from 'currency-symbol-map'
 import "./styleEvent2.scss";
 import Sidebar2 from "../sidebar/sidebar2";
 import Header from "../sidebar/Header";
+import Filter from "./Filter";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
@@ -102,6 +103,7 @@ function Event() {
       }
 
       <div className="list-events">
+        
         <Header
           setSearchText={setSearchText}
           setSelectedCountry={setSelectedCountry}
@@ -109,13 +111,11 @@ function Event() {
         //setRefreshData = {setRefreshData}
         />
 
-        {/* {
-          selectedCountry !== "" ?
-           <div>  */}
-            
-            {
+        <div className="list-filter">
+        {
               eventsData.length > 0 ?
                 <div className="list-events-container">
+                  {/* <Filter /> */}
 
                   {eventsData && eventsData.map(event =>
                     <div className="card-container" key={event.Event_ID}>
@@ -205,14 +205,20 @@ function Event() {
                     </div>
                   )}
 
+                    
+
                 </div>
 
                 : <div><br /><p className="choosecountry">There is no events</p></div>
 
             }
-            {/* </div>
-            : <div><br /><p className="choosecountry">Choose country</p>ss: {selectedCountry}</div>
-        } */}
+            <div><Filter /></div>
+
+        </div>
+
+            
+            
+            
       </div>
     </div>
   );

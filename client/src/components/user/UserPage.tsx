@@ -274,6 +274,10 @@ function UserPage() {
               {userInfo.role.charAt(0).toUpperCase() + userInfo.role.slice(1)}
             </div>
 
+            <div className="deleteProf ">
+              <button className="button delup" onClick={deleteProf}>Delete Profile</button>
+            </div>
+
 
           </div>
 
@@ -309,9 +313,7 @@ function UserPage() {
 
         
 
-        <div className="deleteProf">
-          <button onClick={deleteProf}>Delete Profile</button>
-        </div>
+        
 
 
       </div>
