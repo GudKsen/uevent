@@ -43,6 +43,7 @@ export const UpdateUser = async(req, res) => {
   let email = req.body.email;
   let role = req.body.role;
   let profilePicture = req.file;
+  console.log("🚀 ~ file: UserController.js:46 ~ UpdateUser ~ profilePicture:", profilePicture)
   let country = req.body.country;
   let city = req.body.city;
   let id = parseInt(req.params.id);
@@ -59,7 +60,8 @@ export const UpdateUser = async(req, res) => {
   
   userOld.init(id);
   await userOld.read();
-  if (userOld.profile_picture && userOld.profile_picture !== undefined) 
+  if (userOld.profile_picture && userOld.profile_picture !== undefined 
+    && profilePicture !== "undefined" && profilePicture !== "null" && profilePicture !== undefined) 
   {
     let pathImg = path.resolve("public/avatars", `${userOld.profile_picture}`);
     fs.readFile(pathImg, (err, data) => {

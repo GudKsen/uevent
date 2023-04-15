@@ -78,23 +78,40 @@ export class User
     }
     
     async update() {
-        if (this.phone_number) await database.update("User", "phone_number", this.phone_number, this.id);
-        if (this.full_name) await database.update("User", "full_name", this.full_name, this.id);
-        if (this.email) await database.update("User", "email", this.email, this.id);
+        console.log("Phone number " + this.profile_picture);
+        if (this.phone_number && this.phone_number !== undefined && this.phone_number !== "undefined") 
+            await database.update("User", "phone_number", this.phone_number, this.id);
+
+        if (this.full_name && this.full_name !== undefined && this.full_name !== "undefined") 
+            await database.update("User", "full_name", this.full_name, this.id);
+
+        if (this.email && this.email !== undefined && this.email !== "undefined") 
+            await database.update("User", "email", this.email, this.id);
 
 
-        if (this.role) {
+        if (this.role && this.role !== undefined && this.role !== "undefined") {
             let db = new DatabaseFind();
             let role_id = await db.find_by_title("Role", this.role);
-            console.log("🚀 ~ file: User.js:85 ~ update ~ role_id:", role_id)
             await database.update("User", "Role_ID", role_id[0].Role_ID, this.id);
         }
 
-        if (this.country) await database.update("User", "country", this.country, this.id);
-        if (this.city) await database.update("User", "city", this.city, this.id);
-        if (this.profile_picture) await database.update("User", "profile_picture", this.profile_picture, this.id);
-        if (this.birthday) await database.update("User", "birthday", this.birthday, this.id);
-        if (this.password) await database.update("User", "password", this.password, this.id);
+        // if (this.country ) await database.update("User", "country", this.country, this.id);
+        // if (this.city) await database.update("User", "city", this.city, this.id);
+        if (this.profile_picture 
+            && this.profile_picture !== undefined 
+            && this.profile_picture !== "undefined" 
+            && this.profile_picture !== "null") 
+            {
+                console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa");
+              await database.update("User", "profile_picture", this.profile_picture, this.id);  
+            }
+            
+
+        if (this.birthday && this.birthday !== undefined && this.birthday !== "undefined") 
+            await database.update("User", "birthday", this.birthday, this.id);
+
+        if (this.password && this.password !== undefined && this.password !== "undefined") 
+            await database.update("User", "password", this.password, this.id);
     }
     
     async delete() {

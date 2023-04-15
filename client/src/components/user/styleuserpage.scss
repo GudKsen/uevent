@@ -1,4 +1,4 @@
-.userpageall{
+.userpageall {
   display: grid;
   // display:flex;
   grid-template-columns: 5% auto;
@@ -11,47 +11,259 @@
   // position: fixed;
 
 
-.infouser{
-    padding-left: 18%;
+  .infouser {
+    height: 500px;
+    background-color: white;
+    width: 80%;
+    // margin: 0 auto;
+    border-radius: 20px;
+    margin-left: 15%;
+  }
+
+  .infouser,
+  .imageuser {
+
+    //   padding-left: 100px;
+    h1 {
+      color: rgb(42, 36, 70);
+      font-size: 30px;
+    }
+
+    h2 {
+      padding-left: 70px;
+      font-size: 25px;
+      // color: rgb(0, 0, 0);
+      color: rgb(130, 106, 251);
+    }
+
+    p {
+      font-size: 5px;
+      color: rgb(42, 36, 70);
+    }
+
+  }
+
+  .imageuser {
+    // margin-left: 20%;
+    background-color: white;
+    width: 60%;
+    margin: 0 auto;
+    border-radius: 20px;
+  }
+
+  .user-profile-avatar {
+    img {
+      border-radius: 50%;
+      margin: 0 auto;
+    }
+
+    text-align: center;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .userpage {
+    padding-top: 70px;
+    display: grid;
+    grid-template-columns: 70% 30%;
+    padding-left: 10px;
+    padding-right: 20px;
+    height: 100%;
+    background: rgb(216, 225, 247);
+  }
+
+  .button-edit-image-profile,
+  .button-edit-data-profile {
+    background-color: transparent;
+    border: none;
+    outline: none;
+
+    img {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+  }
 }
 
-.infouser, .imageuser{
-  
-//   padding-left: 100px;
-  h1 {
-    color: rgb(42, 36, 70);
-    font-size: 30px;
-  }
-  h2 {
-    padding-left: 70px;
-    font-size: 25px;
-    // color: rgb(0, 0, 0);
-    color:rgb(130, 106, 251);
-  }
-  p {
-    font-size: 5px;
-    color:rgb(42, 36, 70);
-  }
-  
+.button-edit-image-profile {
+  position: absolute;
+  top: -15px;
+  right: 8%;
 }
 
-.imageuser {
-  margin-left: 20%;
+.user-prof-button-container {
+  width: 100%;
 }
 
-.userpage{
-  //под вопросом
-  // position: fixed;
-  padding-top: 70px;
+.button-edit-data-profile {
+  float: right;
+  margin-top: 2px;
+}
+
+.avatarProfilePicture {
+  width: 150px;
+  height: 150px;
+}
+
+.upload-picture-field FileUploader {
+  width: 200px !important;
+  height: 200px !important;
+}
+
+.lkjDVC {
+  height: 130px !important;
+  width: 50px !important;
+  min-width: 204px !important;
+}
+
+.sc-dkrFOg {
+  width: 50px !important;
+}
+
+.user-data-content {
+  padding: 50px;
   display: grid;
   grid-template-columns: 50% 50%;
-  // min-height: 100vh;
-  display: flex;
-  padding-left: 10px;
-  padding-right: 20px;
-  height: 100%;
-  background: rgb(216, 225, 247);
+  row-gap: 20px;
+  column-gap: 50px;
 }
 
+.profile-data-field {
+  row-gap: 15px;
+}
 
+.userinfo-data,
+.userinfo-data-input {
+  border-bottom: 1px solid rgb(173, 172, 172);
+  max-width: 80%;
+  margin-top: 10px;
+}
+
+.userinfo-title-field-data {
+  color: rgb(173, 172, 172);
+}
+
+.image-organization-windows {
+  display: grid;
+  grid-template-rows: 50% 50%;
+  row-gap: 50px;
+}
+
+.userinfo-role {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.user-profile-avatar-input {
+  display: grid;
+  grid-template-rows: 80% 20%;
+  align-items: center;
+  row-gap: 5px;
+
+}
+
+.file-upload-avatar-field {
+  margin: 5px auto;
+}
+
+.btn-ok-update-photo {
+  border: none;
+  width: 70px !important;
+  font-size: 14px !important;
+  margin: 0 auto;
+}
+
+.btn-update-container {
+  display: flex;
+  align-items: center;
+}
+
+.userinfo-data-input {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid black;
+  font-size: 16px;
+}
+
+.btn-grp-update-cancel {
+  margin-top: 200px;
+
+  button {
+    width: 80px;
+    text-align: center;
+    border: none;
+    padding: 10px;
+    margin-left: 15px;
+    background-color: transparent;
+    transition: all 0.3s ease 0s;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+
+  .update-btn:hover {
+    box-shadow: 0px 8px 15px rgba(44, 198, 215, 0.5);
+  }
+
+  .cancel-btn:hover {
+    box-shadow: 0px 8px 15px rgba(215, 53, 44, 0.5);
+  }
+
+  button:hover {
+    transform: translateY(-7px);
+  }
+}
+
+.organization-window {
+  background-color: white;
+  max-height: 70%;
+  width: 60%;
+  border-radius: 20px;
+  margin: 0 auto;
+}
+
+.my-organization-button {
+  // background-image: url('../../public/video/arrow.png');
+  // background-size: 30px 30px;
+  // background-position: bottom;
+  // background-repeat: no-repeat;
+
+  background-color: transparent;
+    background-image: url('../../public/video/arrow.png');
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-origin: content-box;
+    width: 230px;
+    height: 70px;
+    text-align: left;
+    font-weight: 700;
+    padding: 20px;
+    align-items: center;
+    border: none;
+    outline: none;
+    margin-top: 50px;
+    // box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+}
+
+.my-organization-button:hover {
+  background-image: url('../../public/video/arrow.gif');
+    background-size: 70px 70px;
+    transform: translateY(-7px);
+}
+
+.name-organization {
+  font-size: 20px;
+  text-align: left;
+  margin-left: 40px;
+  margin-top: 30px;
+}
+
+.email-organization {
+  text-align: left;
+  margin-left: 40px;
+  margin-top: 10px;
 }
