@@ -81,7 +81,9 @@ export function OrganizationPage() {
             }
 
             <div className={`event-info-container `}>
-                <Header />
+            <div className="head">
+        <Header />
+        </div>
                 <div className={`create`}>
                     <div className="ordpage">
                         <div className="userinfo-photo">    

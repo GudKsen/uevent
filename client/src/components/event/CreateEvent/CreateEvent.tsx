@@ -120,7 +120,9 @@ function CreateEvent() {
 
             <Sidebar2 />
             <div className="tt">
-                <Header />
+            <div className="head">
+        <Header />
+        </div>
                 <div className="contain">
                     <div className="title-create-event">
                         <h2>Create Event</h2>

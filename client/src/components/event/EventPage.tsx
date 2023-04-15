@@ -161,7 +161,9 @@ function EventPage() {
       }
 
       <div className={`event-info-container `}>
-        <Header />
+        <div className="head">
+          <Header />
+        </div>
         <div className={`create`}>
 
           {/* <div className="event-create"> */}

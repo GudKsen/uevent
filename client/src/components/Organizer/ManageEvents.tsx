@@ -12,7 +12,9 @@ export function ManageEvents() {
         <div className="admin-panel">
             <Sidebar2 />
             <div className="admin-page">
-                <Header />
+                <div className="head">
+                    <Header />
+                </div>
                 <div className="admin-panel-content">
                     {/* <ManageButtons setSave={setSave} /> */}
                     <div className="lists-contaner">

@@ -216,6 +216,7 @@ function Event() {
                 : <div><br /><p className="choosecountry">There is no events</p></div>
 
             }
+            
             <div><Filter /></div>
 
         </div>
