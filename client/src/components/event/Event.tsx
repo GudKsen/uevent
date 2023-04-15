@@ -103,13 +103,17 @@ function Event() {
       }
 
       <div className="list-events">
-        
-        <Header
+
+        <div className="head">
+          <Header
           setSearchText={setSearchText}
           setSelectedCountry={setSelectedCountry}
           onChange={(e: any) => ChangeData(e)}
         //setRefreshData = {setRefreshData}
         />
+        </div>
+        
+        
 
         <div className="list-filter">
         {
