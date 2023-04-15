@@ -47,22 +47,6 @@ function Header({ setSearchText, setSelectedCountry, setSelectedCity }: any) {
 
   const [animate, setAnimate] = useState("");
 
-  function handleClickButtonReg() {
-      setAnimate("animate");
-      setTimeout(() => {
-          setAnimate("");
-      }, 8000);
-      regi();
-  }
-
-  function handleClickButtonLog() {
-    setAnimate("animate");
-    setTimeout(() => {
-        setAnimate("");
-    }, 8000);
-    logi();
-}
-
   return (
     <div className="header">
       <div className="three">
@@ -111,12 +95,12 @@ function Header({ setSearchText, setSelectedCountry, setSelectedCity }: any) {
           !userInfo ?
             <div className="reglog ">
               <div>
-                <button className={`logi  ${animate}`} onClick={handleClickButtonLog}>Sing in</button>
+                <button className={`logi  ${animate}`} onClick={logi}>Sing in</button>
               </div>
               <div></div>
               <div>
                 {/* <button className="log">Sing in</button> */}
-                <button className={`regi  ${animate}`} onClick={handleClickButtonReg}>Sing up</button>
+                <button className={`regi  ${animate}`} onClick={regi}>Sing up</button>
               </div>
             </div>
 

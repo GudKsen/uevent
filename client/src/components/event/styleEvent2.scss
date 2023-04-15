@@ -26,6 +26,11 @@
     height: 100%;
 }
 
+.list-filter{
+  display: grid;
+  grid-template-columns: 80% 20%;
+}
+
 .list-events {
   display: grid;
   grid-template-rows: 80px auto;
