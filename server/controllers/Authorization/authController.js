@@ -27,8 +27,6 @@ export const registerUser = async (req, res) => {
   console.log(birthday);
   let country = req.body.country;
   let city = req.body.city;
-  
-
   let db = new DatabaseFind();
   
   let data = await db.find_by_phone_number(phone_number);
