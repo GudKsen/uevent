@@ -48,6 +48,8 @@ export class Company
     }
 
     async delete () {
+        let d = await this.read();
+        await database.delete('Location', d[0].Location_ID);
         await database.delete('Company', this.id);
     }
 }

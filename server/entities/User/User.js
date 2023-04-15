@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { Database } from "../../database/DB_Functions/Database.js"
 import { DatabaseFind } from "../../database/DB_Functions/DatabaseFind.js";
 import { DatabaseGet } from "../../database/DB_Functions/DatabaseGet.js";
+import { DatabaseDelete } from "../../database/DB_Functions/DatabaseDelete.js";
 let database = new Database();
 
 export class User
@@ -115,6 +116,34 @@ export class User
     }
     
     async delete() {
+        let db = new DatabaseGet();
+        let company = await db.get_company_by_userID(this.id);
+        let comments = await db.get_comments_by_user_id(this.id);
+        if (comments)
+        {
+            for (let comment of comments)
+            {
+                await database.delete("Comment", comment.Comment_ID)
+            }
+        }
+        let db_delete = new DatabaseDelete();
+        let events = await db.get_events_by_company(company[0].Company_ID);
+        if (events)
+        {
+            for (let event of events) {
+                await database.delete("Price", event.Price_ID);
+                await database.delete("Location", event.Location_ID);
+                
+                db_delete.delete_by_eventId("Event_Theme", event.Event_ID);
+                await database.delete("Event", event.Event_ID);
+                
+            }
+        }
+        
+        db_delete.delete_by_userId("Organizer_Company",this.id);
+        await database.delete("Company", company[0].Company_ID);
+        await database.delete("Location", company[0].Location_ID);
+        
         await database.delete("User", this.id);
     }
 

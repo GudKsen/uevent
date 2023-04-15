@@ -174,6 +174,31 @@ export class DatabaseGet {
       return null;
     }
   }
+
+  async get_events_by_company(id)
+  {
+    let command = `select * from Event where Event.Company_ID = ${id}`;
+    let data = await pool.promise().query(command);
+    if (data[0].length) {
+      return data[0];
+    }
+    else {
+      return null;
+    }
+  }
+
+  async get_comments_by_user_id(user_id)
+  {
+    let command = `select * from Comment where User_ID = ${user_id}`;
+    let data = await pool.promise().query(command);
+    if (data[0].length)
+    {
+      return data[0];
+    }
+    else {
+      return null;
+    }
+  }
 }
 
 //const events = await pool.query("SELECT * FROM events WHERE theme_id IS NOT NULL");
