@@ -7,4 +7,10 @@ export class DatabaseDelete
         let command =  `delete from ${table} where Event_ID = "${Event_ID}"`;
         pool.query(command);
     }
+
+    delete_by_userId(table, User_ID)
+    {
+        let command =  `delete from ${table} where User_ID = "${User_ID}"`;
+        pool.query(command);
+    }
 }

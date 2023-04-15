@@ -106,10 +106,11 @@ function UserPage() {
     const info = {
       email: userInfo.email
     };
-    await fetch("http://localhost:8000/api/delete-user", {
+    await fetch("http://localhost:8000/api/auth/delete-account", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        token: localStorage.getItem("token")!
       },
       body: JSON.stringify(info),
     });
@@ -294,9 +295,12 @@ function UserPage() {
               </div>
                 
                 :
-                <button className="button createorgan"
+                <div>
+                  <div className="no-organization-title">The organization has not been created</div>
+                  <button className="my-organization-button"
                   onClick={() => navigate("/create-organization")}
                 >Create organization</button>
+                </div>
             }
 
           </div>
@@ -305,9 +309,9 @@ function UserPage() {
 
         
 
-        {/* <div className="deleteProf">
+        <div className="deleteProf">
           <button onClick={deleteProf}>Delete Profile</button>
-        </div> */}
+        </div>
 
 
       </div>

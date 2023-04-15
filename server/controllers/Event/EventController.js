@@ -178,7 +178,6 @@ export const UpdateEvent = (req, res) => {
     themes
   );
   event.init(id);
-  // console.log(location);
   event.update();
   res.send("Updated");
 };
@@ -202,11 +201,7 @@ export const GetEvents = async (req, res) => {
       }
      })
   }
-
-  
-
   res.json(e);
-  //events.readAll();
 };
 
 export const GetCommentsEvent = async (req, res) => {
@@ -215,6 +210,14 @@ export const GetCommentsEvent = async (req, res) => {
   let data = await dataGet.get_comments_by_event_id(id);
   res.json(data);
 };
+
+export const GetEventsByCompanyId = (req, res) =>
+{
+  let id = parseInt(req.params.id);
+  let db = new DatabaseGet();
+  let events = db.get_events_by_company(id);
+  res.json(events);
+}
 
 export const CreateCommentEvent = (req, res) => {};
 

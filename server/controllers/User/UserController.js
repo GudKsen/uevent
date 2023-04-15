@@ -109,14 +109,15 @@ export const DeleteProfile = async (req, res) => {
 };
 
 
-//это, если мы будем делать через всплывающее окно или второе окно, если с конфирмом
-
 export const DeleteUser = async (req, res) => {
 
-  let database = new Database();
+  // let database = new Database();
   let deleteId = parseInt(req.params.id);
+  let user = new User();
+  user.init(deleteId);
+  user.delete();
 
-  database.delete("User", deleteId);
+  //database.delete("User", deleteId);
 
   // let deleteId = parseInt(req.params.id);
   // let user = new User();
