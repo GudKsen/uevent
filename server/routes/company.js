@@ -24,7 +24,7 @@ const upload = multer({
     fileFilter: multerFilter,
 });
 
-router.get("/api/generate", auth, generateConfirmNumber);
+router.post("/api/generate", auth, generateConfirmNumber);
 router.post("/api/company", auth, CreateCompany);
 router.get("/api/company/:id([0-9]+)", GetCompany);
 router.get("/api/company/user", auth, GetCompanyByUser);

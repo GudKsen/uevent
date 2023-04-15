@@ -7,28 +7,38 @@ import { Event } from "../../entities/Event/Event.js";
 import { GetEvents } from "../../entities/Event/GetEvents.js";
 import { send } from "../../utils/Email/sendEmail.js";
 
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 
 export const generateConfirmNumber = async (req, res) => {
-  let generCod = Math.random() * (999999 - 100000) + 100000;
+  let generCod = parseInt(Math.random() * (999999 - 100000) + 100000);
+
   let number = jwt.sign({ generCod }, process.env.SECRET_REGISTER);
-  send(email, `Enter these numbers to confirm the creation of the organization: ${generCod}`);
+  let email = req.body.email;
+  console.log(email);
+  console.log(number);
+  send(email, `Enter these numbers to confirm the creation of the organization:\n ${generCod}`);
   res.json(number);
 }
 
 export const CreateCompany = async (req, res) => {
 
-  let geCode = jwt.decode(req.body.genCode, process.env.SECRET_REGISTER);
+  console.log(req.body.code);
 
- if(req.body.code !== geCode.number){
-  let string = "Enter correct cod."
-  res.json(string);
-    return;
- } 
+  let geCode = jwt.decode(req.body.genCode, process.env.SECRET_REGISTER);
+  console.log(geCode.generCod);
+  let string;
+
+  if(parseInt(req.body.code) != parseInt(geCode.generCod)){
+    string = "Enter correct cod."
+    return res.json(string);
+      
+  } 
 
   if (req.user.role === "organizer") {
-    res.json("You already have a company and can't create one more.");
-    return;
+    return res.json("You already have a company and can't create one more.");
+    
   }
 
   let name = req.body.name;
@@ -38,8 +48,8 @@ export const CreateCompany = async (req, res) => {
   let getData = new DatabaseFind();
   let findCompany = await getData.find_by_email("Company", email);
   if (findCompany) {
-    res.status(409).send("Company already exists");
-    return;
+     res.send("Company already exists");
+    
   }
 
   let userID = req.user._id;
@@ -68,7 +78,8 @@ export const CreateCompany = async (req, res) => {
   user.update();
   console.log("Created company");
   company.create(userID);
-  res.json("Created");
+  string = "Company was created."
+  return res.json(string);
 };
 
 export const GetCompanyByUser = async (req, res) => {
