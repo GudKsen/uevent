@@ -4,6 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import Header from "../sidebar/Header";
+import Sidebar2 from "../sidebar/sidebar2";
 
 import "./style.scss"
 
@@ -64,15 +65,31 @@ export function PayPalPayment(productId: any) {
     };
 
     return (
-        <div className="paypal-payment-page">
-            <Header />
-            <div className="paypal-buttons-container">
-                <PayPalButtons
-                    className="paypal-buttons"
-                    createOrder={(data: any) => createOrder(data)}
-                    onApprove={(data: any) => onApprove(data)}
-                />
-            </div>
+
+        <div className="thankyou-page">
+            <Sidebar2 />
+          <div className="pageall">
+            <div className="head">
+                <Header /></div>
+                <div className="paypal-buttons-container">
+                 <PayPalButtons
+                     className="paypal-buttons"
+                     createOrder={(data: any) => createOrder(data)}
+                     onApprove={(data: any) => onApprove(data)}
+                 />
+             </div>
+          </div>
+            
         </div>
+        // <div className="paypal-payment-page">
+        //     <div className="head"><Header /></div>
+        //     <div className="paypal-buttons-container">
+        //         <PayPalButtons
+        //             className="paypal-buttons"
+        //             createOrder={(data: any) => createOrder(data)}
+        //             onApprove={(data: any) => onApprove(data)}
+        //         />
+        //     </div>
+        // </div>
     )
 }
