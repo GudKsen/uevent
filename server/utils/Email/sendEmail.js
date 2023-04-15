@@ -6,15 +6,37 @@ export function send(email, text, link) {
     port: 2525,
     auth: {
       //------KSENIIA SETTINGS-------------------------
-      user: "4c475d92282587",
-      pass: "821b514591f9f1",
+      // user: "4c475d92282587",
+      // pass: "821b514591f9f1",
       //-----------------------------------------------
       //------STANISLAVA SETTINGS----------------------
-      // user: "d13f138085da46",
-      // pass: "6b479d6d87fb70"
+      user: "d13f138085da46",
+      pass: "6b479d6d87fb70"
       //-----------------------------------------------
     },
   });
+  var mailOptions;
+
+  if(!link){
+     mailOptions = {
+      from: '"Example Team" <admin@example.com>',
+      to: email,
+      subject: "New password",
+      html: `<h1>Hello, user</h1>
+               <p>${text}</p>
+               <p>Good time for you!</p>`,
+    };
+  } else {
+     mailOptions = {
+      from: '"Example Team" <admin@example.com>',
+      to: email,
+      subject: "New password",
+      html: `<h1>Hello, user</h1>
+               <p>${text}</p>
+               <a href="${link}">Click here</a>
+               <p>Good time for you!</p>`,
+    };
+  }
 
   var mailOptions = {
     from: '"Example Team" <admin@example.com>',

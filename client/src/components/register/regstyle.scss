@@ -21,6 +21,10 @@
 .input-box-a input{
   width: 100%;
 }
+
+.input-box-al input{
+  width: 100%;
+}
 // .all {
 //   min-height: 100vh;
 //   display: flex;
@@ -81,10 +85,15 @@ s
   width: 100%;
   // margin-top: 20px;
 }
+
+.form .input-box-al {
+  width: 100%;
+  // margin-top: 20px;
+}
 .input-box-a label {
   color: #333;
 }
-.form :where(.input-box-a input, .select-box, .react-tel-input .form-control) {
+.form :where(.input-box-a input, .input-box-al input, .select-box, .react-tel-input .form-control) {
   position: relative;
   height: 50px;
   width: 100%;

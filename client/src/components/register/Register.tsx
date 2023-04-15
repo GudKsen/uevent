@@ -150,25 +150,25 @@ function Register() {
       <section className="container">
         <header>Registration Form</header>
         <form action="#" className="form">
-          <div className="input-box-a">
+          <div className="input-box-al">
           <p className="err">{error}</p>
-            <label>Full Name</label>
+            <p>Full Name</p>
             <input type="text" placeholder="Enter full name" required onChange={(e) => setName(e.target.value)} />
           </div><br />
 
-          <div className="input-box-a">
-            <label>Email Address</label>
+          <div className="input-box-al">
+            <p>Email Address</p>
             <input type="text" placeholder="Enter email address" required onChange={(e) => setEmail(e.target.value)} />
           </div><br />
 
           <div className="column">
-            <div className="input-box-a">
-              <label>Password</label>
+            <div className="input-box-al">
+              <p>Password</p>
               <input type="password" placeholder="Enter password" required onChange={(e) => setPassword(e.target.value)} />
             </div>
 
-            <div className="input-box-a">
-              <label>Confirm password</label>
+            <div className="input-box-al">
+              <p>Confirm password</p>
               <input type="password" placeholder="Confirm password" required onChange={(e) => setPasswordConfirm(e.target.value)} />
             </div>
           </div><br />
@@ -198,8 +198,8 @@ function Register() {
 
             </div>
 
-            <div className="input-box-a">
-              <label>Birth Date</label>
+            <div className="input-box-al">
+              <p>Birth Date</p>
               <input type="date" placeholder="Enter birth date" required onChange={(e) => setDirthday(e.target.value)} />
             </div>
           </div><br />
