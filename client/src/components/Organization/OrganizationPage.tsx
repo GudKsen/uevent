@@ -90,13 +90,23 @@ export function OrganizationPage() {
         });
     }
 
+    let [eventsData, setEventsData] = useState<any[]>([]);
+
     useEffect(() => {
         axios.get("http://localhost:8000/api/company/user", {
             params: { token: localStorage.getItem("token") }
         }).then((response) => {
             setOrganization(response.data.data[0]);
             setLocation(response.data.dataLocation[0]);
-        });
+            console.log(response.data.data[0].Company_ID);
+
+            axios.get(`http://localhost:8000/api/events/${response.data.data[0].Company_ID}`
+                ).then((res) => {
+                setEventsData(res.data);
+                console.log(res.data);
+            
+                });
+                });
     }, []);
 
     let userInfo = JSON.parse(localStorage.getItem("userInfo") as string);
@@ -135,22 +145,19 @@ export function OrganizationPage() {
         })
       }
 
-      let [eventsData, setEventsData] = useState<any[]>([]);
+      
 
-      useEffect(() => {
-        let country_code = localStorage.getItem("country");
-        let regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
+    //   useEffect(() => {
+    //     console.log(organization?.Company_ID);
+    //     console.log(organization?.Company_ID);
     
-        axios.get(`http://localhost:8000/api/events`,
-          {
-            params: { country: country_code ? regionNames.of(country_code) : "" }
-          }
-        ).then((res) => {
-          setEventsData(res.data);
-          console.log(res.data);
+    //     // axios.get(`http://localhost:8000/api/events/${organization?.Company_ID}`
+    //     // ).then((res) => {
+    //     //   setEventsData(res.data);
+    //     //   console.log(res.data);
     
-        });
-      }, []);
+    //     // });
+    //   }, []);
     
     
 
