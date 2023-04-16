@@ -29,8 +29,6 @@ export function OrganizationPage() {
     const [file, setFile] = useState<File>();
     const [loadings, setLoadings] = useState(false);
 
-    
-
     const navigate = useNavigate();
 
     const [inEditMode, setInEditMode] = useState({
@@ -137,6 +135,25 @@ export function OrganizationPage() {
         })
       }
 
+      let [eventsData, setEventsData] = useState<any[]>([]);
+
+      useEffect(() => {
+        let country_code = localStorage.getItem("country");
+        let regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
+    
+        axios.get(`http://localhost:8000/api/events`,
+          {
+            params: { country: country_code ? regionNames.of(country_code) : "" }
+          }
+        ).then((res) => {
+          setEventsData(res.data);
+          console.log(res.data);
+    
+        });
+      }, []);
+    
+    
+
 
     return (
 
@@ -163,7 +180,7 @@ export function OrganizationPage() {
                                     <div className="company-update">
                                         <div className="user-prof-button-container">
                                             <button className="button-edit-data-profile " title="Edit profile data">
-                                            <img alt="" src={require('../../public/video/edit_profile.png')}
+                                            <img  alt="" src={require('../../public/video/edit_profile.png')}
                                                 onClick={() => { onEditData(userInfo.User_ID) }}
                                             ></img>
                                             </button>
@@ -221,14 +238,6 @@ export function OrganizationPage() {
                                                 :
                                                 null
                                             }
-
-                                            {/* <div className="user-prof-button-container">
-                                                <button className="button-edit-data-profile " title="Edit profile data">
-                                                <img alt="" src={require('../../public/video/edit_profile.png')}
-                                                    onClick={() => { onEditData(userInfo.User_ID) }}
-                                                ></img>
-                                                </button>
-                                            </div> */}
                                         </div>
                                     </div>
                                     
@@ -243,9 +252,9 @@ export function OrganizationPage() {
                                                 </button>
                                                 {
                                                     userInfo.profile_picture ?
-                                                    <img className="avatarProfilePicture" src={`http://localhost:8000/company/${organization.image}`} alt="Avatar" />
+                                                    <img className="avatarProfilePictur" src={`http://localhost:8000/company/${organization.image}`} alt="Avatar" />
                                                     :
-                                                    <img className="avatarProfilePicture" src={`http://localhost:8000/images/no_photo.jpg`} alt="Avatar" />
+                                                    <img className="avatarProfilePictur" src={`http://localhost:8000/images/no_photo.jpg`} alt="Avatar" />
                                                 }
                                                 {/* <button className="button-edit-image-profile imagebut" title="Edit profile photo">
                                                     <img alt="" src={require('../../public/video/edit_profile.png')}
@@ -279,8 +288,91 @@ export function OrganizationPage() {
                                 </div>
                             : <div></div>}
                         </div>
+
                         <div className="user-events">
-                                            fgh
+                            <div className="title-card">
+                                <div className="title">Events</div>
+                                <div className="container-even">
+                                        
+                                        {
+                                            eventsData.length > 0 ?
+                                                <div className="list-events-containe">
+
+                                                    {eventsData && eventsData.map(event =>
+                                                        <div className="card-containe" key={event.Event_ID}>
+                                                            <div className="car" onClick={() => { navigate(`/eventpage/${event.Event_ID}`) }}>
+                                                                <div className="card-heade">
+                                                                {/* <img src="https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg" alt="rover" /> */}
+
+                                                                {event.poster ?
+                                                                    <img src={`http://localhost:8000/images/${event.poster}`} alt="" />
+                                                                    :
+                                                                    <img src={`http://localhost:8000/images/no_photo.jpg`} alt="" />
+                                                                }
+
+                                                                </div>
+                                                                <div className="card-bod">
+
+                                                                <div className="top-container-card-bod">
+                                                                    <div className="title-even">
+                                                                    {(event.title)}
+                                                                    </div>
+                                                                    <div className="pric">
+                                                                    {
+                                                                        event.price ?
+                                                                        <div>{event.price[0].price_value} {getSymbolFromCurrency(event.price[0].currency)}</div>
+                                                                        : <div>Free</div>
+                                                                    }
+                                                                    </div>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            : <div><br /><p className="choosecountry">There is no events</p></div>
+                                        }
+                                </div>
+                            </div>
+                            
+                            <div className="title-card">
+                                <div className="title">News</div>
+                                <div className="container-news">
+                                
+                                    {
+                                        eventsData.length > 0 ?
+                                            <div className="list-events-containe">
+
+                                                {eventsData && eventsData.map(event =>
+                                                    <div className="card-containe" key={event.Event_ID}>
+                                                        <div className="car" onClick={() => { navigate(`/eventpage/${event.Event_ID}`) }}>
+                                                            <div className="card-headea">
+                                                            {/* <img src="https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg" alt="rover" /> */}
+
+                                                            {event.poster ?
+                                                                <img src={`http://localhost:8000/images/${event.poster}`} alt="" />
+                                                                :
+                                                                <img src={`http://localhost:8000/images/no_photo.jpg`} alt="" />
+                                                            }
+
+                                                            </div>
+                                                            <div className="card-boda">
+
+                                                                <div className="top-container-card-bod">
+                                                                    <div className="title-even">
+                                                                    {(event.title)}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        : <div><br /><p className="choosecountry">There is no events</p></div>
+                                    }
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
