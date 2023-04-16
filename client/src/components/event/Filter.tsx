@@ -13,6 +13,8 @@ import SelectTheme from "./CreateEvent/SelectTheme";
 
 function Filter({setFilterPriceStart, setFilterPriceEnd, setFilterTheme, setFilterFormat}:any) {
 
+    const [selectFree, setSelectFree] = useState(Boolean);
+
     const [selectedThemes, setSelectedThemes] = useState<any[]>([]);
     const [selectedFormat, setSelectedFormat] = useState<{
         value: string,
@@ -50,11 +52,19 @@ function Filter({setFilterPriceStart, setFilterPriceEnd, setFilterTheme, setFilt
                     <div className="ttt">To</div>
                     <div className="input-box-a"><input onChange={(e) => setTo(e.target.value)} type="number"/></div>
                 </div>
+                
             </div>
             
-            <div className="maltobtn">
-                <button className=" malto" onClick={() => {handlePriceFilter()}}>Submit</button>
+            <div >
+                <div className="free">
+                    <input type="checkbox"/>Free
+                </div>
+                <div className="maltobtn">
+                    <button className=" malto" onClick={() => {handlePriceFilter()}}>Submit</button>            
+                </div>
             </div>
+
+            
             
         </div>
 
@@ -66,11 +76,16 @@ function Filter({setFilterPriceStart, setFilterPriceEnd, setFilterTheme, setFilt
 
       </div>
       <div className="format">
-        <div className="ogoloshen"><br/><p>Format</p></div>
+        <div className="ogoloshen"><p className="ogolfor">Format</p></div>
         <div  className="thefo">
             <SelectFormat className="SelectFormat" setSelectedFormat={setFilterFormat}/>
         </div>
         
+      </div>
+      <div className="reset">
+        <div className="maltobtn">
+            <button className="malto" onClick={() => {handlePriceFilter()}}>Reset</button>
+        </div>
       </div>
 
 

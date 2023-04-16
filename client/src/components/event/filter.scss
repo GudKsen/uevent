@@ -18,7 +18,7 @@
     
 
     display: grid;
-    grid-template-rows: 20% 40% 40%;
+    grid-template-rows: 25% 30% 25% 20%;
 
     .SelectTheme{
         height: 100px;
@@ -37,7 +37,25 @@
         
     }
 
-    .price, .theme, .format{
+    .format{
+        .ogolfor{
+            margin-top: 6%;
+        }
+    }
+
+    .reset{
+        .maltobtn{
+            margin-top: 7%;
+        }
+    }
+
+    .price, .theme, .format, .reset{
+
+        .free{
+            margin-bottom: 1%;
+            margin-top: -3%;
+            margin-left: 5%;
+        }
         
         border-width: 0 0 2px 0;
         border-style: solid;
@@ -55,7 +73,7 @@
         }
 
         display: grid;
-        grid-template-rows: 20% 50% 30%;
+        grid-template-rows: 20% 40% 40%;
 
         .ogoloshen{
             border-width: 0 0 2px 0;

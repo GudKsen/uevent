@@ -34,6 +34,7 @@
 .list-events {
   display: grid;
   grid-template-rows: 80px auto;
+  overflow-x: hidden;
 }
 
 .list-events-container {
