@@ -350,7 +350,7 @@ function EventPage() {
 
                     </div>
                     <div className="input-box-a mavka">
-                      <input onChange={(e) => setContent(e.target.value)} type="text" placeholder="Enter comment"></input>
+                      <input value="" onChange={(e) => setContent(e.target.value)} type="text" placeholder="Enter comment"></input>
                     </div>
                     <button className="crater" onClick={createComment}>Create</button>
                   </div>
