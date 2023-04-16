@@ -347,12 +347,20 @@ function EventPage() {
               <div className={`author `} onClick={() => { navigate(`/company/${company.Company_ID}`) }}>
                 {
                   company ?
-                  <div>
-                    <div>
-                      
+                  <div className="place-all">
+                    <div className="place-image">
+                      {
+                        company.image ?
+                        <img className="avatarProfilePictur" src={`http://localhost:8000/company/${company.image}`} alt="Avatar" />
+                        :
+                        <img className="avatarProfilePictur" src={`http://localhost:8000/images/no_photo.jpg`} alt="Avatar" />
+                      }
                     </div>
-                    <p>{company.name}</p>
-                    <p>{company.description}</p>
+                    <div className="place-info">
+                      <p className="namecomp">{company.name}</p>
+                      <p  className="infocomp">{company.description}</p>
+                    </div>
+                    
                   </div>
                   :
                   null

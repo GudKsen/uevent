@@ -1,6 +1,6 @@
 
 .event-create {
-    margin-top:3%;
+    margin-top:1%;
     margin-left: 11%;
     // width: 106%;
     // margin-left:-6%;
@@ -199,14 +199,14 @@
 
 .author{
     padding-bottom: 20px;
-    margin-top: 15px;
-    margin-left: 7%;
-    max-width: 80%;
-    max-height: 100px;
+    margin-top: 5px;
+    margin-left: 27%;
+    max-width: 40%;
+    max-height: 130px;
     min-height: 100px;
     padding-top: 1%;
     top: 7%;
-    padding-left: 10%;
+    padding-left: 20px;
     border-radius: 30px;
     background-color: #edf4f9;
 }
@@ -261,5 +261,40 @@ button{
     margin-right: 3%;
     // white-space: pre;
     word-break:break-all;
+}
+
+.place-all{
+    display: grid;
+    grid-template-columns: 20% 80%;
+
+    .place-info{
+        margin-left: 20px;
+
+        .namecomp{
+            font-size: large;
+            border-width: 0 0 2px 0;
+            border-style: solid;
+            border-color: #70707000 #70707000 #c5c5c5 #70707000;
+        }
+
+        .infocomp{
+            margin-top: 5px;
+            word-break:break-all;
+            height: 60px;
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+    }
+}
+
+.place-image{
+    // margin-right: 10%;
+    img {
+        
+        border-radius: 50%;
+        margin: 0 auto;
+        width: 110px;
+        height: 110px;
+      }
 }
 

@@ -147,19 +147,6 @@ export function OrganizationPage() {
 
       
 
-    //   useEffect(() => {
-    //     console.log(organization?.Company_ID);
-    //     console.log(organization?.Company_ID);
-    
-    //     // axios.get(`http://localhost:8000/api/events/${organization?.Company_ID}`
-    //     // ).then((res) => {
-    //     //   setEventsData(res.data);
-    //     //   console.log(res.data);
-    
-    //     // });
-    //   }, []);
-    
-    
 
 
     return (
