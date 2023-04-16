@@ -46,7 +46,7 @@ function SelectTheme({setSelectedThemes}: any) {
                 isMulti
                 options={options}
                 onChange={handleChange}
-                // defaultInputValue={selectedThemesTmp}
+                // defaultInputValue={reset}
                 required
             />
         </div>

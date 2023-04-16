@@ -34,6 +34,8 @@ function Event() {
   const [filterPriceEnd, setFilterPriceEnd] = useState<number>();
   const [filterTheme, setFilterTheme] = useState<{ value: string, label: string }[]>([]);
   const [filterFormat, setFilterFormat] = useState<{ value: string, label: string }>();
+  const [reset, setReset] = useState(false);
+  const [free, setFree] = useState(false);
 
   const { t, i18n } = useTranslation();
 
@@ -107,31 +109,32 @@ function Event() {
   //   })
   // } 
 
-  if (filterPriceStart !== undefined && filterPriceEnd !== undefined) {
+  function FilterPrice()
+  {
     eventsData = eventsData.filter((event) => {
       if (filterPriceStart === 0 && event.Price_ID === null) {
         return event;
       }
       else if (event.Price_ID !== null) {
-        if (event.price[0].price_value >= filterPriceStart && event.price[0].price_value <= filterPriceEnd) {
+        if (event.price[0].price_value >= filterPriceStart! && event.price[0].price_value <= filterPriceEnd!) {
           return event;
         }
       }
     })
   }
 
-
-  if (filterFormat) {
+  function FilterFormat()
+  {
     eventsData = eventsData.filter((event) => {
       for (let i = 0; i < event.format.length; i++) {
-        if (event.format[i].title === filterFormat.label) {
+        if (event.format[i].title === filterFormat!.label) {
           return event;
         }
-      
     }})
   }
 
-  if (filterTheme.length > 0) {
+  function FilterTheme()
+  {
     eventsData = eventsData.filter((event) => {
       for (let i = 0; i < event.themes.length; i++) {
         if (event.themes[i].title === filterTheme[0].label) {
@@ -139,6 +142,28 @@ function Event() {
         }
       }
     })
+  }
+
+  if (filterPriceStart !== undefined && filterPriceEnd !== undefined) {
+    FilterPrice();
+  }
+
+  if (free)
+  {
+    eventsData = eventsData.filter(event => {
+      if (!event.price)
+      {
+        return event;
+      }
+    })
+  }
+
+  if (filterFormat) {
+    FilterFormat();
+  }
+
+  if (filterTheme.length > 0) {
+    FilterTheme();
   }
 
   function ChangeData(e: any) {
@@ -292,6 +317,9 @@ function Event() {
             setFilterPriceEnd={setFilterPriceEnd}
             setFilterTheme={setFilterTheme}
             setFilterFormat={setFilterFormat}
+            setFree={setFree}
+            setReset={setReset}
+            free={free}
           />
           </div>
 

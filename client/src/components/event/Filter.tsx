@@ -11,7 +11,7 @@ import SelectFormat from "./CreateEvent/SelectFormat";
 import SelectTheme from "./CreateEvent/SelectTheme";
 
 
-function Filter({setFilterPriceStart, setFilterPriceEnd, setFilterTheme, setFilterFormat}:any) {
+function Filter({setFilterPriceStart, setFilterPriceEnd, setFilterTheme, setFilterFormat, setFree, setReset, free}:any) {
 
     const [selectFree, setSelectFree] = useState(Boolean);
 
@@ -28,6 +28,15 @@ function Filter({setFilterPriceStart, setFilterPriceEnd, setFilterTheme, setFilt
     {
         setFilterPriceStart(from);
         setFilterPriceEnd(to);
+    }
+
+    function handleReset()
+    {
+        setFilterTheme([]);
+        setFilterFormat();
+        setFilterPriceEnd();
+        setFilterPriceStart();
+        //setReset(true);
     }
 
 //   const navigate = useNavigate();
@@ -57,7 +66,7 @@ function Filter({setFilterPriceStart, setFilterPriceEnd, setFilterTheme, setFilt
             
             <div >
                 <div className="free">
-                    <input type="checkbox"/>Free
+                    <input type="checkbox" onChange={() => setFree(!free)}/>Free
                 </div>
                 <div className="maltobtn">
                     <button className=" malto" onClick={() => {handlePriceFilter()}}>Submit</button>            
@@ -71,7 +80,7 @@ function Filter({setFilterPriceStart, setFilterPriceEnd, setFilterTheme, setFilt
       <div className="theme">
         <div className="ogoloshen"><br/><p>Theme</p></div>
         <div  className="thefo">
-            <SelectTheme className="SelectTheme" setSelectedThemes={setFilterTheme}/>
+            <SelectTheme className="SelectTheme" setSelectedThemes={setFilterTheme} />
         </div>
 
       </div>
@@ -84,7 +93,7 @@ function Filter({setFilterPriceStart, setFilterPriceEnd, setFilterTheme, setFilt
       </div>
       <div className="reset">
         <div className="maltobtn">
-            <button className="malto" onClick={() => {handlePriceFilter()}}>Reset</button>
+            <button className="malto" onClick={() => {handleReset()}}>Reset</button>
         </div>
       </div>
 
