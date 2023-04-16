@@ -87,7 +87,8 @@ export class DatabaseGet {
   }
 
   async get_comments_by_event_id(event_id) {
-    let command = `select * from Comment where Event_ID = ${event_id}`;
+    let current_date = new Date().toISOString().slice(0, 19).replace("T", " ");
+    let command = `select * from Comment where Event_ID = ${event_id} `;
 
     let data = await pool.promise().query(command);
     if (data[0].length) {
@@ -188,21 +189,9 @@ export class DatabaseGet {
 
   async get_events_by_company(id)
   {
-    // console.log(id);
-    // let command = `select * from Event where Company_ID = ${id}`;
-    // // console.log(command);
-    // let data = await pool.promise().query(command);
-    // console.log(data[0]);
-    // if (data[0].length) {
-    //   return data[0];
-    // }
-    // else {
-    //   return null;
-    // }
-
 
     let current_date = new Date().toISOString().slice(0, 19).replace("T", " ");
-    let get_events_command = `select * from Event where Company_ID = ${id}`;
+    let get_events_command = `select * from Event where Company_ID = ${id} and Event.publishDate <= '${current_date}'`;
 
     const events = await pool.promise().query(get_events_command);
     if (events[0].length) {
@@ -265,7 +254,64 @@ export class DatabaseGet {
       return null;
     }
   }
-}
+
 
 //const events = await pool.query("SELECT * FROM events WHERE theme_id IS NOT NULL");
 //return events.rows;
+
+async get_news_by_company(id)
+  {
+
+    let current_date = new Date().toISOString().slice(0, 19).replace("T", " ");
+    let get_events_command = `select * from Event where Company_ID = ${id} and Event.publishDate > '${current_date}'`;
+
+    const events = await pool.promise().query(get_events_command);
+    if (events[0].length) {
+      for (let event of events[0]) {
+        let event_id = event.Event_ID;
+        let user_id = event.Company_ID;
+        console.log(event);
+
+        let command_get_themes_event = `select Theme.* from Event_Theme
+                inner join Theme on Event_Theme.Theme_ID = Theme.Theme_ID
+                where Event_Theme.Event_ID = ${event_id}`;
+
+        let command_get_format = `select * from Format where Format_ID = ${event.Format_ID}`;
+
+        let command_get_author = `select * from Company where Company_ID = ${user_id}`;
+
+        let command_get_price = `select * from Price where Price_ID = ${event.Price_ID}`;
+
+        let author = await pool.promise().query(command_get_author);
+        // console.log(author[0]);
+        if (author.length) {
+          event.author = author[0][0].name;
+          // console.log(author[0][0].full_name);
+        }
+
+        let themes = await pool.promise().query(command_get_themes_event);
+        let formats = await pool.promise().query(command_get_format);
+        let price = await pool.promise().query(command_get_price);
+        let command_get_location = `select * from Location where Location_ID = ${event.Location_ID}`
+        let location = await pool.promise().query(command_get_location);
+        if (themes.length) {
+          event.themes = themes[0];
+        }
+        event.format = formats[0];
+        if (price[0].length) {
+          event.price = price[0];
+        }
+        if (location.length) {
+          event.location = location[0];
+        }
+      }
+      
+
+      return events[0];
+    } else {
+      return null;
+    }
+    
+  }
+
+}

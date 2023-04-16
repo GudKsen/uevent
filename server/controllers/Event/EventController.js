@@ -213,13 +213,25 @@ export const GetCommentsEvent = async (req, res) => {
 
 export const GetEventsByCompanyId = async (req, res) =>
 {
-  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
   console.log(req.params.id);
   let id = parseInt(req.params.id);
   // console.log(id);
   let db = new DatabaseGet();
   let events = await db.get_events_by_company(id);
   console.log(events);
+  res.json(events);
+}
+
+export const GetNewsByCompanyId = async (req, res) =>
+{
+  console.log(req.params.id);
+  let id = parseInt(req.params.id);
+  // console.log(id);
+  let db = new DatabaseGet();
+  let events = await db.get_news_by_company(id);
+  console.log("-----------------------------------------------------------")
+  console.log(events);
+  console.log("---------------------------------------------------------------")
   res.json(events);
 }
 
