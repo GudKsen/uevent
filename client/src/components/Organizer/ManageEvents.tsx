@@ -1,13 +1,14 @@
 import Sidebar2 from "../sidebar/sidebar2"
 import Header from "../sidebar/Header"
-import AllEvents from "../Admin/Events/AllEvents"
+// import AllEvents from "../Admin/Events/AllEvents"
+import AllEvents from "./AllEvents";
 import "../Admin/styles/styleAdminPanelMain.scss";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import "./style.scss";
 
 export function ManageEvents() {
-
+    
     return (
         <div className="admin-panel">
             <Sidebar2 />
@@ -24,6 +25,7 @@ export function ManageEvents() {
                             </TabList>
 
                             <TabPanel className="panel">
+                                {/* <AllEvents  /> */}
                                 <AllEvents />
                             </TabPanel>
 

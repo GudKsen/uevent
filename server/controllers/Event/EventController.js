@@ -213,7 +213,8 @@ export const GetCommentsEvent = async (req, res) => {
 
 export const GetEventsByCompanyId = async (req, res) =>
 {
-  // console.log(req.params.id);
+  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+  console.log(req.params.id);
   let id = parseInt(req.params.id);
   // console.log(id);
   let db = new DatabaseGet();

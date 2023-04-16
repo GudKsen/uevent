@@ -32,7 +32,7 @@ router.get("/api/event/:id([0-9]+)",    GetEvent);
 
 router.get("/api/events", GetEventsByCountry);
 
-router.get("/api/events/:id", GetEventsByCompanyId);
+router.get("/api/events/:id([0-9]+)", GetEventsByCompanyId);
 
 router.get("/api/events/all", GetEvents);
 

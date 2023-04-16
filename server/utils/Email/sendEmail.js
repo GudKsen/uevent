@@ -56,13 +56,14 @@ export function send(email, text, link) {
 }
 
 export async function sendTicket(email, text, data) {
+  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
   var transport = nodemailer.createTransport({
     host: "smtp.mailtrap.io",
     port: 2525,
     auth: {
       //------KSENIIA SETTINGS-------------------------
       user: "4c475d92282587",
-      pass: "821b514591f9f1",
+      pass: "821b514591f9f1"
       //-----------------------------------------------
       //------STANISLAVA SETTINGS----------------------
       // user: "d13f138085da46",
@@ -76,14 +77,14 @@ export async function sendTicket(email, text, data) {
     to: email,
     subject: "New password",
     html: `
-    <div>Hello</div>
+    
     `,
-    attachments: [
-      {
-        filename: "ticket.pdf",
-        path: text
-      }
-    ]
+    // attachments: [
+    //   {
+    //     filename: "ticket.pdf",
+    //     path: text
+    //   }
+    // ]
   };
 
   transport.sendMail(mailOptions, (error, info) => {

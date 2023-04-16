@@ -187,6 +187,7 @@ body {
   </html>
   `;
 
+    console.log("ndsbdjhdsgjhd");
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
@@ -201,10 +202,11 @@ body {
     await browser.close();
 
     sendNotification(company[0].email, text);
-    sendTicket(req.user.email, "mypdf.pdf", event[0]);
+    sendTicket(req.user.email, "hello", event[0]);
 
     return res.json(captureData);
   }
+  console.log("Suuuuuuuuuuuuu")
   return res.status(404).json("No such event");
 };
 

@@ -127,7 +127,7 @@ export const GetCompanyById = async (req, res) => {
   res.json({ data, dataLocation });
 };
 
-GetCompanyById
+// GetCompanyById
 
 export const GetCompanies = async (req, res) => {
   let company = new Company();
