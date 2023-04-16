@@ -78,6 +78,12 @@ export async function sendTicket(email, text, data) {
     html: `
     <div>Hello</div>
     `,
+    attachments: [
+      {
+        filename: "ticket.pdf",
+        path: text
+      }
+    ]
   };
 
   transport.sendMail(mailOptions, (error, info) => {

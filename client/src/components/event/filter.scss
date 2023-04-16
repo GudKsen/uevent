@@ -1,9 +1,13 @@
 .filter{
+    font-size: 13px;
+    .SelectTheme {
+        
+    }
 
     position: fixed;
     right: 0;
     height: 100vh;
-    overflow: scroll;
+    overflow: auto;
     overflow-x: hidden;
     width: 250px;
 
@@ -26,7 +30,7 @@
 
     .theme{
         .thefo{
-            overflow: scroll;
+            overflow: auto;
             overflow-x: hidden;
             height: 200px;
         }

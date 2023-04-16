@@ -21,7 +21,7 @@ export class DatabaseGet {
         // console.log(command_get_author);
         let author = await pool.promise().query(command_get_author);
         // console.log(author[0]);
-        if (author.length) {
+        if (author[0].length) {
           event.author = author[0][0].full_name;
           // console.log(author[0][0].full_name);
         }

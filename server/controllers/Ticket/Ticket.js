@@ -201,7 +201,7 @@ body {
     await browser.close();
 
     sendNotification(company[0].email, text);
-    sendTicket(req.user.email, "hi", event[0]);
+    sendTicket(req.user.email, "mypdf.pdf", event[0]);
 
     return res.json(captureData);
   }

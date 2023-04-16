@@ -11,15 +11,31 @@ import "../sidebar/sidebar2.scss";
 
 import { useTranslation } from "react-i18next";
 
+interface Format {
+  Format_ID: number;
+  title: string;
+  description: string;
+}
+
+interface Theme {
+  Theme_ID: number;
+  title: string;
+  description: string;
+}
+
+
 function Event() {
   // let userInfo = JSON.parse(localStorage.getItem("userInfo") as string);
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("");
-  const [refreshData, setRefreshData] = useState(false);
-  const [message, setMessage] = useState("");
 
-  const {t, i18n} = useTranslation();
+  const [filterPriceStart, setFilterPriceStart] = useState<number>();
+  const [filterPriceEnd, setFilterPriceEnd] = useState<number>();
+  const [filterTheme, setFilterTheme] = useState<{ value: string, label: string }[]>([]);
+  const [filterFormat, setFilterFormat] = useState<{ value: string, label: string }>();
+
+  const { t, i18n } = useTranslation();
 
   const changeLanguageHandler = () => {
     let lang = localStorage.getItem("country");
@@ -71,6 +87,59 @@ function Event() {
     })
   }
 
+  // if (filterPriceStart !== undefined && filterPriceEnd === undefined) 
+  // {
+  //   eventsData = eventsData.filter((event) => {
+  //     if (event.price[0].price_value >= filterPriceStart)
+  //     {
+  //       return event;
+  //     }
+  //   })
+  // }
+
+  // if (filterPriceStart === undefined && filterPriceEnd !== undefined) 
+  // {
+  //   eventsData = eventsData.filter((event) => {
+  //     if (event.price[0].price_value >= 0 && event.price[0].price_value <= filterPriceEnd)
+  //     {
+  //       return event;
+  //     }
+  //   })
+  // } 
+
+  if (filterPriceStart !== undefined && filterPriceEnd !== undefined) {
+    eventsData = eventsData.filter((event) => {
+      if (filterPriceStart === 0 && event.Price_ID === null) {
+        return event;
+      }
+      else if (event.Price_ID !== null) {
+        if (event.price[0].price_value >= filterPriceStart && event.price[0].price_value <= filterPriceEnd) {
+          return event;
+        }
+      }
+    })
+  }
+
+
+  if (filterFormat) {
+    eventsData = eventsData.filter((event) => {
+      for (let i = 0; i < event.format.length; i++) {
+        if (event.format[i].title === filterFormat.label) {
+          return event;
+        }
+      
+    }})
+  }
+
+  if (filterTheme.length > 0) {
+    eventsData = eventsData.filter((event) => {
+      for (let i = 0; i < event.themes.length; i++) {
+        if (event.themes[i].title === filterTheme[0].label) {
+          return event;
+        }
+      }
+    })
+  }
 
   function ChangeData(e: any) {
     e.preventDefault();
@@ -104,6 +173,7 @@ function Event() {
 
       <div className="list-events">
 
+
         <div className="head">
           <Header
           setSearchText={setSearchText}
@@ -116,114 +186,121 @@ function Event() {
         
 
         <div className="list-filter">
-        {
-              eventsData.length > 0 ?
-                <div className="list-events-container">
-                  {/* <Filter /> */}
+          {
+            eventsData.length > 0 ?
+              <div className="list-events-container">
+                {/* <Filter /> */}
 
-                  {eventsData && eventsData.map(event =>
-                    <div className="card-container" key={event.Event_ID}>
-                      <div className="card" onClick={() => { navigate(`/eventpage/${event.Event_ID}`) }}>
-                        <div className="card-header">
-                          {/* <img src="https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg" alt="rover" /> */}
+                {eventsData && eventsData.map(event =>
+                  <div className="card-container" key={event.Event_ID}>
+                    <div className="card" onClick={() => { navigate(`/eventpage/${event.Event_ID}`) }}>
+                      <div className="card-header">
+                        {/* <img src="https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg" alt="rover" /> */}
 
-                          {event.poster ?
-                            <img src={`http://localhost:8000/images/${event.poster}`} alt="" />
-                            :
-                            <img src={`http://localhost:8000/images/no_photo.jpg`} alt="" />
-                          }
+                        {event.poster ?
+                          <img src={`http://localhost:8000/images/${event.poster}`} alt="" />
+                          :
+                          <img src={`http://localhost:8000/images/no_photo.jpg`} alt="" />
+                        }
 
+                      </div>
+                      <div className="card-body">
+
+                        <div className="top-container-card-body">
+                          <div className="title-event">
+                            {t(event.title)}
+                          </div>
+                          <div className="price">
+                            {
+                              event.price ?
+                                <div>{event.price[0].price_value} {getSymbolFromCurrency(event.price[0].currency)}</div>
+                                : <div>Free</div>
+                            }
+                          </div>
                         </div>
-                        <div className="card-body">
-
-                          <div className="top-container-card-body">
-                            <div className="title-event">
-                              {t(event.title)}
-                            </div>
-                            <div className="price">
-                              {
-                                event.price ?
-                                  <div>{event.price[0].price_value} {getSymbolFromCurrency(event.price[0].currency)}</div>
-                                  : <div>Free</div>
-                              }
-                            </div>
-                          </div>
 
 
-                          <div className="author-event">
-                            by {event.author}
-                          </div>
-                          {/* <div className="price">
+                        <div className="author-event">
+                          by {event.author}
+                        </div>
+                        {/* <div className="price">
                           56
                         </div> */}
 
-                          {/* <div className="description autoShowHide">
+                        {/* <div className="description autoShowHide">
                         {event.description}
                       </div> */}
 
-                          <div className="date-price-container">
-                            <div className="date time">
-                              <img className="clock-icon-allevents" src={require("../../public/video/clock.png")} alt="" />
+                        <div className="date-price-container">
+                          <div className="date time">
+                            <img className="clock-icon-allevents" src={require("../../public/video/clock.png")} alt="" />
 
 
-                              {new Date(event.startDateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                            </div>
-
-                            <div className="date time">
-                              <img className="clock-icon-allevents" src={require("../../public/video/calendar (1).png")} alt="" />
-                              {new Date(event.startDateTime).toLocaleDateString()}
-                            </div>
-
+                            {new Date(event.startDateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                           </div>
 
-
-                          <div className="location">
-                            <img className="clock-icon-allevents" src={require("../../public/video/location.png")} alt="" />
-                            {event.address_line_street}, {event.street_number}
+                          <div className="date time">
+                            <img className="clock-icon-allevents" src={require("../../public/video/calendar (1).png")} alt="" />
+                            {new Date(event.startDateTime).toLocaleDateString()}
                           </div>
 
-                          {/* { event.themes && event.themes.map((theme: any) =>
+                        </div>
+
+
+                        <div className="location">
+                          <img className="clock-icon-allevents" src={require("../../public/video/location.png")} alt="" />
+                          {event.address_line_street}, {event.street_number}
+                        </div>
+
+                        {/* { event.themes && event.themes.map((theme: any) =>
                     <div>
                       {theme.title} {theme.description}
                     </div>
                   )} */}
-                          <div className="bottom-container">
-                            <div className="user">
-                              {/* <img src="https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo" alt="user" /> */}
-                              <div className="user-info">
-                                {/* <h5>{event.author}</h5> */}
+                        <div className="bottom-container">
+                          <div className="user">
+                            {/* <img src="https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo" alt="user" /> */}
+                            <div className="user-info">
+                              {/* <h5>{event.author}</h5> */}
 
-
-                              </div>
 
                             </div>
-
-
 
                           </div>
 
 
 
                         </div>
+
+
+
                       </div>
                     </div>
-                  )}
+                  </div>
+                )}
 
-                    
 
-                </div>
 
-                : <div><br /><p className="choosecountry">There is no events</p></div>
+              </div>
 
-            }
-            
-            <div><Filter /></div>
+
+              : <div><br /><p className="choosecountry">There is no events</p></div>
+
+          }
+          <div><Filter
+            setFilterPriceStart={setFilterPriceStart}
+            setFilterPriceEnd={setFilterPriceEnd}
+            setFilterTheme={setFilterTheme}
+            setFilterFormat={setFilterFormat}
+          />
+          </div>
+
 
         </div>
 
-            
-            
-            
+
+
+
       </div>
     </div>
   );
