@@ -11,7 +11,7 @@ import SelectFormat from "./CreateEvent/SelectFormat";
 import SelectTheme from "./CreateEvent/SelectTheme";
 
 
-function Filter() {
+function Filter({setFilterPriceStart, setFilterPriceEnd, setFilterTheme, setFilterFormat}:any) {
 
     const [selectedThemes, setSelectedThemes] = useState<any[]>([]);
     const [selectedFormat, setSelectedFormat] = useState<{
@@ -22,8 +22,14 @@ function Filter() {
     const [from, setFrom] = useState("");
     const [to, setTo] = useState("");
 
-  const navigate = useNavigate();
-  let userInfo = JSON.parse(localStorage.getItem("userInfo") as string);
+    function handlePriceFilter()
+    {
+        setFilterPriceStart(from);
+        setFilterPriceEnd(to);
+    }
+
+//   const navigate = useNavigate();
+//   let userInfo = JSON.parse(localStorage.getItem("userInfo") as string);
 
   return (
     <div className="filter">
@@ -32,22 +38,22 @@ function Filter() {
             <div className="from-to">
                 <div className="from">
                     <div>
-                        <label className="fff">from</label>
+                        <label className="fff">From</label>
                     </div>
                     <div className="input-box-a"><input onChange={(e) => setFrom(e.target.value)} type="number"/></div>
                 </div>
                 <div >
-                    <div className="aaa">-</div>
-                    <div className="between">-</div>
+                    <div className="aaa"></div>
+                    <div className="between"></div>
                 </div>
                 <div className="to">
-                    <div className="ttt">to</div>
+                    <div className="ttt">To</div>
                     <div className="input-box-a"><input onChange={(e) => setTo(e.target.value)} type="number"/></div>
                 </div>
             </div>
             
             <div className="maltobtn">
-                <button className=" malto">Submit</button>
+                <button className=" malto" onClick={() => {handlePriceFilter()}}>Submit</button>
             </div>
             
         </div>
@@ -55,14 +61,14 @@ function Filter() {
       <div className="theme">
         <div className="ogoloshen"><br/><p>Theme</p></div>
         <div  className="thefo">
-            <SelectTheme className="SelectTheme" setSelectedThemes={setSelectedThemes}/>
+            <SelectTheme className="SelectTheme" setSelectedThemes={setFilterTheme}/>
         </div>
 
       </div>
       <div className="format">
         <div className="ogoloshen"><br/><p>Format</p></div>
         <div  className="thefo">
-            <SelectFormat className="SelectFormat" setSelectedFormat={setSelectedFormat}/>
+            <SelectFormat className="SelectFormat" setSelectedFormat={setFilterFormat}/>
         </div>
         
       </div>
