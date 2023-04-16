@@ -39,6 +39,8 @@ function EventPage() {
   const [company, setCompany] = useState<any>();
   const navigate = useNavigate();
 
+  const [range, setRange] = useState<any>();
+
 
   function GetComments(id: string | undefined) {
     console.log(id);
@@ -332,6 +334,21 @@ function EventPage() {
                       : <div><p>There are no comments</p></div>
                   }
                   <div className="create-comm">
+                    <div className="rage">
+                      <div className="num">
+                        <div>0</div>
+                        <div>1</div>
+                        <div>2</div>
+                        <div>3</div>
+                        <div>4</div>
+                        <div>5</div>
+                      </div>
+                      <div className="motuzok">
+                        <input className="range" type="range" id="volume" name="volume"
+                          min="0" max="5" onChange={(e) => setRange(e.target.value)}/>
+                      </div>
+
+                    </div>
                     <div className="input-box-a mavka">
                       <input onChange={(e) => setContent(e.target.value)} type="text" placeholder="Enter comment"></input>
                     </div>
