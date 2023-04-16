@@ -14,6 +14,7 @@ import {
   DeleteCompany,
   GetCompanyByUser,
   GetEventsByCompany,
+  GetCompanyById,
   UpdateAvatar,
 } from "../controllers/Company/CompanyController.js";
 
@@ -27,6 +28,7 @@ const upload = multer({
 router.post("/api/generate", auth, generateConfirmNumber);
 router.post("/api/company", auth, CreateCompany);
 router.get("/api/company/:id([0-9]+)", GetCompany);
+router.get("/api/companyId/:id([0-9]+)", GetCompanyById);
 router.get("/api/company/user", auth, GetCompanyByUser);
 router.get("/api/companies", auth, GetCompanies);
 router.patch("/api/company/:id", auth, upload.single("file"), UpdateCompany);

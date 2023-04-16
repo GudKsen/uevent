@@ -344,10 +344,13 @@ function EventPage() {
             </div>
 
             <div className={`author-info`}>
-              <div className={`author `}>
+              <div className={`author `} onClick={() => { navigate(`/company/${company.Company_ID}`) }}>
                 {
                   company ?
                   <div>
+                    <div>
+                      
+                    </div>
                     <p>{company.name}</p>
                     <p>{company.description}</p>
                   </div>
@@ -363,33 +366,8 @@ function EventPage() {
 
 
       </div>
-      {/* <div className="event-info">
-          <div className="event">
-              <div className="event-photo">
-                <img src={'http://localhost:8000/images/no_photo.jpg'} alt="" />
-              </div>
-              <div className="event-text">
-                 
-                    <div className="event-header">
-                      <div className="event-title">{event.title}</div> */}
-      {/* <Rating/> */}
-      {/* <p>{event.description}</p> */}
-      {/* </div>
-                    <div className="description">
-                      {event.description}
-                    </div>
-                    <div className="date">
-
-                    </div>
-                    <div className="button-container">
-                      <button className={`button ${animate}`} onClick={handleClickButton}>Buy</button>
-                    </div>
-                    
-              </div>
-          </div>
-        </div> */}
+      
     </div>
-    // </div>
   );
 }
 

@@ -165,6 +165,17 @@ export class DatabaseGet {
     }
   }
 
+  async get_company_by_ID(id) {
+    let command = `select * from Company where Company_ID = ${id}`;
+    let data = await pool.promise().query(command);
+
+    if (data[0].length) {
+      return data[0];
+    } else {
+      return null;
+    }
+  }
+
   async GetByID(table, nameID, id) {
     let command = "select * from " + table + " where " + nameID + "_ID = " + id;
     let data = await pool.promise().query(command);
@@ -188,45 +199,7 @@ export class DatabaseGet {
     else {
       return null;
     }
-    // if (data[0].length) {
-    //   for (let datas of data[0]) {
-    //     let event_id = datas.Event_ID;
-    //     let user_id = datas.Company_ID;
-    //     console.log(datas);
-
-    //     let command_get_themes_event = `select Theme.* from Event_Theme
-    //             inner join Theme on Event_Theme.Theme_ID = Theme.Theme_ID
-    //             where Event_Theme.Event_ID = ${event_id}`;
-
-    //     let command_get_format = `select * from Format where Format_ID = ${datas.Format_ID}`;
-
-    //     let command_get_author = `select * from Company where Company_ID = ${user_id}`;
-
-    //     let command_get_price = `select * from Price where Price_ID = ${datas.Price_ID}`;
-
-    //     let author = await pool.promise().query(command_get_author);
-    //     // console.log(author[0]);
-    //     if (author.length) {
-    //       datas.author = author[0][0].name;
-    //       // console.log(author[0][0].full_name);
-    //     }
-
-    //     let themes = await pool.promise().query(command_get_themes_event);
-    //     let formats = await pool.promise().query(command_get_format);
-    //     let price = await pool.promise().query(command_get_price);
-    //     if (themes.length) {
-    //       datas.themes = themes[0];
-    //     }
-    //     datas.format = formats[0];
-    //     if (price[0].length) {
-    //       datas.price = price[0];
-    //     }
-    //   }
-
-    //   return data[0];
-    // } else {
-    //   return null;
-    // }
+    
   }
 
   async get_comments_by_user_id(user_id)

@@ -15,6 +15,7 @@ import CreateEvent from "./components/event/CreateEvent/CreateEvent";
 import AdminPanel from "./components/Admin/AdminPanel";
 import { CreateOrganization } from "./components/Organization/CreateOrganization";
 import { OrganizationPage } from "./components/Organization/OrganizationPage";
+import { CompanyPage } from "./components/Organization/CompanyPage";
 import DeleteProf from "./components/register/DeleteProf";
 import { PaymentPage } from "./components/Payment/PaymentPage";
 import { ManageEvents } from "./components/Organizer/ManageEvents";
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/setting",
     element: <Setting />,
+  },
+  {
+    path: "/company/:id",
+    element: <CompanyPage />,
   },
   {
     path: "api/auth/register",

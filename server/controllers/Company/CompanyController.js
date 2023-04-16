@@ -105,7 +105,29 @@ export const GetCompany = async (req, res) => {
   } catch (err) {
     res.send("Error");
   }
+  // let userID = req.user._id;
+  // let db = new DatabaseGet();
+  // let data = await db.get_company_by_userID(userID);
+  // let location = new Location();
+  // location.init(data[0].Location_ID);
+  // let dataLocation = await location.read();
+
+  // res.json({ data, dataLocation });
 };
+
+export const GetCompanyById = async (req, res) => {
+  let id = parseInt(req.params.id);
+ 
+  let db = new DatabaseGet();
+  let data = await db.get_company_by_ID(id);
+  let location = new Location();
+  location.init(data[0].Location_ID);
+  let dataLocation = await location.read();
+
+  res.json({ data, dataLocation });
+};
+
+GetCompanyById
 
 export const GetCompanies = async (req, res) => {
   let company = new Company();
