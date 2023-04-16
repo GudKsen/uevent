@@ -173,12 +173,17 @@ function Event() {
 
       <div className="list-events">
 
-        <Header
+
+        <div className="head">
+          <Header
           setSearchText={setSearchText}
           setSelectedCountry={setSelectedCountry}
           onChange={(e: any) => ChangeData(e)}
         //setRefreshData = {setRefreshData}
         />
+        </div>
+        
+        
 
         <div className="list-filter">
           {
@@ -278,6 +283,7 @@ function Event() {
 
               </div>
 
+
               : <div><br /><p className="choosecountry">There is no events</p></div>
 
           }
@@ -288,6 +294,7 @@ function Event() {
             setFilterFormat={setFilterFormat}
           />
           </div>
+
 
         </div>
 

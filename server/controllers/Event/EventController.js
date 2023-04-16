@@ -211,11 +211,14 @@ export const GetCommentsEvent = async (req, res) => {
   res.json(data);
 };
 
-export const GetEventsByCompanyId = (req, res) =>
+export const GetEventsByCompanyId = async (req, res) =>
 {
+  // console.log(req.params.id);
   let id = parseInt(req.params.id);
+  // console.log(id);
   let db = new DatabaseGet();
-  let events = db.get_events_by_company(id);
+  let events = await db.get_events_by_company(id);
+  console.log(events);
   res.json(events);
 }
 

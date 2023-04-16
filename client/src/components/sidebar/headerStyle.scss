@@ -1,13 +1,16 @@
 .header {
-    width: 106%;
+    width: 103%;
     margin-left:-6%;
+    position: fixed;
+
     // width: 100%;
     display: grid;
     grid-template-columns: 50% 50%;
     // background-color: #28bbcb;
     // background-color: #1f2945;
     background-color: rgb(10, 16, 24);
-    height: 100%;
+    height: 80px;
+    // height: 100%;
 }
 
 .two{

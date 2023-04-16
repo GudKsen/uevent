@@ -14,7 +14,7 @@
     background: rgb(216, 225, 247);
 }
 
-.create-event .header {
+.create-event  {
     height: 100%;
 }
 
@@ -194,6 +194,10 @@ input.promo-input.addPromo {
     cursor: pointer;
     height: 40px;
     // margin-top: 15px;
+}
+
+.head{
+    height: 80px;
 }
 
 .promoAdded {

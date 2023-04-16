@@ -13,6 +13,7 @@ import {
     DeleteEvent,
     GetCommentsEvent,
     GetEventsByCountry,
+    GetEventsByCompanyId,
     BuyTicket
 } from "../controllers/Event/EventController.js"
 
@@ -30,6 +31,8 @@ router.post("/api/event", auth, upload.single("file"), CreateEvent);
 router.get("/api/event/:id([0-9]+)",    GetEvent);
 
 router.get("/api/events", GetEventsByCountry);
+
+router.get("/api/events/:id", GetEventsByCompanyId);
 
 router.get("/api/events/all", GetEvents);
 

@@ -1,12 +1,30 @@
-.paypal-payment-page,
-.thankyou-page {
+.paypal-payment-page
+ {
     display: grid;
-    grid-template-rows: 70px auto;
+    grid-template-rows: auto auto;
+    background-color: aliceblue;
+    // height: 97vh;
+    // width: 90%;
+}
+.thankyou-page{
+    display: grid;
+    grid-template-columns: 5% auto;
+    background-color: #E4E9F7;
+    // height: 99vh;
+}
+
+.pageall{
+    display: grid;
+    grid-template-rows: auto auto;
 }
 
 .paypal-buttons-container {
     width: 50%;
     margin: 200px auto 0 auto;
+}
+
+.head{
+    width: 106%;
 }
 
 .paypal-buttons {
@@ -57,4 +75,5 @@
     background-image: url('../../public/video/arrow.gif');
     background-size: 70px 70px;
     transform: translateY(-7px);
+    background-color: white;
 }
