@@ -40,7 +40,7 @@ export function CitySelect(setSelectedCity: any) {
     //  }, [])
 
 
-    console.log("🚀 ~ file: CitySelect.tsx:13 ~ CitySelect ~ countryCode:", countryCode)
+    // console.log("🚀 ~ file: CitySelect.tsx:13 ~ CitySelect ~ countryCode:", countryCode)
     const [selectedCity, setCurrSelectedCity] = useState<ILocationOne | null>(null);
 
 
