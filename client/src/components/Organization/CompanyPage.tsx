@@ -62,19 +62,16 @@ export function CompanyPage() {
             token: localStorage.getItem("token"),
             companyId: id
         })
+        avail();
     }
 
     async function deleteSubscribe(){
         axios.post(`http://localhost:8000/api/sub-del`, {
             token: localStorage.getItem("token"),
             companyId: id
-        })
+        }) 
+        avail();
     }
-
-    
-
-
-
    
     const [organization, setOrganization] = useState<IOrganization>();
     const [location, setLocation] = useState<ILocation>();
