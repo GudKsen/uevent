@@ -13,6 +13,7 @@ export class Database
 
 
     save = async (table, set) => {
+        console.log("\n save \n")
         let command = `insert into ${table} set ? `;
         let data = await pool.promise().query(command, set).catch(err => {
             
@@ -22,8 +23,43 @@ export class Database
         return data[0].insertId;
     }
 
+    // saveSub = async (table, set) => {
+    //     let command = `insert into ${table} set ? `;
+    //     let data = await pool.promise().query(command, set).catch(err => {
+            
+    //         console.error(err.message);
+    //         return new Error(err.message);
+    //     });
+    //     return data[0].insertId;
+    // }
+
     read = async (table, id) => {
         let command = `select * from ${table} where ${table}_ID = "${id}"`;
+        let result = await pool.promise().query(command).catch(err => {
+            console.error(err.message);
+            return new Error(err.message);
+        });
+        return result[0];
+    }
+
+    availabeSub = async (table, one, id, two, andId) => {
+        console.log("\n available \n")
+        let command = `select * from ${table} where ${one}_ID = "${id}" and ${two}_ID = "${andId}"`;
+        let result = await pool.promise().query(command).catch(err => {
+            console.error(err.message);
+            return new Error(err.message);
+        });
+
+        console.log("\n result \n" + result[0])
+
+        if(!result[0]){
+            return "no";
+        }else return "yes";
+    }
+
+    readSub = async (table, one, id) => {
+        console.log("\n read \n")
+        let command = `select * from ${table} where ${one}_ID = "${id}"`;
         let result = await pool.promise().query(command).catch(err => {
             console.error(err.message);
             return new Error(err.message);
@@ -44,7 +80,22 @@ export class Database
     }
 
     delete = async (table, id) => {
+        console.log("\n delete \n")
         let command = `delete from ${table} where ${table}_ID = "${id}"`;
+        let result = await pool.promise().query(command).catch(err => {
+            console.error(err.message);
+            return err;
+        });
+        if (result[0] === undefined) {
+            return new Error("Can't delete");
+        }
+        else {
+            return result;
+        }
+    }
+
+    deleteSub = async (table, one, id, two, andId) => {
+        let command = `delete from ${table} where ${one}_ID = "${id}" and ${two}_ID = "${andId}"`;
         let result = await pool.promise().query(command).catch(err => {
             console.error(err.message);
             return err;

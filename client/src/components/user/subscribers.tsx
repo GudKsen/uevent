@@ -24,60 +24,9 @@ interface ILocation {
 }
 
 export function CompanyPage() {
+
     let { id } = useParams();
 
-    // const [sub, setSub] = useState<any[]>([])
-    const [haveSub, setHaveSub] = useState(false);
-
-    async function avail() {
-            axios.post(`http://localhost:8000/api/sub-yes`, {
-                token: localStorage.getItem("token"),
-                companyId: id
-            }).then((response) => {
-                console.log(response);
-                if(response.data == "yes"){
-                    setHaveSub(true)
-                } else{
-                    setHaveSub(false)
-                }
-            })
-    }
-
-    useEffect(() => {
-        axios.post(`http://localhost:8000/api/sub-yes`, {
-            token: localStorage.getItem("token"),
-            companyId: id
-        }).then((response) => {
-            console.log(response);
-            if(response.data == "yes"){
-                setHaveSub(true)
-            } else{
-                setHaveSub(false)
-            }
-        })
-    }, []);
-
-    async function setSubscribe(){
-        axios.post(`http://localhost:8000/api/sub`, {
-            token: localStorage.getItem("token"),
-            companyId: id
-        })
-        avail()
-    }
-
-    async function deleteSubscribe(){
-        axios.post(`http://localhost:8000/api/sub-del`, {
-            token: localStorage.getItem("token"),
-            companyId: id
-        })
-        avail()
-    }
-
-    
-
-
-
-   
     const [organization, setOrganization] = useState<IOrganization>();
     const [location, setLocation] = useState<ILocation>();
     const [file, setFile] = useState<File>();
@@ -186,15 +135,7 @@ export function CompanyPage() {
                                             </div>
                                             
                                         <div>
-                                            {
-                                                haveSub ? 
-                                                    <button onClick={() => deleteSubscribe()} className="unsub naaaaaaaaame button">Unsubscribe</button>
-                                                
-                                                : 
-                                                <button onClick={() => setSubscribe()} className=" naaaaaaaaame button">Subscribe</button>
-                                            }
-                                            
-                                            {/*  */}
+                                            <button className="button">subscribe</button>
                                             {/* <p className="naaaaaaaaame">{organization.name}</p> */}
                                         </div>
 

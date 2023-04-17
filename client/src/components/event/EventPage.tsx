@@ -461,7 +461,7 @@ async function createwithoutprom(){
                       : <div><p>There are no comments</p></div>
                   }
                   <div className="create-comm">
-                    <div className="rage">
+                    {/* <div className="rage">
                       <div className="num">
                         <div>0</div>
                         <div>1</div>
@@ -473,11 +473,11 @@ async function createwithoutprom(){
                       <div className="motuzok">
                         <input className="range" type="range" id="volume" name="volume"
                           min="0" max="5" onChange={(e) => setRange(e.target.value)}/>
-                      </div>
+                      </div> */}
 
-                    </div>
+                    {/* </div> */}
                     <div className="input-box-a mavka">
-                      <input onChange={(e) => setContent(e.target.value)} type="text" placeholder="Enter comment"></input>
+                      <textarea onChange={(e) => setContent(e.target.value)} placeholder="Enter comment"></textarea>
                     </div>
                     <button className="crater" onClick={createComment}>Create</button>
                   </div>
