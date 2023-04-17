@@ -267,9 +267,13 @@ function EventPage() {
                     {/* <div className="price"> */}
                     {/* <p>Price:   {event.price}</p> */}
 
-                    <p>Time:   {new Date(event.startDateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
-                    <p>Date:   {new Date(event.startDateTime).toLocaleDateString()}</p>
-                    {/* <p>Address:   {event.address_line_street}, {event.street_number}</p> */}
+                    <p>
+                    <img className="clock-icon-allevents" src={require("../../public/video/clock.png")} alt="" />
+                      {new Date(event.startDateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+                    <p>
+                    <img className="clock-icon-allevents" src={require("../../public/video/calendar (1).png")} alt="" />
+                      {new Date(event.startDateTime).toLocaleDateString()}</p>
+                    
 
                     <p>Format: {format?.title}</p>
                     <div className="description">
