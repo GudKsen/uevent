@@ -61,7 +61,7 @@ function SelectPromocode({setSelectedPromocode}: any) {
         <div>
             <Select
                 closeMenuOnSelect={true}
-                isMulti
+                // isMulti
                 options={options}
                 onChange={handleChange}
                 // defaultInputValue={reset}

@@ -51,10 +51,16 @@ function CreateEvent() {
     }>();
 
     let themes_ids: any[] = [];
+    let promos_ids: any[] = [];
 
     if (selectedThemes.length) {
         selectedThemes.forEach((theme) => {
             themes_ids.push(theme!.value);
+        });
+    }
+    if (SelectedPromocode.length) {
+        SelectedPromocode.forEach((promo) => {
+            promos_ids.push(promo!.value);
         });
     }
 
@@ -70,6 +76,7 @@ function CreateEvent() {
 
     function create() {
         let formField = new FormData();
+        // console.log(SelectedPromocode.Promocode_Id);
         formField.append('title', title);
         formField.append('description', description);
         formField.append('date', date);
