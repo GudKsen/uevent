@@ -80,7 +80,7 @@
 }
 
 .scroll-comment{
-    height: 280px;
+    height: 230px;
     max-height: 300px;
     overflow: scroll;
     overflow-x: hidden;
@@ -298,3 +298,12 @@ button{
       }
 }
 
+.num{
+    width: 117%;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+}
+
+.range{
+    width: 100%;
+}
