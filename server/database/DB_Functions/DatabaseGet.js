@@ -261,9 +261,9 @@ export class DatabaseGet {
     }
   }
 
-  async get_prom_by_user_id(id)
+  async get_prom_by_company_id(id)
   {
-    let get_events_command = `select * from Promocode where User_ID = ${id}`;
+    let get_events_command = `select * from Promocode where Company_ID = ${id}`;
     const events = await pool.promise().query(get_events_command);
     console.log(events[0]);
     if (events[0].length) {

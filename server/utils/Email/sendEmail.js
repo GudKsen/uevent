@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import fs from "fs";
 
 export function send(email, text, link) {
   var transport = nodemailer.createTransport({
