@@ -194,6 +194,7 @@ export class DatabaseGet {
     let get_events_command = `select * from Event where Company_ID = ${id} and Event.publishDate <= '${current_date}'`;
 
     const events = await pool.promise().query(get_events_command);
+    console.log("\naaaaaaaaaaaaa"+events[0]+"adsasdsfsdfds]n");
     if (events[0].length) {
       for (let event of events[0]) {
         let event_id = event.Event_ID;
@@ -254,6 +255,20 @@ export class DatabaseGet {
       return null;
     }
   }
+
+  async get_prom_by_user_id(id)
+  {
+    let get_events_command = `select * from Promocode where User_ID = ${id}`;
+    const events = await pool.promise().query(get_events_command);
+    console.log(events[0]);
+    if (events[0].length) {
+      return events[0];
+    } else {
+      return null;
+    }
+    
+  }
+
 
 
 //const events = await pool.query("SELECT * FROM events WHERE theme_id IS NOT NULL");

@@ -6,6 +6,7 @@ import event from "./routes/event.js";
 import user from "./routes/user.js";
 import auth from "./routes/auth.js";
 import theme from "./routes/theme.js";
+import promocode from "./routes/promocodes.js";
 import company from "./routes/company.js";
 import format from "./routes/format.js";
 import comment from "./routes/comment.js";
@@ -32,6 +33,7 @@ app.get("/", async (req, res) => {
 
 app.use(event);
 app.use(user);
+app.use(promocode);
 app.use(auth);
 app.use(theme);
 app.use(company);
