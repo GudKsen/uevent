@@ -99,6 +99,14 @@ function EventPage() {
     });
   }
 
+  function handleClickFreeButton(id: any) {
+    setAnimate("animate");
+    setTimeout(() => {
+      setAnimate("");
+    }, 8000);
+    
+  }
+
   async function deleteComment(idComment: any) {
     await axios.delete(`http://localhost:8000/api/comment/${idComment}`, {
       data: { token: localStorage.getItem("token") }
@@ -201,7 +209,7 @@ function EventPage() {
                     <p>Time:   {new Date(event.startDateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
                     <p>Date:   {new Date(event.startDateTime).toLocaleDateString()}</p>
                     {/* <p>Address:   {event.address_line_street}, {event.street_number}</p> */}
-                    
+
                     <p>Format: {format?.title}</p><br />
                     <div className="description">
                       <p>Theme:<label> </label>
@@ -213,21 +221,21 @@ function EventPage() {
                         }
                       </p>
                     </div>
-                    
-                    
 
-                    
-                    
+
+
+
+
                     <div>
                       {
-                        event.price ? 
-                        <div>
-                          Price: {event.price[0].price_value} {getSymbolFromCurrency(event.price[0].currency)}
-                        </div>
-                        :
-                        null
+                        event.price ?
+                          <div>
+                            Price: {event.price[0].price_value} {getSymbolFromCurrency(event.price[0].currency)}
+                          </div>
+                          :
+                          null
                       }
-                      </div>
+                    </div>
 
                     {/* <div className="date">
 
@@ -237,9 +245,16 @@ function EventPage() {
                 {
                   userInfo ?
                     <div className="button-container">
-                      <button className={`button ${animate}`} onClick={e => handleClickButton(event.Event_ID)}
-                      
-                      >Buy</button>
+                      {
+                        event.price ?
+                          <button className={`button ${animate}`} onClick={e => handleClickButton(event.Event_ID)}
+
+                          >Buy</button>
+                          :
+                          <button className={`button ${animate}`} onClick={e => handleClickFreeButton(event.Event_ID)}
+
+                          >Get ticket</button>
+                      }
                     </div>
                     :
                     <div className="button-container">
@@ -296,22 +311,22 @@ function EventPage() {
                                       :
                                       (
                                         <div >
-                                          
+
                                           {comment.content}
-                                          
+
                                         </div>
                                         // inEditMode.status.toString()
-                                        
-                                        
+
+
                                       )
-                                      
+
                                   }
 
 
                                 </div>
                                 {
                                   (userInfo && comment.UserInfo.full_name === userInfo.full_name) ?
-                                  
+
                                     <div className="del-up">
                                       <div className="del" onClick={() => { deleteComment(comment.Comment_ID) }}>
                                       </div>
@@ -364,23 +379,23 @@ function EventPage() {
               <div className={`author `} onClick={() => { navigate(`/company/${company.Company_ID}`) }}>
                 {
                   company ?
-                  <div className="place-all">
-                    <div className="place-image">
-                      {
-                        company.image ?
-                        <img className="avatarProfilePictur" src={`http://localhost:8000/company/${company.image}`} alt="Avatar" />
-                        :
-                        <img className="avatarProfilePictur" src={`http://localhost:8000/images/no_photo.jpg`} alt="Avatar" />
-                      }
+                    <div className="place-all">
+                      <div className="place-image">
+                        {
+                          company.image ?
+                            <img className="avatarProfilePictur" src={`http://localhost:8000/company/${company.image}`} alt="Avatar" />
+                            :
+                            <img className="avatarProfilePictur" src={`http://localhost:8000/images/no_photo.jpg`} alt="Avatar" />
+                        }
+                      </div>
+                      <div className="place-info">
+                        <p className="namecomp">{company.name}</p>
+                        <p className="infocomp">{company.description}</p>
+                      </div>
+
                     </div>
-                    <div className="place-info">
-                      <p className="namecomp">{company.name}</p>
-                      <p  className="infocomp">{company.description}</p>
-                    </div>
-                    
-                  </div>
-                  :
-                  null
+                    :
+                    null
                 }
                 {/* {company.name} */}
                 {/* {company.description} */}
@@ -391,7 +406,7 @@ function EventPage() {
 
 
       </div>
-      
+
     </div>
   );
 }
