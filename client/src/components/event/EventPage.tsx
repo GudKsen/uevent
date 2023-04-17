@@ -4,6 +4,8 @@ import { useNavigate, useNavigation, useParams } from "react-router-dom";
 import getSymbolFromCurrency from 'currency-symbol-map'
 import "./createpromocodestyle.scss"
 
+import {EnterPromocode} from "./enterPromocod"
+
 import Popup from 'reactjs-popup'
 
 import Header from "../sidebar/Header";
@@ -123,11 +125,11 @@ function EventPage() {
     localStorage.setItem("promocode", JSON.stringify({ nill }));
     handleClickButton(event.Event_ID);
 
-    // axios.post("http://localhost:8000/api/available/promocode",{
-
-    // });
-    // navigate("/events-manage");
-  }
+  // axios.post("http://localhost:8000/api/available/promocode",{
+      
+  // });
+  //navigate("/events-manage");
+}
 
 
 
@@ -265,19 +267,11 @@ function EventPage() {
                     {/* <div className="price"> */}
                     {/* <p>Price:   {event.price}</p> */}
 
-                    <div className="datetime-eventpage">
-                      <p>
-                        <img className="clock-icon-allevents" src={require("../../public/video/clock.png")} alt="" />
-                        {new Date(event.startDateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
-                      <p>
-                        <img className="clock-icon-allevents" src={require("../../public/video/calendar (1).png")} alt="" />
-                        {new Date(event.startDateTime).toLocaleDateString()}</p>
-                    </div>
+                    <p>Time:   {new Date(event.startDateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+                    <p>Date:   {new Date(event.startDateTime).toLocaleDateString()}</p>
+                    {/* <p>Address:   {event.address_line_street}, {event.street_number}</p> */}
 
-
-
-
-                    <p>Format: {format?.title}</p><br />
+                    <p>Format: {format?.title}</p>
                     <div className="description">
                       <p>Theme:<label> </label>
                         {
@@ -292,17 +286,7 @@ function EventPage() {
 
 
 
-
-                    <div>
-                      {
-                        event.price ?
-                          <div>
-                            Price: {event.price[0].price_value} {getSymbolFromCurrency(event.price[0].currency)}
-                          </div>
-                          :
-                          null
-                      }
-                    </div>
+                    
 
                     {/* <div className="date">
 
@@ -325,19 +309,19 @@ function EventPage() {
                             // onClick={e => handleClickButton(event.Event_ID)}
 
                             >Buy</button>}
-                          >
-                            <div className="prom-panel">
-                              <div className="admin-page-prom">
-                                <div className="pro-content">
-                                  <div><h1>Enter promo code</h1></div>
-                                  <div className="proms-contaner">
-                                    <div className="title-create-event-form input-box-a field">
-                                      <div>
-                                        <br /><input type="text" className="tit"
-                                          onChange={(e) => { setProm(e.target.value) }} required
-                                        ></input>
-                                      </div>
-                                    </div>
+                            >
+                              <div className="prom-panel">
+                                <div className="admin-page-prom">
+                                    <div className="pro-content">
+                                        <div><h1>Enter promo code</h1></div>
+                                        <div className="proms-contaner">
+                                            <div className="title-create-event-form input-box-a field">
+                                                <div>
+                                                    <br/><input type="text" className="tit"
+                                                    onChange={(e) => {setProm(e.target.value)}} required
+                                                    ></input>
+                                                </div>
+                                            </div>
 
                                   </div>
                                   <div className=" createpro">
