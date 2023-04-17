@@ -15,17 +15,44 @@ type OptionType = {
 
 function SelectPromocode({setSelectedPromocode}: any) {
 
-    const [themes, setThemes] = useState<any[]>([]);
+    const [prom, setpromocode] = useState<any[]>([]);
     const [selectPromocodeTmp, setSelectPromocodeTmp] = useState<any>([]);
+    let userInfo = JSON.parse(localStorage.getItem("userInfo") as string);
+    const [organization, setOrganization] = useState();
     
     let options: Options[] = [];
 
+    // useEffect(() => {
+    //     axios.get("http://localhost:8000/api/promocode", {
+    //         params: { token: localStorage.getItem("token") }
+    //     }).then((response) => {
+    //         setpromocode(response.data);
+    //         console.log(response.data);
+    //     })
+    // }, [])
+
     useEffect(() => {
-        axios.get("http://localhost:8000/api/promocode").then((response) => {
-            setThemes(response.data);
-            console.log(response.data);
-        })
+        if (userInfo.role === "organizer") {
+            axios.get(`http://localhost:8000/api/company/user`, {
+                headers: {
+                    token: localStorage.getItem("token")!
+                }
+            }).then(async response => {
+                console.log(response.data.data[0].Company_ID);
+                setOrganization(response.data.data);
+                let id = response.data.data[0].Company_ID;
+                if (response.data.data.length > 0) {
+                    axios.get("http://localhost:8000/api/promocodesId", {
+                        params: { token: localStorage.getItem("token") }
+                        }).then((response) => {
+                            setpromocode(response.data);
+                      
+                        })
+                }
+            })
+        }
     }, [])
+
 
     const handleChange = (selectedOption: any) => {
         SelectPromocode(selectedOption);
@@ -33,8 +60,8 @@ function SelectPromocode({setSelectedPromocode}: any) {
     };
 
 
-    if (themes) {
-        themes.forEach((theme) => {
+    if (prom) {
+        prom.forEach((theme) => {
             options.push({ value: theme.Theme_ID, label: theme.title })
         })
     }

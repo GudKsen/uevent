@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useNavigate, useNavigation, useParams } from "react-router-dom";
 import getSymbolFromCurrency from 'currency-symbol-map'
 
+import Popup from 'reactjs-popup'
+
 import Header from "../sidebar/Header";
 import Sidebar2 from "../sidebar/sidebar2";
 import "./styleeventpage.scss";
@@ -79,6 +81,39 @@ function EventPage() {
       console.log(res.data[0]);
     })
   }
+
+  const [popupVisibleCrEv, setPopupVisibleCrEv] = useState<boolean>(false);
+  const [prom, setProm] = useState("");
+
+  async function createprom(){
+        
+    console.log(prom);
+
+    // localStorage.setItem(
+    //   "promocode",
+    //   JSON.stringify({ User_ID, password, full_name, email, role , country, city, phone_number, birthday, profile_picture})
+    // );
+
+    // axios.post("http://localhost:8000/api/promocode",{
+        
+    // });
+    navigate("/events-manage");
+}
+
+
+async function createwithoutprom(){
+        
+  console.log(prom);
+
+  // axios.post("http://localhost:8000/api/promocode",{
+      
+  // });
+  navigate("/events-manage");
+}
+
+
+
+
 
   function GetCompany(event: any) {
     axios.get(`http://localhost:8000/api/company/${event.Company_ID}`).then((res) => {
@@ -252,9 +287,49 @@ function EventPage() {
                     <div className="button-container">
                       {
                         event.price ?
-                          <button className={`button ${animate}`} onClick={e => handleClickButton(event.Event_ID)}
 
-                          >Buy</button>
+                        
+                          <Popup
+                            modal
+                            nested
+                            open={popupVisibleCrEv}
+                            onClose={() => setPopupVisibleCrEv(false)}
+                            trigger={<button className={`button ${animate}`} 
+                            // onClick={e => handleClickButton(event.Event_ID)}
+
+                            >Buy</button>}
+                            >
+                              <div className="prom-panel">
+                                <div className="admin-page-prom">
+                                    <div className="prom-content">
+                                        <div><h1>Enter promo code</h1></div>
+                                        <div className="proms-contaner">
+                                            <div className="title-create-event-form input-box-a field">
+                                                <div>
+                                                    <input type="text" className="tit"
+                                                    onChange={(e) => {setProm(e.target.value)}} required
+                                                    ></input>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div className=" createprom">
+                                            <button onClick={createprom} className="button">Submit</button>
+                                            <button onClick={createwithoutprom} className="button">Create without promo code</button>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                          
+                          </Popup>
+                        
+
+                          // <button className={`button ${animate}`} onClick={e => handleClickButton(event.Event_ID)}
+
+                          // >Buy</button>
                           :
                           <button className={`button ${animate}`} onClick={e => handleClickFreeButton(event.Event_ID)}
 
