@@ -105,6 +105,7 @@ function EventPage() {
 async function createwithoutprom(){
         
   console.log(prom);
+  handleClickButton(event.Event_ID);
 
   // axios.post("http://localhost:8000/api/promocode",{
       
