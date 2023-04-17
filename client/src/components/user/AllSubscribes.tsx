@@ -15,12 +15,22 @@ function AllCompanies ()
     const navigate = useNavigate();
     
     useEffect(() => {
-        axios.get("http://localhost:8000/api/companies", {
-            params: { token: localStorage.getItem("token") }
+        axios.post("http://localhost:8000/api/sub-get", {
+            token: localStorage.getItem("token")
         }).then((response) => {
-            setCompanies(response.data);
-            console.log(response.data);
-        })
+            console.log(response.data)
+            if(!response.data){
+                setCompanies(response.data);
+            } else{
+                // axios.get("http://localhost:8000/api/companies", {
+                //             params: { token: localStorage.getItem("token") }
+                //         }).then((response) => {
+                //             setCompanies(response.data);
+                //             console.log(response.data);
+                //         })
+            }
+            // setCompanies(response.data);
+           })
     }, []);
 
     const DeleteCompanyButton = () => {
