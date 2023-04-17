@@ -5,7 +5,7 @@ import FormSecond from "./FormSecond";
 import axios from "axios";
 
 export function FormMain({setTitle, setDescription, setDate, setTime, setFile, 
-    setSelectedThemes, setSelectedFormat, setEndDate
+    setSelectedThemes, setSelectedPromocode, setSelectedFormat, setEndDate
 }:any) {
 
     // const [title, setTitle] = useState("");
@@ -69,6 +69,7 @@ export function FormMain({setTitle, setDescription, setDate, setTime, setFile,
             <FormSecond
                 setSelectedThemes={setSelectedThemes}
                 setSelectedFormat={setSelectedFormat}
+                setSelectedPromocode={setSelectedPromocode}
                 // CreateEvent={CreateEvent}
             />
         </div>

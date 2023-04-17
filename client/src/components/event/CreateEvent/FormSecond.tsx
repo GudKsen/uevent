@@ -3,8 +3,9 @@ import SelectFormat from "./SelectFormat";
 import SelectTheme from "./SelectTheme";
 import "./styleButton.scss";
 import "../filter.scss"
+import SelectPromocode from "./SelectPromocode";
 
-function FormSecond({setSelectedThemes, setSelectedFormat, CreateEvent}: any) {
+function FormSecond({setSelectedThemes, setSelectedFormat, setSelectedPromocode, CreateEvent}: any) {
     const [animate, setAnimate] = useState("");
     const [addPromo, setAddPromo] = useState("");
     const [promocode, setPromocode] = useState("");
@@ -66,11 +67,15 @@ function FormSecond({setSelectedThemes, setSelectedFormat, CreateEvent}: any) {
                             </div>
                         </div>
 
-                        <div className="container-promocode-add field">
-                            <input type="text" placeholder="Enter promocode..." className={`promo-input ${addPromo}`}
+                        <div className="format field">
+                            {/* <input type="text" placeholder="Enter promocode..." className={`promo-input ${addPromo}`}
                             onChange={(e) => {setPromocode(e.target.value)}}
                             ></input>
-                            <button className={`add-promocode ${promoAdded}`} onClick={handlePromoAdd}>{promoAddedText}</button>
+                            <button className={`add-promocode ${promoAdded}`} onClick={handlePromoAdd}>{promoAddedText}</button> */}
+                            <div  className="ogoloshen"><p>PROMOCODE</p></div>
+                            <div>
+                                <SelectPromocode setSelectedPromocode={setSelectedPromocode}/>
+                            </div>
                         </div>
                     </div>
 

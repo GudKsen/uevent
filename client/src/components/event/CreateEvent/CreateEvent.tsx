@@ -44,6 +44,7 @@ function CreateEvent() {
     const [endDate, setEndDate] = useState("");
     const [file, setFile] = useState<File>();
     const [selectedThemes, setSelectedThemes] = useState<any[]>([]);
+    const [SelectedPromocode, setSelectedPromocode] = useState<any[]>([]);
     const [selectedFormat, setSelectedFormat] = useState<{
         value: string,
         label: string
@@ -150,7 +151,8 @@ function CreateEvent() {
                                     setFile={setFile}
                                     setEndDate={setEndDate}
                                     setSelectedThemes={setSelectedThemes}
-                                    setSelectedFormat={setSelectedFormat} />
+                                    setSelectedFormat={setSelectedFormat}
+                                    setSelectedPromocode={setSelectedPromocode} />
                                 </SwiperSlide>
                             
                                 <SwiperSlide className='swipe-slide'>
