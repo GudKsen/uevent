@@ -1,8 +1,10 @@
 import axios from "axios";
 import { response } from "express";
 
+import fetch from 'node-fetch';
+
 export async function GetCurrentExchangeRate(symbols) {
-  var myHeaders = new Headers();
+  var myHeaders = new fetch.Headers();
   myHeaders.append("apikey", "Bx9Zhw56PPzWqj1GVTBsQRbER9KHoPwo");
 
   var requestOptions = {

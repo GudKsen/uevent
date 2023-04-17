@@ -6,12 +6,12 @@
     // height: 100vh;
 }
 
-.prom-content{
+.pro-content{
     text-align: center;
     justify-content: center;
 
     display: grid;
-    grid-template-rows: 15% 70% 15%;
+    grid-template-rows: 15% 55% 30%;
 
     background-color: #E4E9F7;
     padding: 40px;
@@ -22,6 +22,10 @@
     border-width: 20px;
     border-color: #afadc9;
     // box-shadow:100px 100px #707070, 100px 100px #707070;
+}
+
+.createpro{
+    margin-top: 5%;
 }
 
 

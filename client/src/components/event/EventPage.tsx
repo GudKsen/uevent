@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useNavigation, useParams } from "react-router-dom";
 import getSymbolFromCurrency from 'currency-symbol-map'
+import "./createpromocodestyle.scss"
 
 import Popup from 'reactjs-popup'
 
@@ -296,21 +297,21 @@ async function createwithoutprom(){
                             >
                               <div className="prom-panel">
                                 <div className="admin-page-prom">
-                                    <div className="prom-content">
+                                    <div className="pro-content">
                                         <div><h1>Enter promo code</h1></div>
                                         <div className="proms-contaner">
                                             <div className="title-create-event-form input-box-a field">
                                                 <div>
-                                                    <input type="text" className="tit"
+                                                    <br/><input type="text" className="tit"
                                                     onChange={(e) => {setProm(e.target.value)}} required
                                                     ></input>
                                                 </div>
                                             </div>
 
                                         </div>
-                                        <div className=" createprom">
+                                        <div className=" createpro">
                                             <button onClick={createprom} className="button">Submit</button>
-                                            <button onClick={createwithoutprom} className="button">Create without promo code</button>
+                                            <button onClick={createwithoutprom} className="button">Continue</button>
 
                                         </div>
 
