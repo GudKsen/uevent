@@ -3,18 +3,18 @@ import fs from "fs";
 
 // import { formatTitle }  from "./format-title.js";
 import { formatTitle } from "./formatTitle.js";
+// import { eventNames } from "process";
 
 const post = {
     title: "Draw and save images with Canvas and Node",
     author: "Sean C Davis",
   };
 
-export function Canva(data) {
+export async function Canva(data) {
   console.log("🚀 ~ file: canvas.js:13 ~ Canva ~ data:", data)
   // Move the title formatter up farther because we're going to
 // use it to set our Y values.
 const titleText = formatTitle(data[0].title);
-console.log("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC")
 const width = 1200;
 const height = 627;
 const imagePosition = {
@@ -52,11 +52,16 @@ context.fillText(`by ${data[0].company[0].name}`, 600, authorY);
 context.fillText(`date: ${new Date(data[0].startDateTime).toLocaleDateString()}`, 600, dateY);
 context.fillText(`time: ${new Date(data[0].startDateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`, 900, dateY);
 context.fillText(`place: ${data[0].location[0].country}, ${data[0].location[0].address_line_state}, ${data[0].location[0].address_line_street}, ${data[0].location[0].street_number}`, 600, timeY);
-loadImage("./utils/QRCode/images/img.png").then((image) => {
+
+let pathImg = `./files/tickets/image_${data[0].Event_ID}.png`;
+console.log(data[0].qr_code);
+let str = "./" + data[0].qr_code;
+await loadImage(str).then((image) => {
   const { w, h, x, y } = imagePosition;
   context.drawImage(image, x, y, w, h);
-
   const buffer = canvas.toBuffer("image/png");
-  fs.writeFileSync("./image.png", buffer);
+  fs.writeFileSync(pathImg, buffer);
 });
+
+return pathImg;
 }

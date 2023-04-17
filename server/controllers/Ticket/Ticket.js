@@ -64,18 +64,25 @@ export const GetFreeTicket = async (req, res) =>
   let data_location = await location.read();
 
   if (event) {
-    let qr_code = generateQRCode(event);
+    
 
-    let ticket = new Ticket(event_id, purchase_date, qr_code, user_id);
+    let ticket = new Ticket(event_id, purchase_date, "", user_id);
     ticket.create();
 
     let text = `${req.user.full_name} has just join to your event.`;
     let company = await db.find_by_id("Company", event[0].Company_ID);
     event[0].company = company;
     event[0].location = data_location;
-    Canva(event);
+    let qr_code = await generateQRCode(event, req.user.email);
+    event[0].qr_code = qr_code;
+    let pathTicket = "";
+
+    
+      // pathTicket =  Canva(event);
+   
+    console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
     sendNotification(company[0].email, text);
-    sendTicket(req.user.email, qr_code, event[0]);
+    // 
 
     return res.json("Ticket was send to your account");
   }

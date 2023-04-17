@@ -76,21 +76,21 @@ export async function sendTicket(email, text, data) {
     },
   });
 
-  let url = String(text.slice(2));
+  // let url = String(text.slice(2));
 
-  let gg = "public\\QRCodes\\qr_1681722417964.png";
-  console.log("🚀 ~ file: sendEmail.js:83 ~ sendTicket ~ gg:", gg)
-  console.log(url)
+  // let gg = "public\\QRCodes\\qr_1681722417964.png";
+  // console.log("🚀 ~ file: sendEmail.js:83 ~ sendTicket ~ gg:", gg)
+  // console.log(url)
   
-  const imgData = fs.readFileSync(`${text.slice(2)}`, {encoding: 'base64'});
+  // const imgData = fs.readFileSync(`${text.slice(2)}`, {encoding: 'base64'});
   
   
-  let bitmap = fs.readFileSync(gg);
-  let img = Buffer.from(bitmap, 'utf-8').toString('base64');
+  // let bitmap = fs.readFileSync(gg);
+  // let img = Buffer.from(bitmap, 'utf-8').toString('base64');
  
-  let img2 = Buffer.from(gg, 'utf-8').toString('base64');
+  // let img2 = Buffer.from(gg, 'utf-8').toString('base64');
  
- 
+ let str = text.slice();
   var mailOptions = {
     // from: '"Example Team" <admin@example.com>',
     from: "tt3055783@gmail.com",
@@ -99,16 +99,14 @@ export async function sendTicket(email, text, data) {
     html: `
     <h1>${data.title}</h1>
     <p>${data.description}</p>
-    <br />
-    <img src="data:image/png;base64,${imgData}"/>
     
     `,
-    // attachments: [
-    //   {
-    //     filename: "ticket.png",
-    //     path: "public\\QRCodes\\qr_1681713314489.png"
-    //   }
-    // ]
+    attachments: [
+      {
+        filename: "ticket.png",
+        path: str
+      }
+    ]
   };
 
   transport.sendMail(mailOptions, (error, info) => {
