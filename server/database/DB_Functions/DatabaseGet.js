@@ -339,9 +339,10 @@ async get_news_by_company(id)
     inner join Promocode on Event_Promocode.Promocode_ID = Promocode.Promocode_ID
     where Event_Promocode.Event_ID = ${event_id}`;
     const events = await pool.promise().query(get_events_command);
-    console.log(events[0]);
+    console.log("----------------"+events[0]);
     if (events[0].length) {
-      return events[0];
+      console.log(events[0])
+          return events[0];
     } else {
       return null;
     }

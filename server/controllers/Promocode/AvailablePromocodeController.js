@@ -13,14 +13,15 @@ export const CheckToAvailablePromocode = async (req, res) => {
 
     let promocode = await db.get_promocod_by_event_id(promo, id_event);
 
-    let proverka = 10;
 
     if(!promocode){
-        res.json(proverka);
-        // res.json("Not available")
-    }else{
+        // res.json(proverka);
+        res.json("Not available")
+    }else if(promocode[0].title == promo){
         
-        res.json(promocode.discount);
+        res.json(Number(promocode[0].discount));
+    } else{
+        res.json("Not available")
     }
 
     

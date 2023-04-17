@@ -35,8 +35,9 @@ function SelectPromocode({setSelectedPromocode}: any) {
                 if (response.data.data.length > 0) {
                     axios.get("http://localhost:8000/api/promocodesId", {
                         params: { token: localStorage.getItem("token") }
-                        }).then((response) => {
-                            setpromocode(response.data);
+                        }).then((res) => {
+                            console.log(res.data);
+                            setpromocode(res.data);
                       
                         })
                 }
@@ -52,8 +53,8 @@ function SelectPromocode({setSelectedPromocode}: any) {
 
 
     if (prom) {
-        prom.forEach((theme) => {
-            options.push({ value: theme.Promocode_ID, label: theme.title })
+        prom.forEach((pro) => {
+            options.push({ value: pro.Promocode_ID, label: pro.title })
         })
     }
 
