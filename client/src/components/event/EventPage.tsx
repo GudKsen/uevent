@@ -88,47 +88,47 @@ function EventPage() {
   const [popupVisibleCrEv, setPopupVisibleCrEv] = useState<boolean>(false);
   const [prom, setProm] = useState("");
 
-  async function createprom(){
-        
+  async function createprom() {
+
     console.log(prom);
     localStorage.removeItem("promocode");
 
-    axios.post("http://localhost:8000/api/available/promocode",{
+    axios.post("http://localhost:8000/api/available/promocode", {
       token: localStorage.getItem("token"),
-        promo: prom,
-        id_event: event.Event_ID
-      }).then((response) => {
-        if(response.data == "Not available"){
-          alert("Promocode is not available");
-          return ;
-        }else{
-          console.log(response);
-          let cost = response.data;
-          localStorage.setItem("promocode", JSON.stringify({ cost}));
-          handleClickButton(event.Event_ID);
-        }
+      promo: prom,
+      id_event: event.Event_ID
+    }).then((response) => {
+      if (response.data == "Not available") {
+        alert("Promocode is not available");
+        return;
+      } else {
+        console.log(response);
+        let cost = response.data;
+        localStorage.setItem("promocode", JSON.stringify({ cost }));
+        handleClickButton(event.Event_ID);
+      }
     });
 
-    
+
 
 
     // navigate("/events-manage");
-}
+  }
 
 
-async function createwithoutprom(){
+  async function createwithoutprom() {
 
-  const nill = 0;
-        
-  console.log(prom);
-  localStorage.removeItem("promocode");
-  localStorage.setItem("promocode", JSON.stringify({ nill}));
-  handleClickButton(event.Event_ID);
+    const nill = 0;
+
+    console.log(prom);
+    localStorage.removeItem("promocode");
+    localStorage.setItem("promocode", JSON.stringify({ nill }));
+    handleClickButton(event.Event_ID);
 
   // axios.post("http://localhost:8000/api/available/promocode",{
       
   // });
-  // navigate("/events-manage");
+  //navigate("/events-manage");
 }
 
 
@@ -139,7 +139,7 @@ async function createwithoutprom(){
     axios.get(`http://localhost:8000/api/company/${event.Company_ID}`).then((res) => {
       setCompany(res.data[0]);
       console.log(res.data[0]);
-      
+
     })
   }
 
@@ -160,12 +160,12 @@ async function createwithoutprom(){
     setTimeout(() => {
       setAnimate("");
     }, 8000);
-    await axios.post(`http://localhost:8000/api/event/ticket/free/${id}`, id,{
+    await axios.post(`http://localhost:8000/api/event/ticket/free/${id}`, id, {
       headers: {
-          'Content-Type': 'multipart/form-data',
-          'token': localStorage!.getItem("token")!
+        'Content-Type': 'multipart/form-data',
+        'token': localStorage!.getItem("token")!
       }
-  })
+    })
   }
 
   async function deleteComment(idComment: any) {
@@ -253,13 +253,13 @@ async function createwithoutprom(){
                   <div className="event-text">
                     <div className="event-header">
                       <div className="event-title">
-                        <p>Title:   {event.title}</p>
-                      </div>
+                        <p className="title-eventpage">{event.title}</p>
+                      </div><br />
                       {/* <Rating/> */}
                       {/* <p>{event.description}</p> */}
                     </div>
                     <div className="description">
-                      <p>Description: {event.description}</p><br />
+                      <p>{event.description}</p><br />
                     </div>
                     {/* <div className="location">
                         {event.location}
@@ -267,29 +267,13 @@ async function createwithoutprom(){
                     {/* <div className="price"> */}
                     {/* <p>Price:   {event.price}</p> */}
 
-                    <p>Time:   {new Date(event.startDateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
-                    <p>Date:   {new Date(event.startDateTime).toLocaleDateString()}</p>
-                    <div>
-                      {
-                        event.price ?
-                          <div>
-                            Location: {event.location[0].country}, {event.location[0].city}, {event.location[0].address_line_state}, {event.location[0].address_line_street}, {event.location[0].street_number}
-                          </div>
-                          :
-                          null
-                      }
-                    </div>
-                    <div>
-                      {
-                        event.price ?
-                          <div>
-                            Price: {event.price[0].price_value} {getSymbolFromCurrency(event.price[0].currency)}
-                          </div>
-                          :
-                          null
-                      }
-                    </div><br/>
-                    {/* <p>Address:   {event.address_line_street}, {event.street_number}</p> */}
+                    <p>
+                    <img className="clock-icon-allevents" src={require("../../public/video/clock.png")} alt="" />
+                      {new Date(event.startDateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+                    <p>
+                    <img className="clock-icon-allevents" src={require("../../public/video/calendar (1).png")} alt="" />
+                      {new Date(event.startDateTime).toLocaleDateString()}</p>
+                    
 
                     <p>Format: {format?.title}</p>
                     <div className="description">
@@ -319,24 +303,23 @@ async function createwithoutprom(){
                       {
                         event.price ?
 
-                        
+
                           <Popup
                             modal
                             nested
                             open={popupVisibleCrEv}
                             onClose={() => setPopupVisibleCrEv(false)}
-                            trigger={<button className={`button ${animate}`} 
+                            trigger={<button className={`button ${animate}`}
                             // onClick={e => handleClickButton(event.Event_ID)}
 
                             >Buy</button>}
                             >
-                              {/* <EnterPromocode/> */}
                               <div className="prom-panel">
                                 <div className="admin-page-prom">
                                     <div className="pro-content">
                                         <div><h1>Enter promo code</h1></div>
                                         <div className="proms-contaner">
-                                            <div className="title-create-event-form input-box-an field">
+                                            <div className="title-create-event-form input-box-a field">
                                                 <div>
                                                     <br/><input type="text" className="tit"
                                                     onChange={(e) => {setProm(e.target.value)}} required
@@ -344,20 +327,20 @@ async function createwithoutprom(){
                                                 </div>
                                             </div>
 
-                                        </div>
-                                        <div className=" createpro">
-                                            <button onClick={createprom} className="button">Submit</button>
-                                            <button onClick={createwithoutprom} className="button">Continue</button>
+                                  </div>
+                                  <div className=" createpro">
+                                    <button onClick={createprom} className="button">Submit</button>
+                                    <button onClick={createwithoutprom} className="button">Continue</button>
 
-                                        </div>
-
-                                    </div>
+                                  </div>
 
                                 </div>
+
+                              </div>
                             </div>
-                          
+
                           </Popup>
-                        
+
 
                           // <button className={`button ${animate}`} onClick={e => handleClickButton(event.Event_ID)}
 
@@ -473,7 +456,7 @@ async function createwithoutprom(){
                       <div className="motuzok">
                         <input className="range" type="range" id="volume" name="volume"
                           min="0" max="5" onChange={(e) => setRange(e.target.value)}/>
-                      </div> */}
+                      </div>
 
                     {/* </div> */}
                     <div className="input-box-a mavka">
