@@ -128,7 +128,7 @@ async function createwithoutprom(){
   // axios.post("http://localhost:8000/api/available/promocode",{
       
   // });
-  navigate("/events-manage");
+  // navigate("/events-manage");
 }
 
 
