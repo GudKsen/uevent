@@ -62,7 +62,6 @@ export function CompanyPage() {
             token: localStorage.getItem("token"),
             companyId: id
         })
-        avail()
     }
 
     async function deleteSubscribe(){
@@ -70,7 +69,6 @@ export function CompanyPage() {
             token: localStorage.getItem("token"),
             companyId: id
         })
-        avail()
     }
 
     
@@ -188,7 +186,7 @@ export function CompanyPage() {
                                         <div>
                                             {
                                                 haveSub ? 
-                                                    <button onClick={() => deleteSubscribe()} className="unsub naaaaaaaaame button">Unsubscribe</button>
+                                                    <button onClick={() => deleteSubscribe()} className="unsub naaaaaaaaame ">Unsubscribe</button>
                                                 
                                                 : 
                                                 <button onClick={() => setSubscribe()} className=" naaaaaaaaame button">Subscribe</button>

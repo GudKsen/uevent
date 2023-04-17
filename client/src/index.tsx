@@ -6,6 +6,7 @@ import LogIn from "./components/register/LogIn";
 import ResetPass from "./components/register/ResetPass";
 import ResetPassConfirm from "./components/register/ResetPassConfirm";
 import UserPage from "./components/user/UserPage";
+import Subscribes from "./components/user/subscribers";
 import Setting from "./components/user/Setting";
 import Event from "./components/event/Event";
 import EventPage from "./components/event/EventPage";
@@ -32,6 +33,11 @@ const router = createBrowserRouter([
     path: "/setting",
     element: <Setting />,
   },
+  {
+    path: "/subscribes",
+    element: <Subscribes />,
+  },
+
   {
     path: "/company/:id",
     element: <CompanyPage />,

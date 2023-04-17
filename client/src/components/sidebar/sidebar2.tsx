@@ -145,7 +145,9 @@ function Sidebar2() {
 
                             </li>
 
-                            <li className="nav-link">
+                            <li onClick={() => {
+                                navigate("/subscribes");
+                            }} className="nav-link">
 
                                 <div className="bb bx bx-search icon">
                                     <div className="hoverme-sub"></div>
