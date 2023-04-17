@@ -469,6 +469,7 @@ function EventPage() {
                   }
                   <div className="create-comm">
                     {/* <div className="rage">
+                    {/* <div className="rage">
                       <div className="num">
                         <div>0</div>
                         <div>1</div>
@@ -479,7 +480,7 @@ function EventPage() {
                       </div>
                       <div className="motuzok">
                         <input className="range" type="range" id="volume" name="volume"
-                          min="0" max="5" onChange={(e) => setRange(e.target.value)} />
+                          min="0" max="5" onChange={(e) => setRange(e.target.value)}/>
                       </div>
 
                     </div> */}
