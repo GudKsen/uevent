@@ -100,7 +100,7 @@ function EventPage() {
           alert("Promocode is not available");
           return ;
         }else{
-          console.log(response.data);
+          console.log(response);
           let cost = response.data;
           localStorage.setItem("promocode", JSON.stringify({ cost}));
           handleClickButton(event.Event_ID);

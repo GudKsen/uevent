@@ -44,7 +44,10 @@ function CreateEvent() {
     const [endDate, setEndDate] = useState("");
     const [file, setFile] = useState<File>();
     const [selectedThemes, setSelectedThemes] = useState<any[]>([]);
-    const [SelectedPromocode, setSelectedPromocode] = useState<any[]>([]);
+    const [SelectedPromocode, setSelectedPromocode] = useState<{
+        value: string,
+        label: string
+    }>();
     const [selectedFormat, setSelectedFormat] = useState<{
         value: string,
         label: string
@@ -56,11 +59,6 @@ function CreateEvent() {
     if (selectedThemes.length) {
         selectedThemes.forEach((theme) => {
             themes_ids.push(theme!.value);
-        });
-    }
-    if (SelectedPromocode.length) {
-        SelectedPromocode.forEach((promo) => {
-            promos_ids.push(promo!.value);
         });
     }
 
@@ -76,13 +74,14 @@ function CreateEvent() {
 
     function create() {
         let formField = new FormData();
-        // console.log(SelectedPromocode.Promocode_Id);
+        console.log(SelectedPromocode!.value);
         formField.append('title', title);
         formField.append('description', description);
         formField.append('date', date);
         formField.append('time', time);
         formField.append('file', file!);
         formField.append('format', selectedFormat!.value);
+        formField.append('promocodeId', "4");
         formField.append('themes', JSON.stringify(themes_ids));
 
         formField.append('price', price);
@@ -103,13 +102,13 @@ function CreateEvent() {
         
         console.log("🚀 ~ file: CreateEvent.tsx:93 ~ create ~ currency:", currency)
 
-        axios.post("http://localhost:8000/api/event", formField, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                'token': localStorage!.getItem("token")!
-            }
-        });
-        navigate("/events");
+        // axios.post("http://localhost:8000/api/event", formField, {
+        //     headers: {
+        //         'Content-Type': 'multipart/form-data',
+        //         'token': localStorage!.getItem("token")!
+        //     }
+        // });
+        // navigate("/events");
     }
 
     const [animate, setAnimate] = useState("");

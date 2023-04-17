@@ -8,12 +8,12 @@ export function send(email, text, link) {
     port: 2525,
     auth: {
       //------KSENIIA SETTINGS-------------------------
-      user: "4c475d92282587",
-      pass: "821b514591f9f1",
+      // user: "4c475d92282587",
+      // pass: "821b514591f9f1",
       //-----------------------------------------------
       //------STANISLAVA SETTINGS----------------------
-      // user: "d13f138085da46",
-      // pass: "6b479d6d87fb70"
+      user: "d13f138085da46",
+      pass: "6b479d6d87fb70"
       //-----------------------------------------------
     },
   });
@@ -66,12 +66,12 @@ export async function sendTicket(email, text, data) {
     // secure: true,
     auth: {
       //------KSENIIA SETTINGS-------------------------
-      user: "4c475d92282587",
-      pass: "821b514591f9f1"
+      // user: "4c475d92282587",
+      // pass: "821b514591f9f1"
       //-----------------------------------------------
       //------STANISLAVA SETTINGS----------------------
-      // user: "d13f138085da46",
-      // pass: "6b479d6d87fb70"
+      user: "d13f138085da46",
+      pass: "6b479d6d87fb70"
       //-----------------------------------------------
     },
   });
@@ -124,12 +124,12 @@ export function sendNotification(email, text) {
     port: 2525,
     auth: {
       //------KSENIIA SETTINGS-------------------------
-      user: "4c475d92282587",
-      pass: "821b514591f9f1",
+      // user: "4c475d92282587",
+      // pass: "821b514591f9f1",
       //-----------------------------------------------
       //------STANISLAVA SETTINGS----------------------
-      // user: "d13f138085da46",
-      // pass: "6b479d6d87fb70"
+      user: "d13f138085da46",
+      pass: "6b479d6d87fb70"
       //-----------------------------------------------
     },
   });

@@ -73,14 +73,12 @@ export function PayPalPayment(productId: any) {
         
         // Order is created on the server and the order id is returned
         let price_value;
-        let cost = parseFloat(event.price[0].price_value)*0.9;
-        console.log("price value"+cost);
         if(promocode === null){
             if (event.price[0].currency !== "USD") {
                 let pr: number = await ConvertPriceToUSD("USD", event.price[0].currency, event.price[0].price_value, setPrice) ?? 0;
 
                 if (pr !== undefined) {
-                    price_value = Number(pr.toFixed(2))*0.9;
+                    price_value = Number(pr.toFixed(2));
                     console.log("price value"+price_value);
                 }
             }
