@@ -45,7 +45,7 @@ function Filter({setFilterPriceStart, setFilterPriceEnd, setFilterTheme, setFilt
   return (
     <div className="filter">
         <div className="price">
-            <div className="ogoloshen"><p>Price</p></div>
+            <div className="ogoloshen price-ogol"><p>Price</p></div>
             <div className="from-to">
                 <div className="from">
                     <div>

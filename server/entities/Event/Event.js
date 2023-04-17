@@ -85,7 +85,7 @@ export class Event
             }
         }
 
-        
+        return id;
     }
 
     async read() {

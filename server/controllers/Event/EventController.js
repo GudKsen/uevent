@@ -4,6 +4,8 @@ import { Event } from "../../entities/Event/Event.js";
 import { GetEvents as GetEventsClass} from "../../entities/Event/GetEvents.js";
 import { Location } from "../../entities/Location/Location.js";
 import { User } from "../../entities/User/User.js";
+import { Promocode } from "../../entities/Promocode/Promocode.js";
+import { Database } from "../../database/DB_Functions/Database.js";
 // import { setEndTimeEvent } from "../utils/setEndTimeEvent.js";
 // import { toLocalDate } from "../utils/toLocalDate.js";
 
@@ -28,6 +30,8 @@ export const CreateEvent = async (req, res) => {
   let duration = req.body.duration;
   let price = req.body.price;
   let currency = req.body.currency;
+
+  let promocodeId = req.body.promocodeId;
  
   if (!req.body.title) {
     res.status(400).send({
@@ -109,7 +113,13 @@ export const CreateEvent = async (req, res) => {
 
   
 
-  event.save();
+  let eventId = await event.save();
+  let database = new Database();
+  database.save("Event_Promocode", {
+    Event_ID: eventId,
+    Promocode_ID: promocodeId
+  })
+  
   res.json("Event created");
 };
 

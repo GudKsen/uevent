@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import fs from "fs";
+import fs from 'fs';
 
 export function send(email, text, link) {
   var transport = nodemailer.createTransport({
@@ -57,9 +57,13 @@ export function send(email, text, link) {
 }
 
 export async function sendTicket(email, text, data) {
+  console.log("🚀 ~ file: sendEmail.js:60 ~ sendTicket ~ text:", text)
   var transport = nodemailer.createTransport({
     host: "smtp.mailtrap.io",
+    // host: "smtp.gmail.com",
     port: 2525,
+    // port: 465,
+    // secure: true,
     auth: {
       //------KSENIIA SETTINGS-------------------------
       user: "4c475d92282587",
@@ -72,17 +76,24 @@ export async function sendTicket(email, text, data) {
     },
   });
 
+  text.replace("/", "\\");
+  const imgData = fs.readFileSync(text.slice(2), {encoding: 'base64'});
+
   var mailOptions = {
-    from: '"Example Team" <admin@example.com>',
+    // from: '"Example Team" <admin@example.com>',
+    from: "tt3055783@gmail.com",
     to: email,
     subject: "New password",
     html: `
-    <img src="` + "server\public\QRCodes\qr_471.png" + `"></img>
+    <h1>${data.title}</h1>
+    <p>${data.description}</p>
+    <br />
+    <img src="data:image/png;base64,${imgData}"/>
     `,
     // attachments: [
     //   {
-    //     filename: "ticket.pdf",
-    //     path: "mypdf.pdf"
+    //     filename: "ticket.png",
+    //     path: "public\\QRCodes\\qr_1681713314489.png"
     //   }
     // ]
   };

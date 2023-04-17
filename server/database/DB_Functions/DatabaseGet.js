@@ -122,7 +122,6 @@ export class DatabaseGet {
       for (let event of events[0]) {
         let event_id = event.Event_ID;
         let user_id = event.Company_ID;
-        console.log(event);
 
         let command_get_themes_event = `select Theme.* from Event_Theme
                 inner join Theme on Event_Theme.Theme_ID = Theme.Theme_ID
@@ -204,7 +203,7 @@ export class DatabaseGet {
       for (let event of events[0]) {
         let event_id = event.Event_ID;
         let user_id = event.Company_ID;
-        console.log(event);
+      
 
         let command_get_themes_event = `select Theme.* from Event_Theme
                 inner join Theme on Event_Theme.Theme_ID = Theme.Theme_ID
@@ -248,9 +247,9 @@ export class DatabaseGet {
     
   }
 
-  async get_comments_by_user_id(user_id)
+  async get_data_by_user_id(table, user_id)
   {
-    let command = `select * from Comment where User_ID = ${user_id}`;
+    let command = `select * from ${table} where User_ID = ${user_id}`;
     let data = await pool.promise().query(command);
     if (data[0].length)
     {
@@ -290,7 +289,7 @@ async get_news_by_company(id)
       for (let event of events[0]) {
         let event_id = event.Event_ID;
         let user_id = event.Company_ID;
-        console.log(event);
+      
 
         let command_get_themes_event = `select Theme.* from Event_Theme
                 inner join Theme on Event_Theme.Theme_ID = Theme.Theme_ID
