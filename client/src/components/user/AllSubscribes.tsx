@@ -22,6 +22,7 @@ function AllCompanies ()
             if(!response.data){
                 setCompanies(response.data);
             } else{
+                
                 // axios.get("http://localhost:8000/api/companies", {
                 //             params: { token: localStorage.getItem("token") }
                 //         }).then((response) => {
