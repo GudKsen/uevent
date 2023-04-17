@@ -98,9 +98,8 @@ export async function sendTicket(email, text, data) {
     to: email,
     subject: "New password",
     html: `
-    <h1>${data.title}</h1>
-    <p>${data.description}</p>
-    
+    <h1>Hello!!!</h1>
+    <p>Now you can download your ticket. We wish a good time!</p>
     `,
     attachments: [
       {
