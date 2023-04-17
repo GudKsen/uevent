@@ -1,5 +1,6 @@
 import { Promocode } from "../../entities/Promocode/Promocode.js";
 import { DatabaseGet } from "../../database/DB_Functions/DatabaseGet.js";
+import { User } from "../../entities/User/User.js";
 
 
 export const CreatePromocode = (req, res) => {
@@ -32,7 +33,9 @@ export const GetPromocode = async (req, res) => {
 
 export const GetAllPromocodeByIdUser = async (req, res) => {
     let db = new DatabaseGet();
-    let prom = db.get_prom_by_user_id(req.user._id);
+    let company = await db.get_company_by_userID(req.user._id)
+    console.log("🚀 ~ file: PromocodeController.js:37 ~ GetAllPromocodeByIdUser ~ company:", company)
+    let prom = await db.get_prom_by_company_id(company[0].Company_ID);
     res.json(prom);
 }
 

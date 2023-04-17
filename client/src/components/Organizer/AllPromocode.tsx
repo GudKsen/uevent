@@ -79,9 +79,7 @@ function AllPromocode({ id }: any) {
                         params: { token: localStorage.getItem("token") }
                         }).then((response) => {
                             setpromocode(response.data);
-                            console.log("sfffffffffffffffffffffffffffffffffffffff");
-                            console.log(response.data[0]);
-                            console.log("sfffffffffffffffffffffffffffffffffffffff");
+                      
                         })
                 }
             })
@@ -164,7 +162,11 @@ function AllPromocode({ id }: any) {
                         <th>Date end</th>
                     </tr>
                 </thead>
+                { promocodes ?
+                
+            
                 <tbody>
+                  
                     {
                      promocodes && promocodes.map((event, i) => 
                         <tr 
@@ -257,7 +259,9 @@ function AllPromocode({ id }: any) {
                         </tr>
                     )
                 } 
+                
                 </tbody>
+                : null}
             </table>
         </div>
     )
