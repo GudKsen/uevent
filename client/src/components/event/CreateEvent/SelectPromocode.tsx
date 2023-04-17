@@ -22,38 +22,36 @@ function SelectPromocode({setSelectedPromocode}: any) {
     
     let options: Options[] = [];
 
-    useEffect(() => {
-        axios.get("http://localhost:8000/api/promocode", {
-            params: { token: localStorage.getItem("token") }
-        }).then((response) => {
-            setpromocode(response.data);
-            console.log(response.data);
-        })
-    }, [])
-
     // useEffect(() => {
-    //     if (userInfo.role === "organizer") {
-    //         axios.get(`http://localhost:8000/api/company/user`, {
-    //             headers: {
-    //                 token: localStorage.getItem("token")!
-    //             }
-    //         }).then(async response => {
-    //             console.log(response.data.data[0].Company_ID);
-    //             setOrganization(response.data.data);
-    //             let id = response.data.data[0].Company_ID;
-    //             if (response.data.data.length > 0) {
-    //                 axios.get("http://localhost:8000/api/promocodesId", {
-    //                     params: { token: localStorage.getItem("token") }
-    //                     }).then((response) => {
-    //                         setpromocode(response.data);
-    //                         console.log("sfffffffffffffffffffffffffffffffffffffff");
-    //                         console.log(response.data[0]);
-    //                         console.log("sfffffffffffffffffffffffffffffffffffffff");
-    //                     })
-    //             }
-    //         })
-    //     }
+    //     axios.get("http://localhost:8000/api/promocode", {
+    //         params: { token: localStorage.getItem("token") }
+    //     }).then((response) => {
+    //         setpromocode(response.data);
+    //         console.log(response.data);
+    //     })
     // }, [])
+
+    useEffect(() => {
+        if (userInfo.role === "organizer") {
+            axios.get(`http://localhost:8000/api/company/user`, {
+                headers: {
+                    token: localStorage.getItem("token")!
+                }
+            }).then(async response => {
+                console.log(response.data.data[0].Company_ID);
+                setOrganization(response.data.data);
+                let id = response.data.data[0].Company_ID;
+                if (response.data.data.length > 0) {
+                    axios.get("http://localhost:8000/api/promocodesId", {
+                        params: { token: localStorage.getItem("token") }
+                        }).then((response) => {
+                            setpromocode(response.data);
+                      
+                        })
+                }
+            })
+        }
+    }, [])
 
 
     const handleChange = (selectedOption: any) => {
