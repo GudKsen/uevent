@@ -58,6 +58,7 @@ export function send(email, text, link) {
 }
 
 export async function sendTicket(email, text, data) {
+  console.log("🚀 ~ file: sendEmail.js:61 ~ sendTicket ~ text:", text)
   var transport = nodemailer.createTransport({
     host: "smtp.mailtrap.io",
     // host: "smtp.gmail.com",
@@ -66,12 +67,12 @@ export async function sendTicket(email, text, data) {
     // secure: true,
     auth: {
       //------KSENIIA SETTINGS-------------------------
-      // user: "4c475d92282587",
-      // pass: "821b514591f9f1"
+      user: "4c475d92282587",
+      pass: "821b514591f9f1"
       //-----------------------------------------------
       //------STANISLAVA SETTINGS----------------------
-      user: "d13f138085da46",
-      pass: "6b479d6d87fb70"
+      // user: "d13f138085da46",
+      // pass: "6b479d6d87fb70"
       //-----------------------------------------------
     },
   });

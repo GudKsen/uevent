@@ -82,7 +82,7 @@
 .scroll-comment{
     height: 230px;
     max-height: 300px;
-    overflow: scroll;
+    overflow: auto;
     overflow-x: hidden;
 }
 
@@ -160,7 +160,7 @@
 .description{
     word-break:break-all;
     height: 80px;
-    overflow: scroll;
+    overflow: auto;
     overflow-x: hidden;
 }
 
@@ -211,6 +211,15 @@
     background-color: #edf4f9;
 }
 
+.datetime-eventpage {
+    display: flex;
+    gap: 100px;
+}
+
+.title-eventpage {
+    font-weight: 700;
+    font-size: 20px;
+}
 
 .maindata, .typeevent{
     // min-height: 450px;
@@ -220,7 +229,8 @@
     top: 7%;
     padding-left: 10%;
     border-radius: 30px;
-    background-color: #edf4f9;
+    background-color: white;
+    // background-color: #edf4f9;
 }
 
 
@@ -281,7 +291,7 @@ button{
             margin-top: 5px;
             word-break:break-all;
             height: 60px;
-            overflow: scroll;
+            overflow: auto;
             overflow-x: hidden;
         }
     }
