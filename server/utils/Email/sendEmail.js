@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import fs from 'fs';
+import path from 'path';
 
 export function send(email, text, link) {
   var transport = nodemailer.createTransport({
@@ -57,7 +58,6 @@ export function send(email, text, link) {
 }
 
 export async function sendTicket(email, text, data) {
-  console.log("🚀 ~ file: sendEmail.js:60 ~ sendTicket ~ text:", text)
   var transport = nodemailer.createTransport({
     host: "smtp.mailtrap.io",
     // host: "smtp.gmail.com",
@@ -76,11 +76,21 @@ export async function sendTicket(email, text, data) {
     },
   });
 
-  // text.replace("/", "\\");
-  console.log("🚀 ~ file: sendEmail.js:81 ~ sendTicket ~ imgData:", text.slice(2))
-  const imgData = fs.readFileSync(text.slice(2), {encoding: 'base64'});
+  let url = String(text.slice(2));
+
+  let gg = "public\\QRCodes\\qr_1681722417964.png";
+  console.log("🚀 ~ file: sendEmail.js:83 ~ sendTicket ~ gg:", gg)
+  console.log(url)
+  
+  const imgData = fs.readFileSync(`${text.slice(2)}`, {encoding: 'base64'});
   
   
+  let bitmap = fs.readFileSync(gg);
+  let img = Buffer.from(bitmap, 'utf-8').toString('base64');
+ 
+  let img2 = Buffer.from(gg, 'utf-8').toString('base64');
+ 
+ 
   var mailOptions = {
     // from: '"Example Team" <admin@example.com>',
     from: "tt3055783@gmail.com",
@@ -91,6 +101,7 @@ export async function sendTicket(email, text, data) {
     <p>${data.description}</p>
     <br />
     <img src="data:image/png;base64,${imgData}"/>
+    
     `,
     // attachments: [
     //   {

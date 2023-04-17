@@ -1,4 +1,5 @@
 import puppeteer from "puppeteer";
+import fs from 'fs';
 
 import { Ticket } from "../../entities/Ticket/Ticket.js";
 import { generateQRCode } from "../../utils/QRCode/generateQRCode.js";
@@ -7,6 +8,7 @@ import { capturePayment } from "../../utils/Payment/paypalHelpers.js";
 import { sendNotification, sendTicket } from "../../utils/Email/sendEmail.js";
 import { Event } from "../../entities/Event/Event.js"
 import { Location } from "../../entities/Location/Location.js";
+import { Canva } from "../../utils/QRCode/canvas.js";
 
 export const BuyTicket = async (req, res) => {
   const { orderID, productId } = req.body;
@@ -26,7 +28,7 @@ export const BuyTicket = async (req, res) => {
   let data_location = await location.read();
 
   if (event) {
-    let qr_code = generateQRCode(event);
+    let qr_code = generateQRCode(event, req.user.email);
 
     let ticket = new Ticket(event_id, purchase_date, qr_code, user_id);
     ticket.create();
@@ -34,9 +36,9 @@ export const BuyTicket = async (req, res) => {
     let text = `${req.user.full_name} has just join to your event.`;
     let company = await db.find_by_id("Company", event[0].Company_ID);
 
+    // let g = qr_code.slice(2);
+    // const imgData2 = fs.readFileSync(g, {encoding: 'base64'});
     
-
-
     sendNotification(company[0].email, text);
     sendTicket(req.user.email, qr_code, event[0]);
 
@@ -69,7 +71,9 @@ export const GetFreeTicket = async (req, res) =>
 
     let text = `${req.user.full_name} has just join to your event.`;
     let company = await db.find_by_id("Company", event[0].Company_ID);
-
+    event[0].company = company;
+    event[0].location = data_location;
+    Canva(event);
     sendNotification(company[0].email, text);
     sendTicket(req.user.email, qr_code, event[0]);
 
