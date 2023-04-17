@@ -44,17 +44,18 @@ export class Database
 
     availabeSub = async (table, one, id, two, andId) => {
         console.log("\n available \n")
-        let command = `select * from ${table} where ${one}_ID = "${id}" and ${two}_ID = "${andId}"`;
+        let command = `select * from ${table} where User_ID = "${id}" and Company_ID = "${andId}"`;
         let result = await pool.promise().query(command).catch(err => {
             console.error(err.message);
             return new Error(err.message);
         });
+        console.log("🚀 ~ file: Database.js:52 ~ result ~ result:", result[0])
 
-        console.log("\n result \n" + result[0])
+       
 
-        if(!result[0]){
-            return "no";
-        }else return "yes";
+        if(result[0].length > 0){
+            return "yes";
+        }else return "no";
     }
 
     readSub = async (table, one, id) => {

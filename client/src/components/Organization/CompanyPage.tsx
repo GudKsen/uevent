@@ -35,7 +35,7 @@ export function CompanyPage() {
                 companyId: id
             }).then((response) => {
                 console.log(response);
-                if(response.data == "yes"){
+                if(response.data === "yes"){
                     setHaveSub(true)
                 } else{
                     setHaveSub(false)

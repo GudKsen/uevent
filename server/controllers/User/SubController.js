@@ -18,10 +18,11 @@ export const SetSubscribe = async (req, res) => {
     let companyId = req.body.companyId;
    
     let baba = new Database();
-    await baba.save("Subscribed_User", {
+    let id  = await baba.save("Subscribed_User", {
       User_ID: req.user._id,
       Company_ID: req.body.companyId
     })
+    console.log("🚀 ~ file: SubController.js:25 ~ SetSubscribe ~ id:", id)
     
     res.json("Event created");
 };
