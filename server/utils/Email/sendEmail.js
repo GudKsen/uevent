@@ -76,9 +76,11 @@ export async function sendTicket(email, text, data) {
     },
   });
 
-  text.replace("/", "\\");
+  // text.replace("/", "\\");
+  console.log("🚀 ~ file: sendEmail.js:81 ~ sendTicket ~ imgData:", text.slice(2))
   const imgData = fs.readFileSync(text.slice(2), {encoding: 'base64'});
-
+  
+  
   var mailOptions = {
     // from: '"Example Team" <admin@example.com>',
     from: "tt3055783@gmail.com",
