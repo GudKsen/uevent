@@ -267,13 +267,37 @@ function EventPage() {
                     {/* <div className="price"> */}
                     {/* <p>Price:   {event.price}</p> */}
 
-                    <p>
+                      <div className="datetime-eventpage">
+                      <p>
                     <img className="clock-icon-allevents" src={require("../../public/video/clock.png")} alt="" />
                       {new Date(event.startDateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
                     <p>
                     <img className="clock-icon-allevents" src={require("../../public/video/calendar (1).png")} alt="" />
                       {new Date(event.startDateTime).toLocaleDateString()}</p>
+                        </div>
                     
+                    
+                      <div className="location-eventpage">
+                      {
+                        event.location ?
+                          <div>
+                            <img className="clock-icon-allevents" src={require("../../public/video/location.png")} alt="" />
+                             {event.location[0].country}, {event.location[0].city}, {event.location[0].address_line_state},<br/> {event.location[0].address_line_street}, {event.location[0].street_number}
+                          </div>
+                          :
+                          null
+                      }
+                    </div>
+                    <div>
+                      {
+                        event.price ?
+                          <div>
+                            Price: {event.price[0].price_value} {getSymbolFromCurrency(event.price[0].currency)}
+                          </div>
+                          :
+                          null
+                      }
+                    </div><br/>
 
                     <p>Format: {format?.title}</p>
                     <div className="description">
@@ -281,7 +305,7 @@ function EventPage() {
                         {
 
                           event.themes && event.themes.map((theme: Theme) => {
-                            return <label key={theme.Theme_ID}>{theme.title}; </label>
+                            return <label key={theme.Theme_ID}>{theme.title} </label>
                           })
                         }
                       </p>
@@ -378,7 +402,7 @@ function EventPage() {
 
                                 </div>
                                 <div className="timecom">
-                                  <label>{new Date(comment.date).toLocaleDateString()} {new Date(comment.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                  <label className="datetime-comment">{new Date(comment.date).toLocaleDateString()} {new Date(comment.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                   </label>
 
                                 </div>
@@ -445,6 +469,7 @@ function EventPage() {
                   }
                   <div className="create-comm">
                     {/* <div className="rage">
+                    {/* <div className="rage">
                       <div className="num">
                         <div>0</div>
                         <div>1</div>
@@ -458,11 +483,11 @@ function EventPage() {
                           min="0" max="5" onChange={(e) => setRange(e.target.value)}/>
                       </div>
 
-                    {/* </div> */}
+                    </div> */}
                     <div className="input-box-a mavka">
-                      <textarea onChange={(e) => setContent(e.target.value)} placeholder="Enter comment"></textarea>
+                      <textarea className="textarea-create-comment" onChange={(e) => setContent(e.target.value)}  placeholder="Enter comment"></textarea>
                     </div>
-                    <button className="crater" onClick={createComment}>Create</button>
+                    <button className="crater button" onClick={createComment}>Create</button>
                   </div>
 
 
