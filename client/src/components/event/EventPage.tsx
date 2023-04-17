@@ -254,7 +254,7 @@ async function createwithoutprom(){
                     <div className="event-header">
                       <div className="event-title">
                         <p>Title:   {event.title}</p>
-                      </div><br />
+                      </div>
                       {/* <Rating/> */}
                       {/* <p>{event.description}</p> */}
                     </div>
@@ -269,9 +269,29 @@ async function createwithoutprom(){
 
                     <p>Time:   {new Date(event.startDateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
                     <p>Date:   {new Date(event.startDateTime).toLocaleDateString()}</p>
+                    <div>
+                      {
+                        event.price ?
+                          <div>
+                            Location: {event.location[0].country}, {event.location[0].city}, {event.location[0].address_line_state}, {event.location[0].address_line_street}, {event.location[0].street_number}
+                          </div>
+                          :
+                          null
+                      }
+                    </div>
+                    <div>
+                      {
+                        event.price ?
+                          <div>
+                            Price: {event.price[0].price_value} {getSymbolFromCurrency(event.price[0].currency)}
+                          </div>
+                          :
+                          null
+                      }
+                    </div><br/>
                     {/* <p>Address:   {event.address_line_street}, {event.street_number}</p> */}
 
-                    <p>Format: {format?.title}</p><br />
+                    <p>Format: {format?.title}</p>
                     <div className="description">
                       <p>Theme:<label> </label>
                         {
@@ -286,17 +306,7 @@ async function createwithoutprom(){
 
 
 
-
-                    <div>
-                      {
-                        event.price ?
-                          <div>
-                            Price: {event.price[0].price_value} {getSymbolFromCurrency(event.price[0].currency)}
-                          </div>
-                          :
-                          null
-                      }
-                    </div>
+                    
 
                     {/* <div className="date">
 

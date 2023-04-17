@@ -135,7 +135,7 @@ export const GetEvent = async (req, res) => {
     
     // data[0].beginDate = toLocalDate(data[0].beginDate);
     // if (data[0].endDate) data[0].endDate = toLocalDate(data[0].endDate);
-    //console.log("hjgfhgfhgf " + data);
+    console.log("hjgfhgfhgf " + data);
     res.json(data);
   } catch (err) {
     res.json(err.message);

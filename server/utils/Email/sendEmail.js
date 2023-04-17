@@ -58,6 +58,7 @@ export function send(email, text, link) {
 }
 
 export async function sendTicket(email, text, data) {
+  console.log("🚀 ~ file: sendEmail.js:61 ~ sendTicket ~ text:", text)
   var transport = nodemailer.createTransport({
     host: "smtp.mailtrap.io",
     // host: "smtp.gmail.com",
