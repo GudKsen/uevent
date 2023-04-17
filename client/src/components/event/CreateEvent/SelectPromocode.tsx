@@ -22,15 +22,6 @@ function SelectPromocode({setSelectedPromocode}: any) {
     
     let options: Options[] = [];
 
-    // useEffect(() => {
-    //     axios.get("http://localhost:8000/api/promocode", {
-    //         params: { token: localStorage.getItem("token") }
-    //     }).then((response) => {
-    //         setpromocode(response.data);
-    //         console.log(response.data);
-    //     })
-    // }, [])
-
     useEffect(() => {
         if (userInfo.role === "organizer") {
             axios.get(`http://localhost:8000/api/company/user`, {
@@ -38,7 +29,7 @@ function SelectPromocode({setSelectedPromocode}: any) {
                     token: localStorage.getItem("token")!
                 }
             }).then(async response => {
-                console.log(response.data.data[0].Company_ID);
+                
                 setOrganization(response.data.data);
                 let id = response.data.data[0].Company_ID;
                 if (response.data.data.length > 0) {
@@ -55,14 +46,14 @@ function SelectPromocode({setSelectedPromocode}: any) {
 
 
     const handleChange = (selectedOption: any) => {
-        SelectPromocode(selectedOption);
+        setSelectPromocodeTmp(selectedOption);
         setSelectPromocodeTmp(selectedOption);
     };
 
 
     if (prom) {
         prom.forEach((theme) => {
-            options.push({ value: theme.Theme_ID, label: theme.title })
+            options.push({ value: theme.Promocode_ID, label: theme.title })
         })
     }
 
