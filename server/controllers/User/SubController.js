@@ -64,7 +64,7 @@ export const GetSubscribe = async (req, res) => {
   
     let author = req.user._id;
   
-    let companyId = req.body.companyId;
+    // let companyId = req.body.companyId;
    
     let baba = new Database();
     let subcribe = await baba.readSub("Subscribed_User", 

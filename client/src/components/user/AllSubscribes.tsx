@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "./styles/styleAllCompanies.scss";
+import "../Admin/styles/styleAllCompanies.scss";
 import { useNavigate } from "react-router";
-import "./styles/commonStyle.scss";
-import "./styles/allcompany.scss";
-import { ImageComponent } from "./component/ImageComponent";
-import { useOutsideClick } from "./utils/useOutsideClick";
+import "../Admin/styles/commonStyle.scss";
+import "../Admin/styles/allcompany.scss";
+import { ImageComponent } from "../Admin/component/ImageComponent";
+import { useOutsideClick } from "../Admin/utils/useOutsideClick";
 
 function AllCompanies ()
 {
@@ -80,7 +80,7 @@ function AllCompanies ()
     return (
         <div className="companies-table allcompanies">
             <button className="button-44" onClick={() => DeleteCompanyButton()}>Delete</button>
-            <button className="button-41" onClick={() => navigate("/create-company")}>Create</button>
+            {/* <button className="button-41" onClick={() => navigate("/create-company")}>Create</button> */}
             {
                 companies.length > 0 ? 
                 <table>
