@@ -47,7 +47,7 @@ function SelectPromocode({setSelectedPromocode}: any) {
 
 
     const handleChange = (selectedOption: any) => {
-        setSelectPromocodeTmp(selectedOption);
+        setSelectedPromocode(selectedOption);
         setSelectPromocodeTmp(selectedOption);
     };
 
