@@ -41,7 +41,7 @@ export function CreatePromocode() {
                 <div className="prom-content">
                     <div><h1>Create promocode</h1></div>
                     <div className="proms-contaner">
-                        <div className="title-create-event-form input-box-a field">
+                        <div className="title-create-event-form input-box-an field">
                             <div>TITLE</div>
                             <div>
                                 <input type="text" className="tit"
@@ -50,7 +50,7 @@ export function CreatePromocode() {
                             </div>
                         </div>
 
-                        <div className="description-create-event input-box-a field">
+                        <div className="description-create-event input-box-an field">
                             <div>DESCRIPTION</div>
                             <div>
                                 <textarea className="descr is-focused"
@@ -59,7 +59,7 @@ export function CreatePromocode() {
                             </div>
                         </div>
 
-                        <div className="description-create-event input-box-a field">
+                        <div className="description-create-event input-box-an field">
                             <div>Discount</div>
                             <div>
                                 <input type="Number" className="tit"
@@ -67,7 +67,7 @@ export function CreatePromocode() {
                                 ></input>
                             </div>
                         </div>
-                        <div className="date-create-event input-box-a field">
+                        <div className="date-create-event input-box-an field">
                             <div>
                                 <table>
                                     <tbody>

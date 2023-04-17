@@ -4,6 +4,8 @@ import { useNavigate, useNavigation, useParams } from "react-router-dom";
 import getSymbolFromCurrency from 'currency-symbol-map'
 import "./createpromocodestyle.scss"
 
+import {EnterPromocode} from "./enterPromocod"
+
 import Popup from 'reactjs-popup'
 
 import Header from "../sidebar/Header";
@@ -318,12 +320,13 @@ async function createwithoutprom(){
 
                             >Buy</button>}
                             >
+                              {/* <EnterPromocode/> */}
                               <div className="prom-panel">
                                 <div className="admin-page-prom">
                                     <div className="pro-content">
                                         <div><h1>Enter promo code</h1></div>
                                         <div className="proms-contaner">
-                                            <div className="title-create-event-form input-box-a field">
+                                            <div className="title-create-event-form input-box-an field">
                                                 <div>
                                                     <br/><input type="text" className="tit"
                                                     onChange={(e) => {setProm(e.target.value)}} required
