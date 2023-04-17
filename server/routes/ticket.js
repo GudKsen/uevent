@@ -8,7 +8,7 @@ import {
     GetTickets,
     // UpdateTicket,
     DeleteTicket
-} from "../controllers/Ticket/TicketController.js";
+} from "../controllers/Ticket/Ticket.js";
 
 const router = express.Router();
 

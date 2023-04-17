@@ -28,7 +28,6 @@ export const CreateEvent = async (req, res) => {
   let duration = req.body.duration;
   let price = req.body.price;
   let currency = req.body.currency;
-  console.log("🚀 ~ file: EventController.js:31 ~ CreateEvent ~ currency:", currency)
  
   if (!req.body.title) {
     res.status(400).send({

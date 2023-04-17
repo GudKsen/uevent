@@ -66,6 +66,12 @@ export class DatabaseGet {
           }
         }
 
+        let command_get_location = `select * from Location where Location_ID = ${events[0][0].Location_ID}`;
+        let location = await pool.promise().query(command_get_location);
+        if (location[0].length > 0)
+        {
+          events[0][0].location = location[0];
+        }
         
         return events[0];
       } else {
@@ -188,19 +194,6 @@ export class DatabaseGet {
 
   async get_events_by_company(id)
   {
-    // console.log(id);
-    // let command = `select * from Event where Company_ID = ${id}`;
-    // // console.log(command);
-    // let data = await pool.promise().query(command);
-    // console.log(data[0]);
-    // if (data[0].length) {
-    //   return data[0];
-    // }
-    // else {
-    //   return null;
-    // }
-
-
     let current_date = new Date().toISOString().slice(0, 19).replace("T", " ");
     let get_events_command = `select * from Event where Company_ID = ${id}`;
 
