@@ -80,4 +80,11 @@ export const GetSubscribe = async (req, res) => {
     res.json(subcribe);
 };
 
+export const GetSubByUser = async (req, res) =>
+{
+  let baba = new Database();
+  let subcribes = await baba.readSubByUser(req.user._id);
+  res.json(subcribes);
+}
+
   

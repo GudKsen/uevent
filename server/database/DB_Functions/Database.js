@@ -59,9 +59,22 @@ export class Database
     }
 
     readSub = async (table, one, id) => {
-        console.log("\n read \n")
+        
         let command = `select * from ${table} where ${one}_ID = "${id}"`;
+        
         let result = await pool.promise().query(command).catch(err => {
+            console.error(err.message);
+            return new Error(err.message);
+        });
+        return result[0];
+    }
+
+    readSubByUser = async(id) =>
+    {
+        let command2 = `select Company.* from Subscribed_User 
+        inner join Company on Subscribed_User.Company_ID = Company.Company_ID
+        where Subscribed_User.User_ID = User_ID = ${id}`;
+        let result = await pool.promise().query(command2).catch(err => {
             console.error(err.message);
             return new Error(err.message);
         });
