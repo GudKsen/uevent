@@ -89,25 +89,41 @@ function EventPage() {
   async function createprom(){
         
     console.log(prom);
+    localStorage.removeItem("promocode");
 
-    // localStorage.setItem(
-    //   "promocode",
-    //   JSON.stringify({ User_ID, password, full_name, email, role , country, city, phone_number, birthday, profile_picture})
-    // );
+    axios.post("http://localhost:8000/api/available/promocode",{
+      token: localStorage.getItem("token"),
+        promo: prom,
+        id_event: event.Event_ID
+      }).then((response) => {
+        if(response.data == "Not available"){
+          alert("Promocode is not available");
+          return ;
+        }else{
+          console.log(response.data);
+          let cost = response.data;
+          localStorage.setItem("promocode", JSON.stringify({ cost}));
+          handleClickButton(event.Event_ID);
+        }
+    });
 
-    // axios.post("http://localhost:8000/api/promocode",{
-        
-    // });
-    navigate("/events-manage");
+    
+
+
+    // navigate("/events-manage");
 }
 
 
 async function createwithoutprom(){
+
+  const nill = 0;
         
   console.log(prom);
+  localStorage.removeItem("promocode");
+  localStorage.setItem("promocode", JSON.stringify({ nill}));
   handleClickButton(event.Event_ID);
 
-  // axios.post("http://localhost:8000/api/promocode",{
+  // axios.post("http://localhost:8000/api/available/promocode",{
       
   // });
   navigate("/events-manage");
@@ -121,6 +137,7 @@ async function createwithoutprom(){
     axios.get(`http://localhost:8000/api/company/${event.Company_ID}`).then((res) => {
       setCompany(res.data[0]);
       console.log(res.data[0]);
+      
     })
   }
 

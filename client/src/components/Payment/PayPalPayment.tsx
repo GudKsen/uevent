@@ -43,6 +43,21 @@ export function PayPalPayment(productId: any) {
         axios.get(`http://localhost:8000/api/event/${productId.productId}`, {
             params: { token: localStorage.getItem("token") }
         }).then(response => {
+            // let promocode = parseInt(JSON.parse(localStorage.getItem("promocode") as string));
+        
+        // Order is created on the server and the order id is returned
+
+        console.log(response.data[0].price[0].price_value);
+        let temp = response.data[0].price[0].price_value;
+        
+
+        // if(promocode == 0){
+        //         response.data[0].price[0].price_value = temp;
+        // } else if(promocode !=0){
+        //     response.data[0].price[0].price_value = (((100-promocode)/100) * parseFloat(temp)).toString();
+        // }
+
+            console.log("not nan "+response.data[0].price[0].price_value);
             setEvent(response.data[0]);
             console.log(response.data[0]);
         });
@@ -51,18 +66,70 @@ export function PayPalPayment(productId: any) {
     const serverUrl = "http://localhost:8000";
 
     const createOrder = async (data: any) => {
+
+        let promocode = parseInt(JSON.parse(localStorage.getItem("promocode") as string));
+
+        
         // Order is created on the server and the order id is returned
         let price_value;
-        if (event.price[0].currency !== "USD") {
-            let pr: number = await ConvertPriceToUSD("USD", event.price[0].currency, event.price[0].price_value, setPrice) ?? 0;
+        let cost = parseFloat(event.price[0].price_value)*0.9;
+        console.log("price value"+cost);
+        if(promocode == 0){
+            if (event.price[0].currency !== "USD") {
+                let pr: number = await ConvertPriceToUSD("USD", event.price[0].currency, event.price[0].price_value, setPrice) ?? 0;
 
-            if (pr !== undefined) {
-                price_value = Number(pr.toFixed(2));
+                if (pr !== undefined) {
+                    price_value = Number(pr.toFixed(2))*0.9;
+                    console.log("price value"+price_value);
+                }
             }
+            else {
+                price_value = event.price[0].price_value;
+            }
+
+
+                
+        } else if(promocode !=0){
+            if (event.price[0].currency !== "USD") {
+                let pr: number = await ConvertPriceToUSD("USD", event.price[0].currency, event.price[0].price_value, setPrice) ?? 0;
+
+                if (pr !== undefined) {
+                    price_value = Number(Number(pr.toFixed(2)) *(100-promocode)/100);
+                    console.log("price value"+price_value);
+                }
+            }
+            else {
+                price_value = Number(parseFloat(event.price[0].price_value) * (100-promocode)/100);
+            }
+
+
+            
         }
-        else {
-            price_value = event.price[0].price_value;
-        }
+            
+        
+        
+        
+        
+        
+        // if (event.price[0].currency !== "USD") {
+            //     let pr: number = await ConvertPriceToUSD("USD", event.price[0].currency, event.price[0].price_value, setPrice) ?? 0;
+
+            //     if (pr !== undefined) {
+            //         price_value = Number(pr.toFixed(2))*0.9;
+            //         console.log("price value"+price_value);
+            //     }
+            // }
+            // else {
+            //     price_value = event.price[0].price_value;
+            // }
+        
+
+        
+
+        localStorage.removeItem("promocode");
+
+
+        
 
 
         return await fetch(`${serverUrl}/create-paypal-order`, {

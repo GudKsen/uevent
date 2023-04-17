@@ -333,4 +333,18 @@ async get_news_by_company(id)
     
   }
 
+
+  async get_promocod_by_event_id(promo, event_id){
+    let get_events_command = `select Promocode.* from Event_Promocode
+    inner join Promocode on Event_Promocode.Promocode_ID = Promocode.Promocode_ID
+    where Event_Promocode.Event_ID = ${event_id}`;
+    const events = await pool.promise().query(get_events_command);
+    console.log(events[0]);
+    if (events[0].length) {
+      return events[0];
+    } else {
+      return null;
+    }
+  }
+
 }

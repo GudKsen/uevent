@@ -9,9 +9,10 @@ import { Database } from "../../database/DB_Functions/Database.js";
 // import { setEndTimeEvent } from "../utils/setEndTimeEvent.js";
 // import { toLocalDate } from "../utils/toLocalDate.js";
 
-let database = new DatabaseFind();
+let db = new DatabaseFind();
 
 export const CreateEvent = async (req, res) => {
+  
   let title = req.body.title;
   let description = req.body.description;
   let author = req.user._id;
@@ -71,7 +72,7 @@ export const CreateEvent = async (req, res) => {
   }
 
   for (let i = 0; i < themes.length; i++) {
-    let isExistTheme = await database.find_by_id("Theme", themes[i]);
+    let isExistTheme = await db.find_by_id("Theme", themes[i]);
     if (isExistTheme === null) {
       res.json("Error: theme doesn't exist");
       return;
@@ -114,8 +115,8 @@ export const CreateEvent = async (req, res) => {
   
 
   let eventId = await event.save();
-  let database = new Database();
-  database.save("Event_Promocode", {
+  let baba = new Database();
+  baba.save("Event_Promocode", {
     Event_ID: eventId,
     Promocode_ID: promocodeId
   })
