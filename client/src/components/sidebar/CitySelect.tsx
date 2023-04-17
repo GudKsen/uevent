@@ -7,7 +7,7 @@ interface ILocationOne {
     value: string;
     label: string;
 }
-let countryCode = localStorage.getItem("country");
+
 // let cities: any = [];
 // if (countryCode) {
 //     console.log("🚀 ~ file: CitySelect.tsx:13 ~ countryCode:", countryCode)
@@ -21,7 +21,23 @@ let countryCode = localStorage.getItem("country");
 // }
 
 export function CitySelect(setSelectedCity: any) {
-    // const [cities, setCities] = useState<{ value: string, label: string }[]>([]);
+     const [cities, setCities] = useState<{ value: string, label: string }[]>([]);
+
+    //  useEffect(() => {
+    //             let countryCode = localStorage.getItem("country");
+    //             // console.log("🚀 ~ file: CitySelect.tsx:13 ~ countryCode:", countryCode?)
+                
+    //             if (countryCode)
+    //             {
+    //                 for (var i = 0; i < City.getCitiesOfCountry(countryCode!)!.length; i++) {
+    //                     cities.push({
+    //                         value: City.getCitiesOfCountry(countryCode!)![i].name,
+    //                         label: City.getCitiesOfCountry(countryCode!)![i].name
+    //                     });
+    //                 }
+    //             }
+            
+    //  }, [])
 
 
     console.log("🚀 ~ file: CitySelect.tsx:13 ~ CitySelect ~ countryCode:", countryCode)
