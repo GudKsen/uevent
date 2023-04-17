@@ -15,12 +15,15 @@ function AllCompanies ()
     const navigate = useNavigate();
     
     useEffect(() => {
-        axios.post("http://localhost:8000/api/sub-get", {
-            token: localStorage.getItem("token")
-        }).then((response) => {
+        axios.get("http://localhost:8000/api/sub-get-user", {
+            headers: {
+              token: localStorage.getItem("token")!
+            }
+          }).then((response) => {
             console.log(response.data)
+            setCompanies(response.data);
             if(!response.data){
-                setCompanies(response.data);
+                
             } else{
                 
                 // axios.get("http://localhost:8000/api/companies", {

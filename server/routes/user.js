@@ -7,7 +7,7 @@ import { multerFilter, multerStorageUser } from "../utils/Media/multerFunc.js";
 import { CreateUser, GetUser, UpdateUser, DeleteUser, GetUsers } 
 from "../controllers/User/UserController.js";
 
-import { SetSubscribe, ExploreSubscribe, DeleteSubscribe, GetSubscribe} 
+import { SetSubscribe, ExploreSubscribe, DeleteSubscribe, GetSubscribe, GetSubByUser} 
 from "../controllers/User/SubController.js";
 
 const router = express.Router();
@@ -27,5 +27,6 @@ router.post("/api/sub", auth, SetSubscribe);
 router.post("/api/sub-yes", auth, ExploreSubscribe);
 router.post("/api/sub-del", auth, DeleteSubscribe);
 router.post("/api/sub-get", auth, GetSubscribe);
+router.get("/api/sub-get-user", auth, GetSubByUser);
 
 export default router;
