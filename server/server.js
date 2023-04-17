@@ -11,6 +11,7 @@ import company from "./routes/company.js";
 import format from "./routes/format.js";
 import comment from "./routes/comment.js";
 import payment from "./routes/payment.js";
+import ticket from "./routes/ticket.js";
 
 import cors from 'cors';
 
@@ -40,6 +41,7 @@ app.use(company);
 app.use(format);
 app.use(comment);
 app.use(payment);
+app.use(ticket);
 
 app.all("*", (req, res) => {
     res.status(404).send('404! Page not found');

@@ -99,12 +99,17 @@ function EventPage() {
     });
   }
 
-  function handleClickFreeButton(id: any) {
+  async function handleClickFreeButton(id: any) {
     setAnimate("animate");
     setTimeout(() => {
       setAnimate("");
     }, 8000);
-    
+    await axios.post(`http://localhost:8000/api/event/ticket/free/${id}`, id,{
+      headers: {
+          'Content-Type': 'multipart/form-data',
+          'token': localStorage!.getItem("token")!
+      }
+  })
   }
 
   async function deleteComment(idComment: any) {

@@ -45,9 +45,37 @@ export const BuyTicket = async (req, res) => {
   return res.status(404).json("No such event");
 };
 
-export const GetFreeTicket = (req, res) =>
+export const GetFreeTicket = async (req, res) =>
 {
+  let event_id = parseInt(req.params.id);
+  let user_id = req.user._id;
+  let purchase_date = new Date().toISOString().slice(0, 19).replace("T", " ");
+
+  let db = new DatabaseFind();
+  let event = await db.find_by_id("Event", event_id);
+  console.log("🚀 ~ file: Ticket.js:56 ~ event:", event)
   
+  let ev = new Event();
+  ev.init(event_id);
+  let location = new Location();
+  location.init(event[0].Location_ID);
+  let data_location = await location.read();
+
+  if (event) {
+    let qr_code = generateQRCode(event);
+
+    let ticket = new Ticket(event_id, purchase_date, qr_code, user_id);
+    ticket.create();
+
+    let text = `${req.user.full_name} has just join to your event.`;
+    let company = await db.find_by_id("Company", event[0].Company_ID);
+
+    sendNotification(company[0].email, text);
+    sendTicket(req.user.email, qr_code, event[0]);
+
+    return res.json("Ticket was send to your account");
+  }
+  return res.status(404).json("No such event");
 }
 
 export const GetTicket = async (req, res) => {
@@ -64,6 +92,6 @@ export const GetTickets = async (req, res) => {
   res.json(data);
 };
 
-export const DeleteTickets = (req, res) => {
+export const DeleteTicket = (req, res) => {
   let id = parseInt(req.params.id);
 };

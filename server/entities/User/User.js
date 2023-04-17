@@ -118,7 +118,7 @@ export class User
     async delete() {
         let db = new DatabaseGet();
         let company = await db.get_company_by_userID(this.id);
-        let comments = await db.get_comments_by_user_id(this.id);
+        let comments = await db.get_data_by_user_id("Comment", this.id);
         if (comments)
         {
             for (let comment of comments)
