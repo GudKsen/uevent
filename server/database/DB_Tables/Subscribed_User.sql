@@ -8,4 +8,4 @@ CREATE TABLE IF NOT EXISTS Subscribed_User(
     User_ID INT NOT NULL,
     FOREIGN KEY(Company_ID) REFERENCES Company(Company_ID),
     FOREIGN KEY(User_ID) REFERENCES User(User_ID)
-)
+);

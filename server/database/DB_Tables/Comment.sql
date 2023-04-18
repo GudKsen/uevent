@@ -11,4 +11,4 @@ CREATE TABLE IF NOT EXISTS Comment(
     Event_ID INT NOT NULL,
     FOREIGN KEY(User_ID) REFERENCES User(User_ID),
     FOREIGN KEY(Event_ID) REFERENCES Event(Event_ID)
-)
+);

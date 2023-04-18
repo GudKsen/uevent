@@ -11,4 +11,4 @@ CREATE TABLE IF NOT EXISTS Location(
     address_line_state VARCHAR(255),
     city VARCHAR(255) NOT NULL,
     country VARCHAR(255) NOT NULL
-)
+);

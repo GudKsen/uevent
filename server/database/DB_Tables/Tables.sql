@@ -42,6 +42,9 @@ CREATE TABLE IF NOT EXISTS User (
     profile_picture VARCHAR(255),
     birthday DATE,
     phone_number VARCHAR(50) UNIQUE NOT NULL,
+    telegram VARCHAR(50),
+    twitter VARCHAR(50),
+    skype VARCHAR(50),
     country VARCHAR(255) NOT NULL,
     city VARCHAR(255) NOT NULL,
     Role_ID INT NOT NULL,
@@ -182,6 +185,7 @@ CREATE TABLE IF NOT EXISTS Event(
     endDateTime DATETIME,
     Location_ID INT,
     FOREIGN KEY(Location_ID) REFERENCES Location(Location_ID),
+    number_of_tickets INT NOT NULL,
     Price_ID INT(50),
     isPromocodeAvailable INT(1),
     Format_ID INT NOT NULL,
@@ -221,7 +225,11 @@ CREATE TABLE IF NOT EXISTS Promocode(
     Promocode_ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     title VARCHAR(100) NOT NULL,
     description VARCHAR(255),
-    discount INT NOT NULL
+    discount INT NOT NULL,
+    startDateTime DATETIME,
+    endDateTime DATETIME,
+    Company_ID INT NOT NULL,
+    FOREIGN KEY(Company_ID) REFERENCES Company(Company_ID)
 );
 
 SET FOREIGN_KEY_CHECKS = 0;
@@ -240,9 +248,9 @@ DROP TABLE IF EXISTS Subscribed_User;
 SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE IF NOT EXISTS Subscribed_User(
-    Event_ID INT NOT NULL,
+    Company_ID INT NOT NULL,
     User_ID INT NOT NULL,
-    FOREIGN KEY(Event_ID) REFERENCES Event(Event_ID),
+    FOREIGN KEY(Company_ID) REFERENCES Company(Company_ID),
     FOREIGN KEY(User_ID) REFERENCES User(User_ID)
 );
 
@@ -253,23 +261,26 @@ SET FOREIGN_KEY_CHECKS = 1;
 CREATE TABLE IF NOT EXISTS Ticket (
     Ticket_ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     Event_ID INT NOT NULL,
-    price INT,
     FOREIGN KEY(Event_ID) REFERENCES Event(Event_ID),
-    purchase_date TIMESTAMP NOT NULL,
-    seat VARCHAR(255) UNIQUE,
-    visit_date TIMESTAMP NOT NULL,
+    purchase_date DATETIME NOT NULL,
     User_ID INT NOT NULL,
-    FOREIGN KEY(User_ID) REFERENCES User(User_ID)
+    FOREIGN KEY(User_ID) REFERENCES User(User_ID),
+    qr_code VARCHAR(255)
 );
 
 SET FOREIGN_KEY_CHECKS = 0;
-DROP TABLE IF EXISTS User_Ticket;
+DROP TABLE IF EXISTS Comment;
 SET FOREIGN_KEY_CHECKS = 1;
 
-CREATE TABLE IF NOT EXISTS User_Ticket (
+CREATE TABLE IF NOT EXISTS Comment(
+    Comment_ID INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    content VARCHAR(255) NOT NULL,
+    date DATE NOT NULL,
     User_ID INT NOT NULL,
-    Ticket_ID INT NOT NULL,
+    Event_ID INT NOT NULL,
     FOREIGN KEY(User_ID) REFERENCES User(User_ID),
-    FOREIGN KEY(Ticket_ID) REFERENCES Ticket(Ticket_ID)
+    FOREIGN KEY(Event_ID) REFERENCES Event(Event_ID)
 );
+
+
 
