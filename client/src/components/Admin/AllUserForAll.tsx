@@ -205,9 +205,9 @@ function AllUsersForAll() {
                                     <td onClick={() => {
                                         onEdit({ id: user.User_ID, colN: "telegram" });
                                     }}>
-                                        { user.phone_number ?
+                                        { user.telegram ?
                                         (
-                                                    user.phone_number
+                                                    user.telegram
                                                 ) : <></>
                                         }
                                        
@@ -216,9 +216,9 @@ function AllUsersForAll() {
                                     <td onClick={() => {
                                         onEdit({ id: user.User_ID, colN: "twitter" });
                                     }}>
-                                        { user.phone_number ?
+                                        { user.twitter ?
                                         (
-                                                    user.phone_number
+                                                    user.twitter
                                                 ) : <></>
                                         }
                                        
@@ -227,9 +227,9 @@ function AllUsersForAll() {
                                     <td onClick={() => {
                                         onEdit({ id: user.User_ID, colN: "skype" });
                                     }}>
-                                        { user.phone_number ?
+                                        { user.skype ?
                                         (
-                                                    user.phone_number
+                                                    user.skype
                                                 ) : <></>
                                         }
                                        
