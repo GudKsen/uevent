@@ -9,6 +9,7 @@ import UserPage from "./components/user/UserPage";
 import Subscribes from "./components/user/subscribers";
 import Setting from "./components/user/Setting";
 import Event from "./components/event/Event";
+import AppMap from "./components/map/src/AppMap";
 import EventPage from "./components/event/EventPage";
 import RegiConfirm from "./components/register/RegiConfirm";
 import BankCard from "./components/bankCard/bankCard";
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/api/map",
+    element: <AppMap />,
   },
   {
     path: "/setting",

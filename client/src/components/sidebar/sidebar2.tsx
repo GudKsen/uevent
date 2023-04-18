@@ -105,7 +105,11 @@ function Sidebar2() {
                             {/* {userInfo.role === "admin" ? <li className="nav-link manage-eve">
                                 <NavigateAdminPanel />
                             </li> : null} */}
-                            <NavigateAdminPanel/>
+                            
+                            {
+                                userInfo.role === "admin" ?<NavigateAdminPanel/>:<></>
+                                
+                            }
 
                             <li className="nav-link" onClick={() => {
                                 navigate("/events");
@@ -118,32 +122,32 @@ function Sidebar2() {
 
                             </li>
 
-                            <li className="nav-link">
+                            {/* <li className="nav-link">
 
                                 <div className="bb bx bx-search icon">
                                     <div className="hoverme-calendar"></div>
                                 </div>
                                 <span className="text nav-text">Calendar</span>
 
-                            </li>
+                            </li> */}
 
-                            <li className="nav-link">
+                            {/* <li className="nav-link">
 
                                 <div className="bb bx bx-search icon">
                                     <div className="hoverme-notification"></div>
                                 </div>
                                 <span className="text nav-text">Notifications</span>
 
-                            </li>
+                            </li> */}
 
-                            <li className="nav-link">
+                            {/* <li className="nav-link">
 
                                 <div className="bb bx bx-search icon">
                                     <div className="hoverme-tickets"></div>
                                 </div>
                                 <span className="text nav-text">Tickets</span>
 
-                            </li>
+                            </li> */}
 
                             <li onClick={() => {
                                 navigate("/subscribes");
@@ -156,16 +160,16 @@ function Sidebar2() {
 
                             </li>
 
-                            <li className="nav-link">
+                            {/* <li className="nav-link">
 
                                 <div className="bb bx bx-search icon">
                                     <div className="hoverme-basket"></div>
                                 </div>
                                 <span className="text nav-text">Basket</span>
 
-                            </li>
+                            </li> */}
 
-                            <li className="nav-link" onClick={() => {
+                            {/* <li className="nav-link" onClick={() => {
                                 navigate("/bankcard");
                             }}>
 
@@ -174,7 +178,7 @@ function Sidebar2() {
                                 </div>
                                 <span className="text nav-text">Wallets</span>
 
-                            </li>
+                            </li> */}
 
                         </ul>
                     </div>

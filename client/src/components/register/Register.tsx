@@ -174,7 +174,7 @@ function Register() {
           </div><br />
 
           <div className="column">
-            <div className="input-box-a">
+            <div className="input-box-al">
               <label>Phone Number</label>
 
               {/* <PhoneInputGfg onChange={(e:any) => setNumber(state)}/> */}
