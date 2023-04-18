@@ -46,6 +46,9 @@ export const UpdateUser = async(req, res) => {
   console.log("🚀 ~ file: UserController.js:46 ~ UpdateUser ~ profilePicture:", profilePicture)
   let country = req.body.country;
   let city = req.body.city;
+  let telegram = req.body.telegram;
+  let twitter = req.body.twitter;
+  let skype = req.body.skype;
   let id = parseInt(req.params.id);
 
   let imageName = null;
@@ -55,7 +58,7 @@ export const UpdateUser = async(req, res) => {
     imageName = null;
   }
 
-  let userNew = new User(full_name, email, country, city, role, phone_number, birthday, password, imageName);
+  let userNew = new User(full_name, email, country, city, role, phone_number, birthday, password, imageName, telegram, twitter, skype);
   let userOld = new User();
   
   userOld.init(id);

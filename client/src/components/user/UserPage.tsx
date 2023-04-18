@@ -14,6 +14,11 @@ function UserPage() {
   const [email, setEmail] = useState<string>();
   const [phone_number, setPhoneNumber] = useState<string>();
   const [dateofbirth, setDateOfBirth] = useState<string>();
+
+  const [telegram, settelegram] = useState<string>();
+  const [twitter, settwitter] = useState<string>();
+  const [skype, setskype] = useState<string>();
+
   const [organization, setOrganization] = useState<{
     name: string,
     description: string,
@@ -60,12 +65,15 @@ function UserPage() {
 
   function updateProfileTextData() {
     let formField = new FormData();
-
+  formField.append('telegram', telegram!);
+      formField.append('twitter', twitter!);
+      formField.append('skype', skype!);
     formField.append('full_name', fullname!);
     formField.append('email', email!);
     formField.append('phone_number', phone_number!);
     formField.append('birthday', dateofbirth!);
-
+    
+      console.log(formField);
     axios.patch(`http://localhost:8000/api/user/${userInfo.User_ID}`, formField, {
       headers: {
         // 'Content-Type': 'multipart/form-data',
@@ -74,10 +82,10 @@ function UserPage() {
     }).then(res => {
 
       localStorage.removeItem("userInfo");
-      const { User_ID, password, full_name, email, role, country, city, phone_number, birthday, profile_picture } = res.data;
+      const { User_ID, password, full_name, email, role, country, city, phone_number, birthday, profile_picture, telegram, twitter, skype } = res.data;
       localStorage.setItem(
         "userInfo",
-        JSON.stringify({ User_ID, password, full_name, email, role, country, city, phone_number, birthday, profile_picture })
+        JSON.stringify({ User_ID, password, full_name, email, role, country, city, phone_number, birthday, profile_picture, telegram, twitter, skype })
       );
       userInfo = JSON.parse(localStorage.getItem("userInfo") as string);
       setUserInfoTmp(userInfo);
@@ -230,7 +238,7 @@ function UserPage() {
               {
                 inEditDataMode.status ?
                   <input onChange={(e) => {
-                    setPhoneNumber(e.target.value);
+                    settelegram(e.target.value);
                   }} className="userinfo-data-input" type="text" defaultValue={userInfo.telegram}></input>
                   :
                   // {
@@ -249,7 +257,7 @@ function UserPage() {
               {
                 inEditDataMode.status ?
                   <input onChange={(e) => {
-                    setPhoneNumber(e.target.value);
+                    settwitter(e.target.value);
                   }} className="userinfo-data-input" type="text" defaultValue={userInfo.twitter}></input>
                   :
                   <div className="userinfo-data">{userInfo.twitter}</div>
@@ -261,7 +269,7 @@ function UserPage() {
               {
                 inEditDataMode.status ?
                   <input onChange={(e) => {
-                    setPhoneNumber(e.target.value);
+                    setskype(e.target.value);
                   }} className="userinfo-data-input" type="text" defaultValue={userInfo.skype}></input>
                   :
                   <div className="userinfo-data">{userInfo.skype}</div>

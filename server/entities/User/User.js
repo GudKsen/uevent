@@ -8,7 +8,7 @@ let database = new Database();
 
 export class User
 {
-    constructor(Full_name, Email, Country, City, Role, Phone_number, Birthday, Password, Profile_picture)
+    constructor(Full_name, Email, Country, City, Role, Phone_number, Birthday, Password, Profile_picture, telegram, twitter,skype)
     {
         this.full_name = Full_name;
         this.email = Email;
@@ -16,6 +16,9 @@ export class User
         this.city = City;
         this.role = Role;
         this.phone_number = Phone_number;
+        this.telegram = telegram;
+        this.twitter = twitter;
+        this.skype = skype;
         this.birthday = Birthday;
         this.password = Password;
         this.profile_picture = Profile_picture;
@@ -30,6 +33,9 @@ export class User
           full_name: this.full_name,
           password: this.password,
           phone_number: this.phone_number,
+          telegram: this.telegram,
+          twitter: this.twitter,
+          skype: this.skype,
           email: this.email,
           profile_picture: this.profile_picture,
           country: this.country,
@@ -56,6 +62,9 @@ export class User
         let role = await db.find_by_id("Role", data[0].Role_ID);
         
         if (data.length) {
+            this.telegram = data[0].telegram;
+            this.twitter = data[0].twitter;
+            this.skype = data[0].skype;
           this.User_ID = data[0].User_ID;
           this.phone_number = data[0].phone_number;
           this.password = data[0].password;
@@ -89,6 +98,14 @@ export class User
         if (this.email && this.email !== undefined && this.email !== "undefined") 
             await database.update("User", "email", this.email, this.id);
 
+        if (this.telegram && this.telegram !== undefined && this.telegram !== "undefined") 
+            await database.update("User", "telegram", this.telegram, this.id);
+
+        if (this.twitter && this.twitter !== undefined && this.twitter !== "undefined") 
+            await database.update("User", "twitter", this.twitter, this.id);
+
+        if (this.skype && this.skype !== undefined && this.skype !== "undefined") 
+            await database.update("User", "skype", this.skype, this.id);
 
         if (this.role && this.role !== undefined && this.role !== "undefined") {
             let db = new DatabaseFind();

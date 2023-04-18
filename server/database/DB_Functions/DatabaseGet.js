@@ -124,7 +124,7 @@ export class DatabaseGet {
             and Location.address_line_state = '${region}'`;
 
     }
-    else if (country !== undefined)
+    else (country !== undefined)
     {
       get_events_command = `select * from Event 
             inner join Location on Event.Location_ID = Location.Location_ID 
