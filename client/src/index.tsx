@@ -6,6 +6,7 @@ import LogIn from "./components/register/LogIn";
 import ResetPass from "./components/register/ResetPass";
 import ResetPassConfirm from "./components/register/ResetPassConfirm";
 import UserPage from "./components/user/UserPage";
+import UserId from "./components/user/UserId";
 import Subscribes from "./components/user/subscribers";
 import Setting from "./components/user/Setting";
 import Event from "./components/event/Event";
@@ -21,6 +22,7 @@ import { CompanyPage } from "./components/Organization/CompanyPage";
 import DeleteProf from "./components/register/DeleteProf";
 import { PaymentPage } from "./components/Payment/PaymentPage";
 import { ManageEvents } from "./components/Organizer/ManageEvents";
+import { ManageUser } from "./components/Organizer/ManageUser";
 import { Thankyou } from "./components/Payment/Thankyou";
 
 // import DeleteProfile from "./components/register/DeleteProfile";
@@ -33,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: "/api/map",
     element: <AppMap />,
+  },
+  {
+    path: "/users",
+    element: <ManageUser />,
   },
   {
     path: "/setting",
@@ -55,10 +61,10 @@ const router = createBrowserRouter([
     path: "api/auth/login",
     element: <LogIn />,
   },
-  // {
-  //   path: "delete_profile",
-  //   element: <DeleteProfile />,
-  // },
+  {
+    path: "/user/:id",
+    element: <UserId />,
+  },
   {
     path: "api/auth/register/:token",
     element: <RegiConfirm />,

@@ -23,6 +23,9 @@ export const registerUser = async (req, res) => {
   let phone_number = req.body.phone_number;
   // console.log(req.body.birthday);
   let birthday = new Date(req.body.birthday);
+  let telegram = req.body.telegram;
+  let twitter = req.body.twitter;
+  let skype = req.body.skype;
   // let birthday = req.body.birthday;
   console.log(birthday);
   let country = req.body.country;
@@ -40,7 +43,7 @@ export const registerUser = async (req, res) => {
     return res.json("User exist");
   } 
   else {
-    let usr = new User(full_name, email, country, city, "user",  phone_number, birthday,password, profile_picture );
+    let usr = new User(full_name, email, country, city, "user",  phone_number, birthday,password, profile_picture, telegram, twitter,skype );
     // if ((await validateUser(usr, res, req)) === true) {
       let token = jwt.sign({ usr }, process.env.SECRET_REGISTER);
       
@@ -56,7 +59,7 @@ export const registerConfirm = (req, res) => {
   let token = req.params.token;
   let user = jwt.decode(token, process.env.SECRET_REGISTER);
   // let newToken = jwt.sign(user, process.env.TOKEN_KEY);
-  let newUser = new User(user.usr.full_name, user.usr.email, user.usr.country, user.usr.city, user.usr.role, user.usr.phone_number, new Date(user.usr.birthday),  user.usr.password, user.usr.profile_picture );
+  let newUser = new User(user.usr.full_name, user.usr.email, user.usr.country, user.usr.city, user.usr.role, user.usr.phone_number, new Date(user.usr.birthday),  user.usr.password, user.usr.profile_picture, user.usr.telegram, user.usr.twitter, user.usr.skype );
   console.log(newUser)
   newUser.save();
   return res.json("user created");
@@ -91,6 +94,9 @@ export const loginUser = async (req, res) => {
           country: data[0].country, 
           city: data[0].city, 
           phone_number: data[0].phone_number, 
+          telegram: data[0].telegram, 
+          twitter: data[0].twitter, 
+          skype: data[0].skype, 
           birthday: data[0].birthday,
           profile_picture: data[0].profile_picture
         },

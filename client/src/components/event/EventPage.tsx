@@ -249,11 +249,11 @@ function EventPage() {
                       :
                       <img className="mangodb" src={`http://localhost:8000/images/no_photo.jpg`} alt="" />
                     }
-                    <button  onClick={e => navigate("/api/map", {
+                    {/* <button  onClick={e => navigate("/api/map", {
                       state:{
                         location: event.location[0]
                       }
-                    })}>In map</button>
+                    })}>In map</button> */}
                   </div>
                   <div className="event-text">
                     <div className="event-header">

@@ -169,8 +169,8 @@ function Sidebar2() {
 
                             </li>
 
-                            {/* <li className="nav-link" onClick={() => {
-                                navigate("/bankcard");
+                            <li className="nav-link" onClick={() => {
+                                navigate("/users");
                             }}>
 
                                 <div className="bb bx bx-search icon">
@@ -178,7 +178,7 @@ function Sidebar2() {
                                 </div>
                                 <span className="text nav-text">Wallets</span>
 
-                            </li> */}
+                            </li>
 
                         </ul>
                     </div>
