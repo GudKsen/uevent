@@ -11,21 +11,20 @@ import Header from "../sidebar/Header";
 
 function UserId() {
     const {id} = useParams();
+
   const [user, setUser] = useState<any[]>([]);
 
-  useEffect(() => {
-    axios.get(`http://localhost:8000/api/user/${id}`, {
-        params: { token: localStorage.getItem("token") }
-    }).then((response) => {
+   useEffect(() => {
+     axios.get(`http://localhost:8000/api/user/${id}`).then((response) => {
         setUser(response.data);
+        console.log(response.data);
         
     })
-    console.log(user[0].full_name);
-}, []);
+    }, [id]);
 
   const navigate = useNavigate();
   let userInfo = JSON.parse(localStorage.getItem("userInfo") as string);
-  console.log("🚀 ~ file: UserPage.tsx:84 ~ UserPage ~ userInfo:", userInfo)
+  //console.log("🚀 ~ file: UserPage.tsx:84 ~ UserPage ~ userInfo:", userInfo)
 
 
   return (
@@ -75,19 +74,19 @@ function UserId() {
 
                         <div>
                         <div className="userinfo-title-field-data">Telegram</div>
-                        <div className="userinfo-data">{user[0].telegram}</div>
+                        {/* <div className="userinfo-data">{user[0].telegram}</div> */}
                         </div>
 
 
 
                         <div>
                         <div className="userinfo-title-field-data">Twitter</div>
-                        <div className="userinfo-data">{user[0].twitter}</div>
+                        {/* <div className="userinfo-data">{user[0].twitter}</div> */}
                         </div>
 
                         <div>
                         <div className="userinfo-title-field-data">Skype</div>
-                        <div className="userinfo-data">{user[0].skype}</div>
+                        {/* <div className="userinfo-data">{user[0].skype}</div> */}
                         </div>
                 </div>
 
@@ -99,17 +98,17 @@ function UserId() {
                     
                         <div className="user-profile-avatar">
                         {
-                            userInfo.profile_picture ?
-                            <img className="avatarProfilePicture" src={`http://localhost:8000/avatars/${user[0].profile_picture}`} alt="Avatar" />
-                            :
-                            <img className="avatarProfilePicture" src={`http://localhost:8000/images/no_photo.jpg`} alt="Avatar" />
+                            // userInfo.profile_picture ?
+                            // <img className="avatarProfilePicture" src={`http://localhost:8000/avatars/${user[0].profile_picture}`} alt="Avatar" />
+                            // :
+                            // <img className="avatarProfilePicture" src={`http://localhost:8000/images/no_photo.jpg`} alt="Avatar" />
                         }
                         
                         </div>
                         
 
                     <div className="userinfo-role">
-                    {userInfo.role.charAt(0).toUpperCase() + user[0].role.slice(1)}
+                    {/* {userInfo.role.charAt(0).toUpperCase() + user[0].role.slice(1)} */}
                     </div>
 
 
