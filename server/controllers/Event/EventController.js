@@ -249,10 +249,11 @@ export const CreateCommentEvent = (req, res) => {};
 
 export const GetEventsByCountry = async (req, res) => {
   let country = req.query.country;
+  let region = req.query.region;
   console.log(country);
   let events = new GetEventsClass();
   
-  let data = await events.GetEventsByCountry(country);
+  let data = await events.GetEventsByCountry(country, region);
   if (data === null)
   {
     return res.json([]);

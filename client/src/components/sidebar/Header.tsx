@@ -11,7 +11,7 @@ import "./headerStyle.scss";
 import { CitySelect } from "./CitySelect";
 
 
-function Header({ setSearchText, setSelectedCountry, setSelectedCity }: any) {
+function Header({ setSearchText, setSelectedCountry, setSelectedCity, setSelectedRegion }: any) {
   const [showMenu, setShowMenu] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [selectedThemes, setSelectedThemes] = useState<any[]>([]);
@@ -68,9 +68,9 @@ function Header({ setSearchText, setSelectedCountry, setSelectedCity }: any) {
 
         </div>
         <div>
-          <img className="filter-icon " src={require("../../public/video/filter.png")} alt=""
+          {/* <img className="filter-icon " src={require("../../public/video/filter.png")} alt=""
             onClick={() => { setIsOpen(!isOpen) }}
-          />
+          /> */}
           {/* {
               isOpen ?
               <div className="modal-filter">
@@ -88,7 +88,7 @@ function Header({ setSearchText, setSelectedCountry, setSelectedCity }: any) {
           <FlagSelect className="country-select" setSelectedCountry={setSelectedCountry}
 
           />
-          <CitySelect setSelectedCity={setSelectedCity} />
+          <CitySelect setSelectedCity={setSelectedCity} setSelectedRegion={setSelectedRegion}/>
         </div>
         {/* <div> */}
           {

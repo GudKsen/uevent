@@ -36,6 +36,7 @@ function Event() {
   const [filterFormat, setFilterFormat] = useState<{ value: string, label: string }>();
   const [reset, setReset] = useState(false);
   const [free, setFree] = useState(false);
+  const [selectedRegion, setSelectedRegion] = useState('');
 
   const { t, i18n } = useTranslation();
 
@@ -53,7 +54,8 @@ function Event() {
 
     axios.get(`http://localhost:8000/api/events`,
       {
-        params: { country: country_code ? regionNames.of(country_code) : "" }
+        params: { country: country_code ? regionNames.of(country_code) : null,
+                  region: localStorage.getItem("region") ? localStorage.getItem("region") : null }
       }
     ).then((res) => {
       setEventsData(res.data);
@@ -203,7 +205,8 @@ function Event() {
           <Header
           setSearchText={setSearchText}
           setSelectedCountry={setSelectedCountry}
-          onChange={(e: any) => ChangeData(e)}
+          setSelectedRegion={setSelectedRegion}
+          // onChange={(e: any) => ChangeData(e)}
         //setRefreshData = {setRefreshData}
         />
         </div>

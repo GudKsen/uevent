@@ -12,7 +12,7 @@ export function FlagSelect({setSelectedCountry}: any) {
     localStorage.setItem("country", selected);
 
     return (
-        <div>
+        <div title="Find events by country">
             {selected === "" ? <div><label className="select-cont">Select country</label></div> : null}
             <ReactFlagsSelect
                 selected={selected}

@@ -111,11 +111,27 @@ export class DatabaseGet {
     }
   }
 
-  async get_events_by_country(country) {
+  async get_events_by_country(country, region) {
+    console.log("🚀 ~ file: DatabaseGet.js:115 ~ DatabaseGet ~ get_events_by_country ~ region:", region)
     let current_date = new Date().toISOString().slice(0, 19).replace("T", " ");
-    let get_events_command = `select * from Event 
+
+    let get_events_command;
+
+    if (country !== undefined && region !== undefined) {
+      get_events_command = `select * from Event 
+            inner join Location on Event.Location_ID = Location.Location_ID 
+            where Location.Country = '${country}' and Event.publishDate <= '${current_date}'
+            and Location.address_line_state = '${region}'`;
+
+    }
+    else if (country !== undefined)
+    {
+      get_events_command = `select * from Event 
             inner join Location on Event.Location_ID = Location.Location_ID 
             where Location.Country = '${country}' and Event.publishDate <= '${current_date}'`;
+    }
+    
+    
 
     const events = await pool.promise().query(get_events_command);
     if (events[0].length) {
