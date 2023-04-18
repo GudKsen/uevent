@@ -23,6 +23,7 @@ export const BuyTicket = async (req, res) => {
   
   let ev = new Event();
   ev.init(event_id);
+
   let location = new Location();
   location.init(event[0].Location_ID);
   let data_location = await location.read();
@@ -43,6 +44,7 @@ export const BuyTicket = async (req, res) => {
     let qr_code = await generateQRCode(event, req.user.email);
     event[0].qr_code = qr_code;
     sendNotification(company[0].email, text);
+    await ev.updateCountTickets();
     // sendTicket(req.user.email, qr_code, event[0]);
 
     return res.json(captureData);

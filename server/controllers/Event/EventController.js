@@ -6,6 +6,7 @@ import { Location } from "../../entities/Location/Location.js";
 import { User } from "../../entities/User/User.js";
 import { Promocode } from "../../entities/Promocode/Promocode.js";
 import { Database } from "../../database/DB_Functions/Database.js";
+import { send } from "../../utils/Email/sendEmail.js";
 // import { setEndTimeEvent } from "../utils/setEndTimeEvent.js";
 // import { toLocalDate } from "../utils/toLocalDate.js";
 
@@ -31,6 +32,7 @@ export const CreateEvent = async (req, res) => {
   let duration = req.body.duration;
   let price = req.body.price;
   let currency = req.body.currency;
+  let number_of_tickets = req.body.countTicket;
 
   let promocodeId = req.body.promocodeId;
  
@@ -108,7 +110,8 @@ export const CreateEvent = async (req, res) => {
     new Date(endDate),
     publish_date,
     price,
-    currency
+    currency,
+    number_of_tickets
   );
   console.log("🚀 ~ file: EventController.js:109 ~ CreateEvent ~ event:", event)
 
@@ -121,6 +124,17 @@ export const CreateEvent = async (req, res) => {
     Promocode_ID: promocodeId
   })
   
+  let databaseGet = new DatabaseGet();
+
+  let subscribed_users = await databaseGet.get_subscribed_users(company[0].Company_ID);
+  console.log("🚀 ~ file: EventController.js:130 ~ CreateEvent ~ subscribed_users:", subscribed_users)
+  if (subscribed_users)
+  {
+    for (let i = 0; i < subscribed_users.length; i++)
+    {
+      send(subscribed_users[i].email, `The new event will be soon ${title} from ${company[0].name}`, "");
+    }
+  }
   res.json("Event created");
 };
 
@@ -135,7 +149,7 @@ export const GetEvent = async (req, res) => {
     
     // data[0].beginDate = toLocalDate(data[0].beginDate);
     // if (data[0].endDate) data[0].endDate = toLocalDate(data[0].endDate);
-    console.log("hjgfhgfhgf " + data);
+   
     res.json(data);
   } catch (err) {
     res.json(err.message);

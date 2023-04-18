@@ -8,6 +8,7 @@ import {
   Marker,
   GoogleMap
 } from '@react-google-maps/api'
+import GoogleMapReact from 'google-map-react';
 
 import "./index.css"
 
@@ -28,16 +29,26 @@ function AppMap() {
 
 function Map(){
 
-  const center = {lat: 44, lng: -80}
+  const center = {lat: 49.988358, lng: 36.232845}
+  const defaultProps = {
+    center: {
+      lat: 10.99835602,
+      lng: 77.01502627
+    },
+    zoom: 11
+  };
+  const AnyReactComponent = ({ text }) => <div>{text}</div>;
   // googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyALVjLwOIM1gf7EzdJJVmWLKdLP-yZGTcw&libraries=places"
   return <GoogleMap 
           zoom={10} 
           center={center} 
           mapContainerClassName='.map-container'
+          
           // mapContainerClassName={map-container }
           >
               <Marker position={center}/>
           </GoogleMap>
+  
 }
 
 export default AppMap;

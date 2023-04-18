@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS Event(
     endDateTime DATETIME,
     Location_ID INT,
     FOREIGN KEY(Location_ID) REFERENCES Location(Location_ID),
+    number_of_tickets INT NOT NULL,
     Price_ID INT(50),
     isPromocodeAvailable INT(1),
     Format_ID INT NOT NULL,

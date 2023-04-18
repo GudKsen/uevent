@@ -8,7 +8,7 @@ let databaseGet = new DatabaseGet();
 
 export class Event
 {
-    constructor(title, description, companyID, dateTime, location, image, formatID, theme, endDate, publishDate, price, currency)
+    constructor(title, description, companyID, dateTime, location, image, formatID, theme, endDate, publishDate, price, currency, number_of_tickets)
     {
         this.title = title;
         this.description = description;
@@ -22,6 +22,7 @@ export class Event
         this.publishDate =  publishDate;
         this.price = price;
         this.currency = currency;
+        this.number_of_tickets = number_of_tickets;
     }
 
     init (id)
@@ -40,7 +41,8 @@ export class Event
             poster: this.image,
             Format_ID: this.formatID,
             endDateTime: this.endDate,
-            publishDate: this.publishDate
+            publishDate: this.publishDate,
+            number_of_tickets: this.number_of_tickets
         }
         return obj;
     }
@@ -101,7 +103,6 @@ export class Event
           this.authorID = data[0].Company_ID;
           this.dateTime = data[0].dateTime;
           this.location = data[0].location;
-        //   this.categoryID = data[0].categoryID;
           this.image = data[0].image;
           this.formatID = data[0].formatID;
           this.endDate = data[0].endDateTime;
@@ -118,6 +119,13 @@ export class Event
         if (this.location) await database.update("Event", "location", this.location, this.id);
         if (this.formatID) await database.update("Event", "formatID", this.formatID, this.id);
         if (this.endDate) await database.update("Event", "endDateTime", this.endDate, this.id);
+    }
+
+    async updateCountTickets()
+    {
+        let event = await this.read();
+        console.log("🚀 ~ file: Event.js:125 ~ event:", event)
+        await database.update("Event", "number_of_tickets", (event[0].number_of_tickets-1), this.id);
     }
 
     async delete ()

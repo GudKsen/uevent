@@ -8,12 +8,12 @@ export function send(email, text, link) {
     port: 2525,
     auth: {
       //------KSENIIA SETTINGS-------------------------
-      // user: "4c475d92282587",
-      // pass: "821b514591f9f1",
+      user: "4c475d92282587",
+      pass: "821b514591f9f1",
       //-----------------------------------------------
       //------STANISLAVA SETTINGS----------------------
-      user: "d13f138085da46",
-      pass: "6b479d6d87fb70"
+      // user: "d13f138085da46",
+      // pass: "6b479d6d87fb70"
       //-----------------------------------------------
     },
   });
@@ -122,15 +122,18 @@ export function sendNotification(email, text) {
     port: 2525,
     auth: {
       //------KSENIIA SETTINGS-------------------------
-      // user: "4c475d92282587",
-      // pass: "821b514591f9f1",
+      user: "4c475d92282587",
+      pass: "821b514591f9f1",
       //-----------------------------------------------
       //------STANISLAVA SETTINGS----------------------
-      user: "d13f138085da46",
-      pass: "6b479d6d87fb70"
+      // user: "d13f138085da46",
+      // pass: "6b479d6d87fb70"
       //-----------------------------------------------
     },
   });
+
+  // <p>See all users on this event:</p>
+  //            <a href="http://localhost:3000/events-manage">Click here</a>
 
   var mailOptions = {
     from: '"Example Team" <admin@example.com>',
@@ -138,8 +141,7 @@ export function sendNotification(email, text) {
     subject: "New user on event",
     html: `<h1>Hello, user</h1>
              <p>${text}</p>
-             <p>See all users on this event:</p>
-             <a href="http://localhost:3000/events-manage">Click here</a>
+             
              <p>Good time for you!</p>`,
   };
 
