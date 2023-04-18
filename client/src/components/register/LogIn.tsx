@@ -31,10 +31,10 @@ function LogIn() {
     if (typeof res === typeof "rara") {
       setErr(res);
     } else {
-      const { User_ID, password, full_name, email, role , country, city, phone_number, birthday, profile_picture} = res.data[0];
+      const { User_ID, password, full_name, email, role , country, city, phone_number, birthday, profile_picture, telegram, twitter, skype} = res.data[0];
       localStorage.setItem(
         "userInfo",
-        JSON.stringify({ User_ID, password, full_name, email, role , country, city, phone_number, birthday, profile_picture})
+        JSON.stringify({ User_ID, password, full_name, email, role , country, city, phone_number, birthday, profile_picture, telegram, twitter, skype})
       );
       localStorage.setItem("token", res.token);
       navigate("/events");

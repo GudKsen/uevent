@@ -116,7 +116,7 @@ function AllUsersForAll() {
                         <tbody>
                         
                             {users && users.map((user) =>
-                                <tr key={user.User_ID} id={user.User_ID} onClick={() =>navigate(`user/${user.User_ID}`)}>
+                                <tr key={user.User_ID} id={user.User_ID} onClick={() =>navigate(`/user/${user.User_ID}`)}>
                                     {
                                         user.profile_picture ?
                                         <td><ImageComponent imageUrl={"http://localhost:8000/avatars/" + user.profile_picture} /></td> 

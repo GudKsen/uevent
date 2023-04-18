@@ -5,6 +5,7 @@ import DragDrop from "../event/DragAndDrop";
 
 import Sidebar2 from "../sidebar/sidebar2";
 import axios from "axios";
+import Header from "../sidebar/Header";
 
 
 function UserPage() {
@@ -157,6 +158,7 @@ function UserPage() {
         <Sidebar2 />
       </div>
       <div className="userpage">
+      <Header/>
         <div className="infouser">
           <div className="user-prof-button-container">
             <button className="button-edit-data-profile " title="Edit profile data">
@@ -221,6 +223,49 @@ function UserPage() {
             <div>
               <div className="userinfo-title-field-data">Address</div>
               <div className="userinfo-data">{userInfo.city}, {userInfo.country}</div>
+            </div>
+
+            <div>
+              <div className="userinfo-title-field-data">Telegram</div>
+              {
+                inEditDataMode.status ?
+                  <input onChange={(e) => {
+                    setPhoneNumber(e.target.value);
+                  }} className="userinfo-data-input" type="text" defaultValue={userInfo.telegram}></input>
+                  :
+                  // {
+                  //   (userInfo.phone_number) ?{
+
+                  //   }: <div><div/>}
+                  // }
+                  <div className="userinfo-data">{userInfo.telegram}</div> 
+              }
+            </div>
+
+
+
+            <div>
+              <div className="userinfo-title-field-data">Twitter</div>
+              {
+                inEditDataMode.status ?
+                  <input onChange={(e) => {
+                    setPhoneNumber(e.target.value);
+                  }} className="userinfo-data-input" type="text" defaultValue={userInfo.twitter}></input>
+                  :
+                  <div className="userinfo-data">{userInfo.twitter}</div>
+              }
+            </div>
+
+            <div>
+              <div className="userinfo-title-field-data">Skype</div>
+              {
+                inEditDataMode.status ?
+                  <input onChange={(e) => {
+                    setPhoneNumber(e.target.value);
+                  }} className="userinfo-data-input" type="text" defaultValue={userInfo.skype}></input>
+                  :
+                  <div className="userinfo-data">{userInfo.skype}</div>
+              }
             </div>
 
             {
