@@ -160,14 +160,14 @@ function Sidebar2() {
 
                             </li>
 
-                            {/* <li className="nav-link">
+                            <li className="nav-link">
 
                                 <div className="bb bx bx-search icon">
                                     <div className="hoverme-basket"></div>
                                 </div>
-                                <span className="text nav-text">Basket</span>
+                                <span className="text nav-text">Users</span>
 
-                            </li> */}
+                            </li>
 
                             <li className="nav-link" onClick={() => {
                                 navigate("/users");

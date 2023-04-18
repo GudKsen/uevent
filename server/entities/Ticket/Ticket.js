@@ -32,6 +32,7 @@ export class Ticket
 
     create () {
         database.save('Ticket', this.transfer_data());
+        
     }
 
     async read () {

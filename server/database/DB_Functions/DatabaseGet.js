@@ -92,6 +92,19 @@ export class DatabaseGet {
     }
   }
 
+  async get_subscribed_users(company_id)
+  {
+    let command = `select User.email from Subscribed_User
+    inner join User on Subscribed_User.User_ID = User.User_ID
+    where Subscribed_User.Company_ID = ${company_id}`;
+    let data = await pool.promise().query(command);
+    if (data[0].length > 0)
+    {
+      return data[0];
+    }
+    else return null;
+  }
+
   async get_comments_by_event_id(event_id) {
     let current_date = new Date().toISOString().slice(0, 19).replace("T", " ");
     let command = `select * from Comment where Event_ID = ${event_id} `;
@@ -124,14 +137,14 @@ export class DatabaseGet {
             and Location.address_line_state = '${region}'`;
 
     }
-    else (country !== undefined)
+    else 
     {
       get_events_command = `select * from Event 
             inner join Location on Event.Location_ID = Location.Location_ID 
             where Location.Country = '${country}' and Event.publishDate <= '${current_date}'`;
     }
     
-    
+    //if (country !== undefined)
 
     const events = await pool.promise().query(get_events_command);
     if (events[0].length) {
