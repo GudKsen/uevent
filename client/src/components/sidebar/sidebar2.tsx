@@ -160,7 +160,9 @@ function Sidebar2() {
 
                             </li>
 
-                            <li className="nav-link">
+                            <li className="nav-link" onClick={() => {
+                                navigate("/users");
+                            }}>
 
                                 <div className="bb bx bx-search icon">
                                     <div className="hoverme-basket"></div>
@@ -169,7 +171,7 @@ function Sidebar2() {
 
                             </li>
 
-                            <li className="nav-link" onClick={() => {
+                            {/* <li className="nav-link" onClick={() => {
                                 navigate("/users");
                             }}>
 
@@ -178,7 +180,7 @@ function Sidebar2() {
                                 </div>
                                 <span className="text nav-text">Wallets</span>
 
-                            </li>
+                            </li> */}
 
                         </ul>
                     </div>
